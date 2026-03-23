@@ -1,4 +1,4 @@
-# AI and the Rise of Superstar Coders on GitHub: An analysis of commit data
+# The Rise of Superstar Coders on GitHub: An analysis of commit data
 
 ## 1. Introduction
 
@@ -19,9 +19,9 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals.** *Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).*
+**We find that the rise of superstar coders is driven by personal/hobbyist developers (Power Law exponent α declines in value as inequality and concentration increases), not professionals.** *Among personal developers, the sharpest increase in concentration and inequality occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).* This is reflected in the Power Law α getting smaller and indicates that COVID played an important role in the key observed findings.
 
-We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
+We analyze GitHub commit concentration and inequality bwteen 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
 
 | Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
 |:--------------:|:---------------:|:------------------:|:------------------:|:----:|:--------------:|
