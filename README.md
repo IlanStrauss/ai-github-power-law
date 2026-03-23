@@ -221,26 +221,9 @@ A declining α indicates heavier tails — more probability mass concentrated am
 
 ## 4. Results
 
-### 4.1 Power Law Analysis
+### 4.1 Power Law Estimates
 
-Power law distributions are ubiquitous in complex systems — from wealth (Pareto, 1896) to city sizes (Zipf, 1949) to web traffic (Adamic & Huberman, 2000). Their presence signals **preferential attachment**: success compounds over time, creating extreme concentration (Simon, 1955; Barabási & Albert, 1999).
-
-#### Why Power Laws Matter
-
-Standard inequality measures (Gini, Top K% shares) describe concentration but do not reveal the underlying **generative process**. Power law distributions, characterized by:
-
-$$P(X > x) \propto x^{-\alpha}$$
-
-arise from preferential attachment, network effects, and compounding returns — precisely the dynamics we might expect if AI tools amplify productive developers' output.
-
-**The α exponent determines tail behavior (Newman, 2005):**
-- **α < 2:** Infinite variance — no stable mean; extreme winner-take-all dynamics
-- **α ≈ 2:** Comparable to wealth distributions (Pareto) and city sizes (Zipf/Gabaix)
-- **α > 2.5:** More moderate concentration; finite moments
-
-#### Power Law Estimates
-
-Using the Clauset-Shalizi-Newman (2009) methodology with maximum likelihood estimation:
+We estimate the power law exponent α for each year using the methodology described in Section 3.1:
 
 | Year | α (exponent) | xmin | R (vs. log-normal) | Best Fit |
 |------|--------------|------|--------------------|----------|
