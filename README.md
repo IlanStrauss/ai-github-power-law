@@ -346,7 +346,7 @@ This supports our main finding: concentration is increasing, and our estimates a
 
 ### What's Driving Concentration?
 
-The key finding — that concentration is increasing among personal developers but not among org developers — points to institutional structure as a critical factor.
+The key finding — that concentration is increasing among personal developers but not among org developers — points to institutional structure as a critical potential factor, though this remains speculation for now.
 
 **Why org developers remain stable.** Developers who contribute to organization-owned repositories operate within institutional constraints: code review processes, team structures, sprint planning, and distributed workloads. These organizational practices act as a "ceiling" on individual contribution shares. When one developer becomes more productive, the work is often redistributed rather than concentrated. Professional open-source projects (Linux, Kubernetes, TensorFlow) typically have governance structures that prevent any single contributor from dominating.
 
