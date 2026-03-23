@@ -141,46 +141,60 @@ Multi-repo contributors are more likely to represent human developers working ac
 
 **Observation:** The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift.
 
+#### Concentration Measures (Multi-Repo Sample)
+
+| Year | Accounts | Top 1% Share | Top 10% Share | Gini | P99/P50 |
+|------|----------|--------------|---------------|------|---------|
+| 2019 | 64,406 | 45.3% | 71.9% | 0.750 | 45 |
+| 2020 | 88,765 | 47.8% | 72.2% | 0.753 | 44 |
+| 2021 | 102,867 | 52.2% | 75.2% | 0.779 | 51 |
+| 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
+| 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
+| 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
+
+These descriptive measures show increasing concentration, but do not reveal the underlying distributional form. For that, we turn to power law analysis in Section 4.
+
 ---
 
 ## 3. Methodology
 
-### Concentration Metrics
+### 3.1 Power Law Estimation
 
-We compute standard inequality measures:
+We follow the Clauset-Shalizi-Newman (2009) methodology, as applied by Strauss, Yang & Mazzucato (2025) to platform earnings distributions:
 
-**Top K% Share:** The fraction of total commits made by the top K% of accounts, ranked by commit count.
+**Step 1: Threshold Selection**
 
-**Gini Coefficient:** Ranges from 0 (perfect equality) to 1 (perfect concentration). Computed as:
+Determine the minimum value xmin where power law behavior begins using the Kolmogorov-Smirnov (KS) statistic. Below xmin, the distribution may follow a different form (typically log-normal).
 
-$$G = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n}|x_i - x_j|}{2n\sum_{i=1}^{n}x_i}$$
+**Step 2: Maximum Likelihood Estimation**
 
-**Percentile Ratios:** P99/P50 compares the 99th percentile to the median, capturing upper-tail dispersion.
+Fit the power law exponent α using MLE for the tail above xmin:
 
-### Power Law Analysis
+$$\hat{\alpha} = 1 + n \left[ \sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}} \right]^{-1}$$
 
-We follow the Clauset-Shalizi-Newman (2009) methodology, as recommended by Yang (2025):
+**Step 3: Alternative Distribution Comparison**
 
-1. **Maximum Likelihood Estimation (MLE):** Fit the power law exponent α for the upper tail
-2. **Threshold Selection:** Determine xmin using the Kolmogorov-Smirnov (KS) statistic
-3. **Alternative Comparison:** Compare power law fit to log-normal using likelihood ratio test
+Compare power law to log-normal using likelihood ratio test (R statistic):
+- R > 0: Power law fits better
+- R < 0: Log-normal fits better
 
-The power law probability density function is:
+This comparison is crucial because many productivity distributions exhibit log-normal bodies with power-law tails (Gabaix, 2016).
 
-$$p(x) = \frac{\alpha - 1}{x_{\min}} \left(\frac{x}{x_{\min}}\right)^{-\alpha}$$
+### 3.2 Interpreting the α Exponent
 
-**Interpretation of α:**
-- α < 2: Infinite variance (extremely heavy tails)
-- 2 < α < 3: Finite variance, infinite mean for tail
-- α > 3: Finite variance and mean
+Following Strauss & Yang (2025), we interpret α in economic context:
 
-**Interpretation of R (likelihood ratio):**
-- R > 0: Power law fits better than log-normal
-- R < 0: Log-normal fits better than power law
+| α Range | Variance | Economic Analogue |
+|---------|----------|-------------------|
+| α < 2 | Infinite | Wealth, capital income — extreme concentration |
+| 2 < α < 2.5 | Finite | Capital income, firm size distributions |
+| α > 2.5 | Finite | Labor income — more moderate concentration |
 
-### Robustness Checks
+A declining α indicates the distribution is becoming more unequal over time, with more mass in the upper tail.
 
-1. **Full sample vs. multi-repo:** Compare concentration with and without single-repo filter
+### 3.3 Robustness Checks
+
+1. **Full sample vs. multi-repo:** Compare results with and without single-repo filter
 2. **Ceiling sensitivity:** Examine accounts hitting the 10,000-commit cap
 3. **AI detection:** Search for explicit AI markers in commit messages
 
@@ -188,44 +202,53 @@ $$p(x) = \frac{\alpha - 1}{x_{\min}} \left(\frac{x}{x_{\min}}\right)^{-\alpha}$$
 
 ## 4. Results
 
-### 4.1 Concentration Metrics
+### 4.1 Power Law Analysis
 
-#### Main Finding: Dramatic Concentration Increase
+Following Strauss, Yang, and Mazzucato (2025), we analyze whether GitHub commit distributions exhibit power law behavior — a signature of "rich-get-richer" dynamics where success compounds over time.
 
-| Year | Accounts | Commits | Top 1% Share | Top 10% Share | Gini | P99/P50 |
-|------|----------|---------|--------------|---------------|------|---------|
-| 2019 | 64,406 | 1,384,035 | 45.3% | 71.9% | 0.750 | 45 |
-| 2020 | 88,765 | 1,924,456 | 47.8% | 72.2% | 0.753 | 44 |
-| 2021 | 102,867 | 2,525,459 | 52.2% | 75.2% | 0.779 | 51 |
-| 2022 | 113,981 | 2,865,724 | 53.7% | 76.1% | 0.787 | 54 |
-| 2023 | 124,041 | 3,132,816 | 54.6% | 76.9% | 0.792 | 56 |
-| **2024** | **131,530** | **7,463,885** | **63.9%** | **89.2%** | **0.895** | **215** |
+#### Why Power Laws Matter
 
-**Findings:**
-- Top 1% share increased **every year** from 2019-2024
-- Total increase: +18.6 percentage points (45.3% → 63.9%)
-- The 2024 jump (+9.3pp from 2023) is the **largest single-year increase**
-- P99/P50 ratio increased nearly **5-fold** (45 → 215), indicating extreme tail growth
+Standard inequality measures (Gini, Top K% shares) describe concentration but do not reveal the underlying **generative process**. Power law distributions, characterized by:
 
-### 4.2 Power Law Analysis
+$$P(X > x) \propto x^{-\alpha}$$
 
-Following the CNS methodology:
+arise from preferential attachment, network effects, and compounding returns — precisely the dynamics we might expect if AI tools amplify productive developers' output.
 
-| Year | α (exponent) | xmin | R (vs. log-normal) | p-value | Best Fit |
-|------|--------------|------|---------------------|---------|----------|
-| 2019 | 1.96 | 25 | -3.16 | 0.100 | Log-normal |
-| 2020 | 1.93 | 34 | -5.64 | 0.026 | Log-normal |
-| 2021 | 2.09 | 5 | +6.33 | 0.000 | Power law |
-| 2022 | 1.85 | 36 | -6.47 | 0.013 | Log-normal |
-| 2023 | 1.82 | 40 | -14.32 | 0.000 | Log-normal |
-| 2024 | 1.63 | 30 | -31.58 | 0.000 | Log-normal |
+**The α exponent is key:**
+- **α < 2:** Infinite variance — extreme winner-take-all dynamics
+- **α ≈ 2:** Consistent with capital income and wealth distributions (Strauss & Yang, 2025)
+- **α > 2.5:** More moderate concentration, closer to labor income distributions
 
-**Findings:**
-1. **Declining α:** The exponent dropped from 1.96 (2019) to 1.63 (2024), indicating progressively heavier tails. Lower α means more mass in the upper tail — consistent with increasing concentration.
+#### Power Law Estimates
 
-2. **Log-normal vs. power law:** In most years, the log-normal distribution provides a better fit (R < 0). This is common for productivity distributions, which typically show log-normal bodies with power-law tails (Gabaix, 2016).
+Using the Clauset-Shalizi-Newman (2009) methodology with maximum likelihood estimation:
 
-3. **2024 anomaly:** The R value (-31.58) is the most negative, suggesting the 2024 distribution deviates significantly from a pure power law — likely due to the explosion in high-volume automated accounts.
+| Year | α (exponent) | xmin | R (vs. log-normal) | Best Fit |
+|------|--------------|------|--------------------|----------|
+| 2019 | 1.96 | 25 | -3.16 | Log-normal |
+| 2020 | 1.93 | 34 | -5.64 | Log-normal |
+| 2021 | 2.09 | 5 | +6.33 | Power law |
+| 2022 | 1.85 | 36 | -6.47 | Log-normal |
+| 2023 | 1.82 | 40 | -14.32 | Log-normal |
+| **2024** | **1.63** | **30** | **-31.58** | **Log-normal** |
+
+#### Interpretation
+
+**1. Declining α indicates increasing concentration**
+
+The power law exponent dropped from **1.96 (2019) to 1.63 (2024)**. Following Strauss & Yang (2025), this shift has economic significance:
+
+- In 2019, α ≈ 2 placed GitHub commits between capital income (α ≈ 1.5-2) and labor income (α ≈ 2.5-3) distributions
+- By 2024, α = 1.63 indicates commit activity now resembles **wealth and capital income** more than labor income
+- An α below 2 implies infinite variance — the distribution has no stable mean, characteristic of extreme winner-take-all dynamics
+
+**2. Log-normal body, power-law tail**
+
+The negative R values indicate log-normal provides a better overall fit than pure power law. This is consistent with Gabaix (2016): productivity distributions typically exhibit log-normal bodies with power-law upper tails. The relevant question is not "is this a power law?" but "how heavy is the tail?" — and the declining α shows the tail is getting heavier.
+
+**3. 2024 structural break**
+
+The 2024 α (1.63) represents a **discontinuous shift** from the 2019-2023 range (1.82-2.09). The R value (-31.58) is the most negative, indicating the 2024 distribution deviates significantly from both power law and log-normal — likely due to the explosion in high-volume automated accounts hitting our 10,000-commit ceiling.
 
 ### 4.3 Robustness: Full Sample vs. Multi-Repo
 
@@ -317,6 +340,8 @@ When a developer uses Copilot to write 50% of their code, whose productivity are
 - Individual performance evaluation
 - Attribution of open-source contributions
 
+Independent analysis by [Star History (2026)](https://www.star-history.com/blog/state-of-coding-ai-on-github) using the same GH Archive data finds AI coding tools now account for **60% of bot PR reviews** (up from 20% at start of 2025) and **9-10% of bot-created PRs**. However, they note these statistics "only capture PRs authored by bot accounts, not AI-written code submitted under human developer names" — confirming that explicit AI attribution is a floor, not a ceiling.
+
 ### Limitations
 
 1. **Correlation ≠ causation:** Concentration increases alongside AI adoption, but we cannot establish causality
@@ -362,13 +387,14 @@ python scripts/02a_power_law_from_sample.py
 
 ## References
 
-### Methodology
-- Kalliamvakou, E., et al. (2016). "An in-depth study of the promises and perils of mining GitHub." *Empirical Software Engineering*, 21(5), 2035-2071.
-- Dey, T., et al. (2020). "Detecting and characterizing bots that commit code." *MSR 2020*.
-
 ### Power Law Analysis
+- Strauss, I., Yang, J., & Mazzucato, M. (2025). ["'Rich-Get-Richer'? Analyzing Content Creator Earnings Across Large Social Media Platforms."](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5253032) UCL Institute for Innovation and Public Purpose, Working Paper IIPP WP 2025-16.
 - Clauset, A., Shalizi, C. R., & Newman, M. E. J. (2009). "Power-law distributions in empirical data." *SIAM Review*, 51(4), 661-703.
 - Gabaix, X. (2016). "Power laws in economics: An introduction." *Journal of Economic Perspectives*, 30(1), 185-206.
+
+### GitHub Data Mining
+- Kalliamvakou, E., et al. (2016). "An in-depth study of the promises and perils of mining GitHub." *Empirical Software Engineering*, 21(5), 2035-2071.
+- Dey, T., et al. (2020). "Detecting and characterizing bots that commit code." *MSR 2020*.
 
 ### AI and Productivity
 - Ziegler, A., Kalliamvakou, E., et al. (2024). "Measuring GitHub Copilot's Impact on Productivity." *Communications of the ACM*, 67(3).
