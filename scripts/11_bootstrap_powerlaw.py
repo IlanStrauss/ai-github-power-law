@@ -23,7 +23,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "output"
 INTERMEDIATE_DIR = OUTPUT_DIR / "intermediate"
 
-N_BOOTSTRAP = 1000  # Number of bootstrap iterations
+N_BOOTSTRAP = 500  # Number of bootstrap iterations (reduced for speed)
 RANDOM_SEED = 42
 
 

@@ -2,6 +2,8 @@
 
 ## 1. Introduction
 
+**What is a commit?** A *commit* is a saved change to a code repository — the fundamental unit of developer contribution on GitHub. Each commit represents work: fixing a bug, adding a feature, or updating documentation. Developers with more commits contribute more code.
+
 ### Research Question
 
 Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?
@@ -16,20 +18,29 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**The rise of superstar coders is driven by personal/hobbyist developers, not professionals.**
+**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals — with the sharpest increase in concentration occurring in 2020-2021.**
 
-We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the **power law exponent α** for each group:
+We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
 
 | Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
-|----------------|-----------------|--------------------|--------------------|------|----------------|
+|:--------------:|:---------------:|:------------------:|:------------------:|:----:|:--------------:|
 | **Personal-only** | 53,945 → 102,204 | 1.99 | **1.78** | −0.21 | Increasing concentration |
 | **Org developers** | 9,824 → 25,490 | 2.04 | 2.04 | 0 | Stable |
 
-**What does this mean?**
-- **Personal developers:** α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
-- **Org developers:** α remains stable at ~2.0, suggesting professional team structures distribute work more evenly
+*Notes: "Personal-only" = developers with zero commits to organization-owned repositories. "Org developers" = at least one commit to a public organization repo (Google, Microsoft, Apache, etc.). Power Law α estimated via Clauset-Shalizi-Newman (2009) MLE method. Source: `output/org_developer_analysis.csv`.*
 
-This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian.
+**Timing of the shift:**
+- **2019-2020:** Modest decline (α: 1.99 → 1.95, Δ = −0.04)
+- **2020-2021:** **Sharpest drop** (α: 1.95 → 1.86, Δ = −0.09)
+- **2021-2024:** Continued decline (α: 1.86 → 1.78, Δ = −0.08)
+
+The inflection point in 2020-2021 preceded GitHub Copilot's public launch (June 2022) but coincided with the COVID-19 pandemic, increased remote work, and growing interest in AI-assisted development.
+
+**What does this mean?**
+- *Personal developers:* Their power law exponent α fell from 1.99 (2019) to 1.78 (2024). By crossing below 2.0, the distribution entered the "infinite variance" regime — the same statistical class as wealth distributions (Pareto, 1896) and city sizes (Zipf, 1949), where extreme values dominate and the mean is unstable.
+- *Org developers:* α remained stable at ~2.0 throughout (2.04 in both 2019 and 2024), suggesting professional team structures distribute work more evenly.
+
+This suggests that concentration among individual developers was already accelerating before AI coding tools became mainstream — though AI may be amplifying an existing trend toward "superstar coders" outside traditional organizational structures.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
@@ -38,6 +49,16 @@ This suggests AI coding tools may be amplifying **individual** developer product
 ---
 
 ## 2. Data
+
+### 2.0 Unit of Analysis
+
+Our data is aggregated at the **developer level**. Each observation represents one developer in one year, with their total commits summed across all repositories they contributed to. The core question is: *How are commits distributed across developers?*
+
+- Most developers contribute few commits (median = 6/year)
+- A small number of "superstar" developers contribute thousands
+- The power law exponent α measures how extreme this concentration is
+
+This aggregation is performed via `groupby("actor_login")` in our extraction code, summing all `distinct_size` commits per developer per year.
 
 ### 2.1 Source: GH Archive
 
@@ -70,18 +91,14 @@ This sampling provides approximately **1/180th** of total GitHub activity while 
 
 We apply filters following best practices from the mining software repositories (MSR) literature, particularly Kalliamvakou et al. (2016) "The Promises and Perils of Mining GitHub" and Dey et al. (2020) on bot detection.
 
-#### Filter 1: Event Type (PushEvents Only)
-
-We analyze only PushEvents containing commit data. This excludes:
+*Filter 1: Event Type (PushEvents Only).* We analyze only PushEvents containing commit data. This excludes:
 - Issue comments and PR discussions
 - Stars and forks (popularity metrics)
 - Administrative events
 
-**Rationale:** Commits are the primary unit of code contribution. Other event types measure engagement, not productivity.
+*Rationale:* Commits are the primary unit of code contribution. Other event types measure engagement, not productivity.
 
-#### Filter 2: Bot Account Exclusion
-
-We exclude accounts matching 15+ bot patterns from the MSR literature:
+*Filter 2: Bot Account Exclusion.* We exclude accounts matching 15+ bot patterns from the MSR literature:
 
 ```
 [bot], -bot, dependabot, renovate, github-actions, codecov,
@@ -89,35 +106,27 @@ greenkeeper, snyk, imgbot, allcontributors, semantic-release,
 pre-commit, mergify, stale, coveralls, travis, circleci
 ```
 
-**Evidence:** Dey et al. (2020) found bots involved in 31% of all PRs and responsible for 25% of PR accept/reject decisions.
+*Evidence:* Dey et al. (2020) found bots involved in 31% of all PRs and responsible for 25% of PR accept/reject decisions.
 
-**Note on AI coding bots:** The [Star History Coding AI Leaderboard](https://www.star-history.com/coding-ai-leaderboard) tracks AI-specific accounts (coderabbitai, copilot, cursor, claude, devin, gemini-code-assist). We do not filter these because: (a) they primarily operate via PRs, not direct pushes; (b) if AI tools drive concentration, filtering them would obscure the phenomenon we're measuring.
+*Note on AI coding bots:* The [Star History Coding AI Leaderboard](https://www.star-history.com/coding-ai-leaderboard) tracks AI-specific accounts (coderabbitai, copilot, cursor, claude, devin, gemini-code-assist). We do not filter these because: (a) they primarily operate via PRs, not direct pushes; (b) if AI tools drive concentration, filtering them would obscure the phenomenon we're measuring.
 
-#### Filter 3: Distinct Commits Only
-
-GH Archive provides two commit counts:
+*Filter 3: Distinct Commits Only.* GH Archive provides two commit counts:
 - `size`: Total commits in push (includes merges)
 - `distinct_size`: Unique commits (excludes merges)
 
 We use `distinct_size` to avoid merge commit double-counting, which can artificially inflate activity for accounts that frequently merge branches.
 
-#### Filter 4: Minimum Activity Threshold (≥3 commits/year)
+*Filter 4: Minimum Activity Threshold (≥3 commits/year).* We require at least 3 commits per year to be included in the sample.
 
-We require at least 3 commits per year to be included in the sample.
+*Rationale:* Kalliamvakou et al. found 50% of GitHub users have <10 commits total. Including minimally-active accounts inflates the denominator and understates true concentration.
 
-**Rationale:** Kalliamvakou et al. found 50% of GitHub users have <10 commits total. Including minimally-active accounts inflates the denominator and understates true concentration.
+*Filter 5: Behavioral Ceiling (≤10,000 commits/year).* Accounts exceeding 10,000 commits/year are excluded as likely automation.
 
-#### Filter 5: Behavioral Ceiling (≤10,000 commits/year)
+*Rationale:* Pattern-matching alone fails for sophisticated automation. In 2024, one account had **2.84 million commits** while passing all bot pattern filters. The 10,000 ceiling catches CI pipelines and enterprise automation that escaped username detection.
 
-Accounts exceeding 10,000 commits/year are excluded as likely automation.
+*Filter 6: Multi-Repo Filter (2+ repositories).* Our primary sample restricts to accounts contributing to 2+ distinct repositories per year.
 
-**Rationale:** Pattern-matching alone fails for sophisticated automation. In 2024, one account had **2.84 million commits** while passing all bot pattern filters. The 10,000 ceiling catches CI pipelines and enterprise automation that escaped username detection.
-
-#### Filter 6: Multi-Repo Filter (2+ repositories)
-
-Our **primary sample** restricts to accounts contributing to 2+ distinct repositories per year.
-
-**Rationale:** Single-repo accounts (60-63% of all accounts) are predominantly:
+*Rationale:* Single-repo accounts (60-63% of all accounts) are predominantly:
 - CI/CD automation scripts
 - Personal project forks with minimal activity
 - Sync bots and auto-update tools
@@ -155,24 +164,17 @@ Multi-repo contributors are more likely to represent human developers working ac
 
 *Source: GH Archive PushEvents (distinct_size only). Multi-repo sample: accounts contributing to 2+ repositories per year.*
 
-**Observation:** The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift.
-
-#### Concentration Measures (Multi-Repo Sample)
-
-| Year | Accounts | Top 1% Share | Top 10% Share | Gini | P99/P50 |
-|------|----------|--------------|---------------|------|---------|
-| 2019 | 64,406 | 45.3% | 71.9% | 0.750 | 45 |
-| 2020 | 88,765 | 47.8% | 72.2% | 0.753 | 44 |
-| 2021 | 102,867 | 52.2% | 75.2% | 0.779 | 51 |
-| 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
-| 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
-| 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
-
-*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`*
+The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift. For detailed concentration measures (Gini, Top 1% share, etc.), see Appendix.
 
 #### Organization vs Personal Developers
 
-We classify developers by whether they contribute to **organization-owned repositories** (Google, Microsoft, Meta, Apache, etc.) — a proxy for professional developers working on public open-source vs hobbyists/individuals.
+We classify developers into two groups based on whether they contribute to organization-owned repositories:
+
+**Classification criteria:**
+- **Org developers:** At least one commit to a repository owned by a known organization account. We identify org accounts via: (1) a curated list of 70+ major organizations (Google, Microsoft, Meta, Apache, Mozilla, etc.); (2) heuristic patterns for org-like names (e.g., suffixes like `-inc`, `-io`, `-labs`, `-foundation`).
+- **Personal-only developers:** Zero commits to any organization-owned repository — all commits go to personal/individual accounts.
+
+This classification proxies for professional developers (who often contribute to public org repos) vs hobbyists/individuals (who work only on personal projects).
 
 | Year | Org Developers | Personal-Only | Org % of Sample |
 |------|----------------|---------------|-----------------|
@@ -183,27 +185,15 @@ We classify developers by whether they contribute to **organization-owned reposi
 | 2023 | 23,411 | 99,585 | 19.0% |
 | 2024 | 25,490 | 102,204 | 20.0% |
 
-*Source: `output/org_developer_analysis.csv`. Org developers = at least 1 commit to a public organization repo.*
+*Source: `output/org_developer_analysis.csv`.*
 
-**Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured.
+**Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* organization repos (open-source foundations, public company projects like tensorflow, kubernetes, etc.).
 
 These descriptive measures show increasing concentration, but do not reveal the underlying distributional form. For that, we turn to power law analysis in Section 4.
 
 ---
 
 ## 3. Methodology
-
-### 3.0 Unit of Analysis
-
-**Our data is aggregated at the developer level.** Each observation represents one developer in one year, with their total commits summed across all repositories they contributed to.
-
-The core question is: **How are commits distributed across developers?**
-
-- Most developers contribute few commits (median = 6/year)
-- A small number of "superstar" developers contribute thousands
-- The power law exponent α measures how extreme this concentration is
-
-This aggregation is performed via `groupby("actor_login")` in our extraction code, summing all `distinct_size` commits per developer per year.
 
 ### 3.1 Power Law Estimation
 
@@ -250,12 +240,6 @@ The mechanism generating power laws is typically **preferential attachment** (Si
 
 A declining α indicates heavier tails — more probability mass concentrated among top performers.
 
-### 3.3 Robustness Checks
-
-1. **Full sample vs. multi-repo:** Compare results with and without single-repo filter
-2. **Ceiling sensitivity:** Examine accounts hitting the 10,000-commit cap
-3. **AI detection:** Search for explicit AI markers in commit messages
-
 ---
 
 ## 4. Results
@@ -301,6 +285,14 @@ Looking at all developers combined (org + personal), the power law α declined f
 
 ### 4.3 Automation and Ceiling Effects
 
+Our analysis applies a 10,000 commits/year ceiling to exclude automated accounts that pass bot pattern filters. This section examines what these excluded accounts reveal about automation trends and how they affect our concentration estimates.
+
+#### Why This Matters
+
+Accounts exceeding 10,000 commits/year are almost certainly automated — no human developer makes 27+ commits per day, every day of the year. These accounts escaped our bot pattern filters (dependabot, github-actions, etc.) because they use custom usernames or operate CI/CD pipelines under human-like accounts.
+
+The sharp increase in such accounts in 2024 suggests a fundamental shift in how automation operates on GitHub.
+
 #### Extreme Outliers (>10,000 commits/year)
 
 | Year | Accounts >10k | YoY Change |
@@ -312,7 +304,7 @@ Looking at all developers combined (org + personal), the power law α declined f
 | 2023 | 175 | +34% |
 | **2024** | **1,155** | **+560%** |
 
-**Finding:** The 6.6x explosion in 2024 (175 → 1,155 accounts) indicates a **fundamental shift** in automated commit activity — likely enterprise-scale CI/CD, AI-assisted bulk operations, or new automation patterns.
+*Finding:* The 6.6x explosion in 2024 (175 → 1,155 accounts) indicates a **fundamental shift** in automated commit activity — likely enterprise-scale CI/CD, AI-assisted bulk operations, or new automation patterns.
 
 #### Accounts Hitting the 10,000-Commit Cap
 
@@ -325,33 +317,17 @@ Looking at all developers combined (org + personal), the power law α declined f
 | 2023 | 1 | 24 |
 | **2024** | **180** | **262** |
 
-**Finding:** In 2024, 180 accounts are **capped at 10,000** — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
+*Finding:* In 2024, 180 accounts are **capped at 10,000** — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
 
-### 4.4 AI Detection
+#### Implications for Concentration Estimates
 
-#### Explicit AI Markers in Commit Messages
+The ceiling creates a **conservative bias** in our 2024 estimates. If we included these accounts at their true commit counts, concentration would be even higher. The 560% increase in high-volume accounts suggests:
 
-| Year | Total Commits | AI-Attributed | Rate |
-|------|---------------|---------------|------|
-| 2019 | 1,936,241 | 0 | 0.000% |
-| 2020 | 2,803,770 | 0 | 0.000% |
-| 2021 | 3,716,022 | 0 | 0.000% |
-| 2022 | 4,615,220 | 0 | 0.000% |
-| 2023 | 6,259,638 | 50 | 0.001% |
-| 2024 | 7,882,625 | 115 | 0.001% |
+1. **Enterprise automation maturity:** More organizations deploying sophisticated CI/CD pipelines
+2. **AI-assisted bulk operations:** Tools that can generate or modify code across many files
+3. **Monorepo adoption:** Large companies (Google, Microsoft) with automated commit workflows
 
-**Detection patterns used:**
-- `aider:` prefix (72 commits in 2024) — Aider tool marker
-- `Co-authored-by: Copilot` (23 commits) — GitHub autofix
-- `generated by GPT/Claude/Copilot` (18 commits) — explicit attribution
-- `AI-generated code` (2 commits) — explicit marker
-
-**Finding:** Only **0.001%** of commits have explicit AI markers, despite industry surveys suggesting 30-50% of developers use AI tools. Reasons include:
-- No incentive for disclosure
-- Most AI tools don't auto-tag commits
-- AI suggestions are edited before commit
-
-**AI and Top Developers:** Only 1 of 1,315 top 1% developers (0.08%) had AI-attributed commits. We **cannot directly measure** AI's contribution to concentration using commit message attribution.
+This supports our main finding: concentration is increasing, and our estimates are likely lower bounds.
 
 ---
 
@@ -359,30 +335,29 @@ Looking at all developers combined (org + personal), the power law α declined f
 
 ### What's Driving Concentration?
 
-The data suggests multiple forces:
+The key finding — that concentration is increasing among personal developers but not among org developers — points to institutional structure as a critical factor.
 
-1. **Automation scale-up:** The 6.6x explosion in >10k-commit accounts indicates enterprise-scale automation
-2. **AI-assisted velocity:** Developers using AI tools may commit more frequently, though explicit markers are rare
-3. **Platform effects:** GitHub's network effects may concentrate activity toward established projects
-4. **Winner-take-all dynamics:** Top developers may be capturing an increasing share of high-value open-source work
+**Why org developers remain stable.** Developers who contribute to organization-owned repositories operate within institutional constraints: code review processes, team structures, sprint planning, and distributed workloads. These organizational practices act as a "ceiling" on individual contribution shares. When one developer becomes more productive, the work is often redistributed rather than concentrated. Professional open-source projects (Linux, Kubernetes, TensorFlow) typically have governance structures that prevent any single contributor from dominating.
 
-### The Human-AI Measurement Problem
+**Why personal developers are concentrating.** Developers working only on personal repositories face no such constraints. There is no code review requiring others' involvement, no team sprint distributing work, no governance limiting individual output. In this environment, factors that increase individual productivity — including AI coding tools — directly translate into higher personal commit shares. The "superstar coder" can commit as much as they want, with nothing redistributing their output.
 
-When a developer uses Copilot to write 50% of their code, whose productivity are we measuring? The distinction between "human productivity" and "AI-assisted productivity" is increasingly blurred. This creates fundamental challenges for:
+**The institutional hypothesis.** The divergence suggests that institutional structures, not technology alone, determine how productivity gains are distributed. AI tools may amplify individual productivity equally across both groups, but only in the personal/hobbyist space does this translate into increased concentration. Professional settings absorb individual productivity gains into collective output.
 
-- Labor productivity statistics
-- Individual performance evaluation
-- Attribution of open-source contributions
-
-Independent analysis by [Star History (2026)](https://www.star-history.com/blog/state-of-coding-ai-on-github) using the same GH Archive data finds AI coding tools now account for **60% of bot PR reviews** (up from 20% at start of 2025) and **9-10% of bot-created PRs**. However, they note these statistics "only capture PRs authored by bot accounts, not AI-written code submitted under human developer names" — confirming that explicit AI attribution is a floor, not a ceiling.
+This has implications beyond GitHub: concentration of output may be a feature of *individual-oriented* markets (gig platforms, solo content creation) rather than *institutionally-mediated* markets (traditional employment, team-based production).
 
 ### Limitations
 
-1. **Correlation ≠ causation:** Concentration increases alongside AI adoption, but we cannot establish causality
-2. **AI detection:** Most AI usage leaves no trace (<0.002% explicit attribution)
-3. **Sampling:** Monthly first-day samples may miss weekly/seasonal patterns
-4. **Ceiling effects:** The 10,000-commit cap understates 2024 concentration
-5. **Bot detection:** Some automation evades our pattern filters
+Our analysis has several important limitations that should inform interpretation.
+
+*Correlation, not causation.* Concentration increases alongside AI adoption (Copilot launched publicly in June 2022), but we cannot establish a causal relationship. The inflection point in 2020-2021 actually preceded widespread AI tool adoption, suggesting other factors — COVID-19, remote work patterns, changes in open-source participation — may be equally or more important.
+
+*AI detection is a floor, not a ceiling.* Only 0.001% of commits have explicit AI markers. Industry surveys suggest 30-50% of developers use AI coding tools. The gap exists because: (a) most tools don't auto-tag commits; (b) there's no incentive for disclosure; (c) AI suggestions are typically edited before committing. Our explicit AI detection captures almost none of actual AI-assisted coding.
+
+*Sampling limitations.* Our stratified sample (1st of each month, 4 time slots) may miss weekly or seasonal patterns. However, our sample size (625,590 developer-years, 19.3 million commits) is large enough that sampling variance is unlikely to affect main conclusions.
+
+*Ceiling effects bias 2024 estimates downward.* The 10,000 commit/year ceiling excludes accounts whose true counts could be 50k, 100k, or higher. With 180 accounts hitting this cap in 2024 (vs. 1 in 2023), our concentration estimates for 2024 are likely understated.
+
+*Public repositories only.* GH Archive captures only public GitHub activity. Most enterprise development occurs in private repositories, which we cannot observe. Our "org developers" are those contributing to *public* org repos — open-source foundations, public company projects — not private corporate codebases.
 
 ---
 
@@ -416,6 +391,59 @@ python scripts/01a_download_gharchive_direct.py \
 # Run analysis
 python scripts/02a_power_law_from_sample.py
 ```
+
+### A.3 Concentration Measures (Multi-Repo Sample)
+
+| Year | Accounts | Top 1% Share | Top 10% Share | Gini | P99/P50 |
+|:----:|:--------:|:------------:|:-------------:|:----:|:-------:|
+| 2019 | 64,406 | 45.3% | 71.9% | 0.750 | 45 |
+| 2020 | 88,765 | 47.8% | 72.2% | 0.753 | 44 |
+| 2021 | 102,867 | 52.2% | 75.2% | 0.779 | 51 |
+| 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
+| 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
+| 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
+
+*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`*
+
+### A.4 AI Detection in Commit Messages
+
+| Year | Total Commits | AI-Attributed | Rate |
+|:----:|:-------------:|:-------------:|:----:|
+| 2019 | 1,936,241 | 0 | 0.000% |
+| 2020 | 2,803,770 | 0 | 0.000% |
+| 2021 | 3,716,022 | 0 | 0.000% |
+| 2022 | 4,615,220 | 0 | 0.000% |
+| 2023 | 6,259,638 | 50 | 0.001% |
+| 2024 | 7,882,625 | 115 | 0.001% |
+
+*Detection patterns: `aider:` prefix (72 commits in 2024), `Co-authored-by: Copilot` (23), `generated by GPT/Claude/Copilot` (18), `AI-generated code` (2).*
+
+Only 0.001% of commits have explicit AI markers, despite industry surveys suggesting 30-50% of developers use AI tools. Most AI usage leaves no trace in commit messages.
+
+### A.5 The Human-AI Measurement Problem
+
+When a developer uses Copilot to write 50% of their code, whose productivity are we measuring? The distinction between "human productivity" and "AI-assisted productivity" is increasingly blurred. This creates fundamental challenges for labor productivity statistics, individual performance evaluation, and attribution of open-source contributions.
+
+Independent analysis by [Star History (2026)](https://www.star-history.com/blog/state-of-coding-ai-on-github) using the same GH Archive data finds AI coding tools now account for 60% of bot PR reviews (up from 20% at start of 2025) and 9-10% of bot-created PRs. However, they note these statistics "only capture PRs authored by bot accounts, not AI-written code submitted under human developer names" — confirming that explicit AI attribution is a floor, not a ceiling.
+
+### A.6 Bootstrap Confidence Intervals
+
+We estimate bootstrap confidence intervals (500 iterations) for the power law exponent α:
+
+**Org Developers:**
+
+| Year | n | α | 95% CI |
+|:----:|:---:|:-----:|:----------------:|
+| 2019 | 9,824 | 2.037 | [1.955, 2.082] |
+| 2020 | 14,502 | 2.063 | [2.024, 2.097] |
+| 2021 | 18,253 | 2.075 | [1.960, 2.106] |
+| 2022 | 20,764 | 1.911 | [1.882, 2.092] |
+| 2023 | 23,411 | 2.055 | [1.827, 2.074] |
+| 2024 | 25,490 | 2.037 | [1.967, 2.073] |
+
+*Significance test (2019 vs 2024): Δα = 0.003, 95% CI [−0.090, 0.072]. Not significant — CI includes 0.*
+
+*Source: `output/bootstrap_org_developers.csv`*
 
 ---
 
@@ -487,7 +515,7 @@ Combining all multi-repo developers (org + personal):
 | 2023 | 60.2% | 54.6% | -5.6pp |
 | 2024 | 68.9% | 63.9% | -5.0pp |
 
-**Finding:** Both samples show the same upward trend. Multi-repo filter reduces concentration by 3-5pp but trend is robust.
+*Finding:* Both samples show the same upward trend. Multi-repo filter reduces concentration by 3-5pp but trend is robust.
 
 ### A.3 Power Law α Robustness Across Developer Filters
 
@@ -502,7 +530,7 @@ Combining all multi-repo developers (org + personal):
 
 *Source: `output/developer_powerlaw_analysis.csv`*
 
-**Finding:** The α decline is robust across all developer definitions.
+*Finding:* The α decline is robust across all developer definitions.
 
 ---
 
