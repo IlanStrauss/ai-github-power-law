@@ -272,6 +272,28 @@ The xmin parameter identifies where power law behavior begins — the threshold 
 
 The 2024 α (1.63) represents a **discontinuous shift** from the 2019-2023 range (1.82-2.09). The R value (-31.58) is the most negative, indicating the 2024 distribution deviates significantly from both power law and log-normal — likely due to the explosion in high-volume automated accounts hitting our 10,000-commit ceiling.
 
+### 4.2 Organization vs Personal Developers
+
+We classify developers by whether they contribute to **organization-owned repositories** (Google, Microsoft, Meta, Apache, etc.) — a proxy for professional developers vs hobbyists.
+
+| Year | Org Developers (n) | α | Personal-Only (n) | α |
+|------|--------------------|----|-------------------|-----|
+| 2019 | 9,824 | 2.04 | 53,945 | 1.99 |
+| 2020 | 14,502 | 2.06 | 73,483 | 1.95 |
+| 2021 | 18,253 | 2.08 | 83,614 | 1.86 |
+| 2022 | 20,764 | 1.91 | 92,200 | 1.83 |
+| 2023 | 23,411 | 2.06 | 99,585 | 1.82 |
+| 2024 | 25,490 | 2.04 | 102,204 | 1.78 |
+
+*Source: `output/org_developer_analysis.csv`. Org developers = at least 1 commit to an organization repo.*
+
+**Key finding:** The concentration increase is driven by **personal/hobbyist developers**, not professionals:
+
+- **Org developers:** α remains stable at ~2.0 (finite variance, moderate concentration)
+- **Personal-only developers:** α declined from 1.99 to 1.78 (infinite variance, extreme concentration)
+
+This suggests the "superstar coder" phenomenon is emerging among individual developers — potentially aided by AI tools that amplify individual productivity — rather than within professional organizations where team structures may distribute work more evenly.
+
 ### 4.3 Robustness: Full Sample vs. Multi-Repo
 
 Does the multi-repo filter create the concentration trend artificially?
