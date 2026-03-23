@@ -17,9 +17,7 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**The rise of superstar coders is driven by personal/hobbyist developers, not professionals.**
-
-We analyze GitHub commit concentration from 2019-2024 among (multi-repo) developers (n=625,590 developer-years). Estimating the **power law exponent α** for each group to test concentration and inequality:
+**The rise of superstar coders is driven by personal/hobbyist developers, not professionals.** We analyze GitHub commit concentration from 2019-2024 among (multi-repo) developers (n=625,590 developer-years). Estimating the **power law exponent α** for each group to test concentration and inequality:
 
 | Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
 |----------------|-----------------|--------------------|--------------------|------|----------------|
