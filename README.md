@@ -27,7 +27,13 @@ We find a **dramatic increase in commit concentration** from 2019-2024 among mul
 
 **Power law interpretation:** The declining α exponent (1.96 → 1.63) indicates the commit distribution is becoming increasingly heavy-tailed — more activity is concentrated in fewer accounts. An α below 2 implies infinite variance, characteristic of extreme winner-take-all dynamics.
 
-**Robustness:** This concentration increase holds even after filtering to multi-repo developers (those contributing to 2+ repositories), suggesting it reflects genuine behavioral change rather than bot activity.
+**Who is driving concentration?** The increase is driven by **personal/hobbyist developers**, not professionals:
+- Org developers (contribute to Google, Microsoft, etc.): α stable at ~2.0
+- Personal-only developers: α declined from 1.99 → 1.78
+
+This suggests AI tools may be amplifying individual developer productivity, creating "superstar coders" outside traditional organizational structures.
+
+**Robustness:** Results hold across multiple filters (multi-repo, strict developer definitions) and are not driven by bot activity.
 
 ---
 
