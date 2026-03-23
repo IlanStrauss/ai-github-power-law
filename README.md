@@ -25,10 +25,10 @@ We analyze GitHub commit concentration from 2019-2024 among multi-repo developer
 
 | Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
 |:--------------:|:---------------:|:------------------:|:------------------:|:----:|:--------------:|
-| **Personal-only** | 53,945 → 102,204 | 1.99 | **1.78** | −0.21 | Increasing concentration |
+| **Personal-only** | 53,945 → 102,204 | 1.99 | **1.78** | −0.21 | ↑ Concentration (worse) |
 | **Org developers** | 9,824 → 25,490 | 2.04 | 2.04 | 0 | Stable |
 
-*Notes: "Personal-only" = developers with zero commits to organization-owned repositories. "Org developers" = at least one commit to a public organization repo (Google, Microsoft, Apache, etc.). Power Law α estimated via Clauset-Shalizi-Newman (2009) MLE method. Source: `output/org_developer_analysis.csv`.*
+*Notes: **Lower α = more concentration.** A declining α means the distribution has a "fatter tail" — extreme values (superstar coders) become more common. "Personal-only" = developers with zero commits to organization-owned repositories. "Org developers" = at least one commit to a public organization repo (Google, Microsoft, Apache, etc.). Power Law α estimated via Clauset-Shalizi-Newman (2009) MLE method. Source: `output/org_developer_analysis.csv`.*
 
 **Timing of the shift:**
 - **2019-2020:** Modest decline (α: 1.99 → 1.95, Δ = −0.04)
@@ -38,8 +38,11 @@ We analyze GitHub commit concentration from 2019-2024 among multi-repo developer
 The inflection point in 2020-2021 preceded GitHub Copilot's public launch (June 2022) but coincided with the COVID-19 pandemic, increased remote work, and growing interest in AI-assisted development.
 
 **What does this mean?**
-- *Personal developers:* Their power law exponent α fell from 1.99 (2019) to 1.78 (2024). By crossing below 2.0, the distribution entered the "infinite variance" regime — the same statistical class as wealth distributions (Pareto, 1896) and city sizes (Zipf, 1949), where extreme values dominate and the mean is unstable.
-- *Org developers:* α remained stable at ~2.0 throughout (2.04 in both 2019 and 2024), suggesting professional team structures distribute work more evenly.
+
+Remember: **lower α = more concentration.** A declining α means extreme values (superstars) are becoming more common relative to typical developers.
+
+- *Personal developers:* Their α fell from 1.99 (2019) to 1.78 (2024) — a 0.21 decline indicating *increasing concentration*. By crossing below 2.0, the distribution entered the "infinite variance" regime — the same statistical class as wealth distributions (Pareto, 1896) and city sizes (Zipf, 1949), where extreme values dominate and the mean is unstable. The "superstar coder" phenomenon is real and accelerating.
+- *Org developers:* α remained stable at ~2.0 throughout (2.04 in both 2019 and 2024) — no increase in concentration. Professional team structures appear to distribute work more evenly, preventing "winner-take-all" dynamics.
 
 This suggests that concentration among individual developers was already accelerating before AI coding tools became mainstream — though AI may be amplifying an existing trend toward "superstar coders" outside traditional organizational structures.
 
@@ -230,6 +233,17 @@ This comparison is crucial because many productivity distributions exhibit log-n
 
 The power law exponent α has well-established statistical and economic interpretations relating to how inequality-reproducing a given dynamic is.
 
+**How to interpret α (the key intuition):**
+
+**Lower α = more concentration = more inequality.** A power law distribution has the form P(x) ∝ x^(−α), where α controls how fast the probability of extreme values decays. When α is smaller, the decay is slower — meaning extreme values (superstar coders with thousands of commits) are *more likely*. When α is larger, extreme values are rarer and the distribution is more equal.
+
+Think of it this way:
+- **High α (e.g., 2.5-3.0):** The "rich" tail falls off quickly. Top performers exist but don't dominate.
+- **Low α (e.g., 1.5-1.8):** The tail is "fat" — extreme values are common. A small number of superstars capture most of the activity.
+- **α declining over time:** Concentration is *increasing*. The distribution is becoming more unequal.
+
+In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024). This means the probability of "superstar coders" with extreme commit counts *increased* — concentration got worse.
+
 **Statistical properties (Newman, 2005; Clauset et al., 2009):**
 - **α ≤ 2:** Infinite variance — the distribution has no stable mean; dominated by extreme values
 - **2 < α ≤ 3:** Finite variance but infinite higher moments
@@ -243,7 +257,9 @@ The power law exponent α has well-established statistical and economic interpre
 
 ### 4.1 Power Law Analysis: Organization vs Personal Developers
 
-We estimate power law exponents α separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos), we also show sample size (n), and xmin and R test for each α, which assesses if the power law is the best fit to the distribution:
+We estimate power law exponents α separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos), we also show sample size (n), and xmin and R test for each α, which assesses if the power law is the best fit to the distribution.
+
+**Reminder: Lower α = more concentration.** Watch for α *declining* over time — this indicates the distribution is becoming more unequal, with more activity concentrated among top performers.
 
 | Year | Org (n) | α | xmin | R | Personal (n) | α | xmin | R |
 |:----:|:-------:|:----:|:----:|:----:|:------------:|:----:|:----:|:----:|
@@ -506,7 +522,7 @@ Combining all multi-repo developers (org + personal):
 | 2023 | 1.82 | 40 | -14.32 | Log-normal |
 | 2024 | 1.63 | 30 | -31.58 | Log-normal |
 
-*Source: `output/multi_repo_analysis.csv`*
+*Interpretation: α declined from 1.96 to 1.63 — indicating substantial increase in concentration. Lower α = heavier tail = more activity captured by superstars. Source: `output/multi_repo_analysis.csv`*
 
 **xmin interpretation:** The xmin parameter (25-40 commits/year) identifies where power law behavior begins — roughly 2-4 commits/month. Developers above this threshold are in the heavy tail.
 
