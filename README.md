@@ -4,7 +4,7 @@
 
 ### Research Question
 
-Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?
+Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)? We aim to assess the latter using a rich dataset of commits by developers. We do not yet have direct data on AI usage unfortunately.
 
 ### Motivation
 
