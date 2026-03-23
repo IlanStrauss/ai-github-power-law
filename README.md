@@ -184,15 +184,26 @@ This comparison is crucial because many productivity distributions exhibit log-n
 
 ### 3.2 Interpreting the α Exponent
 
-Following Strauss & Yang (2025), we interpret α in economic context:
+The power law exponent α has well-established statistical and economic interpretations:
 
-| α Range | Variance | Economic Analogue |
-|---------|----------|-------------------|
-| α < 2 | Infinite | Wealth, capital income — extreme concentration |
-| 2 < α < 2.5 | Finite | Capital income, firm size distributions |
-| α > 2.5 | Finite | Labor income — more moderate concentration |
+**Statistical properties (Newman, 2005; Clauset et al., 2009):**
+- **α ≤ 2:** Infinite variance — the distribution has no stable mean; dominated by extreme values
+- **2 < α ≤ 3:** Finite variance but infinite higher moments
+- **α > 3:** All moments finite; distribution approaches "normal" behavior
 
-A declining α indicates the distribution is becoming more unequal over time, with more mass in the upper tail.
+**Empirical benchmarks from the literature:**
+
+| Domain | Typical α | Source |
+|--------|-----------|--------|
+| Wealth/Income (top tail) | 1.5–2.0 | Pareto (1896); Gabaix (2009) |
+| City sizes | 2.0 | Zipf (1949); Gabaix (1999) |
+| Firm sizes | 2.0 | Axtell (2001) |
+| Scientific citations | 2.5–3.0 | Redner (1998) |
+| Web page visits | 2.0–2.5 | Adamic & Huberman (2000) |
+
+The mechanism generating power laws is typically **preferential attachment** (Simon, 1955; Barabási & Albert, 1999): success begets success, creating "rich-get-richer" dynamics where early advantages compound over time.
+
+A declining α indicates heavier tails — more probability mass concentrated among top performers.
 
 ### 3.3 Robustness Checks
 
@@ -206,7 +217,7 @@ A declining α indicates the distribution is becoming more unequal over time, wi
 
 ### 4.1 Power Law Analysis
 
-Following Strauss, Yang, and Mazzucato (2025), we analyze whether GitHub commit distributions exhibit power law behavior — a signature of "rich-get-richer" dynamics where success compounds over time.
+Power law distributions are ubiquitous in complex systems — from wealth (Pareto, 1896) to city sizes (Zipf, 1949) to web traffic (Adamic & Huberman, 2000). Their presence signals **preferential attachment**: success compounds over time, creating extreme concentration (Simon, 1955; Barabási & Albert, 1999).
 
 #### Why Power Laws Matter
 
@@ -216,10 +227,10 @@ $$P(X > x) \propto x^{-\alpha}$$
 
 arise from preferential attachment, network effects, and compounding returns — precisely the dynamics we might expect if AI tools amplify productive developers' output.
 
-**The α exponent is key:**
-- **α < 2:** Infinite variance — extreme winner-take-all dynamics
-- **α ≈ 2:** Consistent with capital income and wealth distributions (Strauss & Yang, 2025)
-- **α > 2.5:** More moderate concentration, closer to labor income distributions
+**The α exponent determines tail behavior (Newman, 2005):**
+- **α < 2:** Infinite variance — no stable mean; extreme winner-take-all dynamics
+- **α ≈ 2:** Comparable to wealth distributions (Pareto) and city sizes (Zipf/Gabaix)
+- **α > 2.5:** More moderate concentration; finite moments
 
 #### Power Law Estimates
 
@@ -238,11 +249,11 @@ Using the Clauset-Shalizi-Newman (2009) methodology with maximum likelihood esti
 
 **1. Declining α indicates increasing concentration**
 
-The power law exponent dropped from **1.96 (2019) to 1.63 (2024)**. Following Strauss & Yang (2025), this shift has economic significance:
+The power law exponent dropped from **1.96 (2019) to 1.63 (2024)**. This shift has clear statistical and economic significance:
 
-- In 2019, α ≈ 2 placed GitHub commits between capital income (α ≈ 1.5-2) and labor income (α ≈ 2.5-3) distributions
-- By 2024, α = 1.63 indicates commit activity now resembles **wealth and capital income** more than labor income
-- An α below 2 implies infinite variance — the distribution has no stable mean, characteristic of extreme winner-take-all dynamics
+- In 2019, α ≈ 2 placed GitHub commits in line with classic power law phenomena: city sizes (Gabaix, 1999), firm sizes (Axtell, 2001), and the upper tail of income distributions (Pareto, 1896)
+- By 2024, α = 1.63 indicates commit activity has become **more concentrated than typical economic distributions** — comparable to extreme wealth concentration
+- An α below 2 implies **infinite variance** (Newman, 2005): the distribution has no stable mean, and is dominated by a few extreme values. This is the statistical signature of winner-take-all dynamics
 
 **2. Log-normal body, power-law tail**
 
@@ -389,10 +400,26 @@ python scripts/02a_power_law_from_sample.py
 
 ## References
 
-### Power Law Analysis
-- Strauss, I., Yang, J., & Mazzucato, M. (2025). ["'Rich-Get-Richer'? Analyzing Content Creator Earnings Across Large Social Media Platforms."](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5253032) UCL Institute for Innovation and Public Purpose, Working Paper IIPP WP 2025-16.
+### Power Law Theory and Methods
+- Pareto, V. (1896). *Cours d'économie politique*. Lausanne: Rouge.
+- Zipf, G. K. (1949). *Human Behavior and the Principle of Least Effort*. Addison-Wesley.
+- Simon, H. A. (1955). "On a class of skew distribution functions." *Biometrika*, 42(3/4), 425-440.
+- Barabási, A. L., & Albert, R. (1999). "Emergence of scaling in random networks." *Science*, 286(5439), 509-512.
+- Newman, M. E. J. (2005). "Power laws, Pareto distributions and Zipf's law." *Contemporary Physics*, 46(5), 323-351.
 - Clauset, A., Shalizi, C. R., & Newman, M. E. J. (2009). "Power-law distributions in empirical data." *SIAM Review*, 51(4), 661-703.
+
+### Power Laws in Economics
+- Gabaix, X. (1999). "Zipf's law for cities: An explanation." *Quarterly Journal of Economics*, 114(3), 739-767.
+- Axtell, R. L. (2001). "Zipf distribution of U.S. firm sizes." *Science*, 293(5536), 1818-1820.
+- Gabaix, X. (2009). "Power laws in economics and finance." *Annual Review of Economics*, 1, 255-294.
 - Gabaix, X. (2016). "Power laws in economics: An introduction." *Journal of Economic Perspectives*, 30(1), 185-206.
+
+### Web and Citation Networks
+- Redner, S. (1998). "How popular is your paper? An empirical study of the citation distribution." *European Physical Journal B*, 4(2), 131-134.
+- Adamic, L. A., & Huberman, B. A. (2000). "Power-law distribution of the World Wide Web." *Science*, 287(5461), 2115.
+
+### Platform Economics
+- Strauss, I., Yang, J., & Mazzucato, M. (2025). ["'Rich-Get-Richer'? Analyzing Content Creator Earnings Across Large Social Media Platforms."](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5253032) UCL Institute for Innovation and Public Purpose, Working Paper IIPP WP 2025-16.
 
 ### GitHub Data Mining
 - Kalliamvakou, E., et al. (2016). "An in-depth study of the promises and perils of mining GitHub." *Empirical Software Engineering*, 21(5), 2035-2071.
