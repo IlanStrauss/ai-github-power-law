@@ -26,8 +26,8 @@ We analyze GitHub commit concentration from 2019-2024 among (multi-repo) develop
 | **Org developers** | 9,824 → 25,490 | 2.04 | 2.04 | 0 | Stable |
 
 **What does this mean?**
-- **Personal developers:** α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
-- **Org developers:** α remains stable at ~2.0, suggesting professional team structures distribute work more evenly
+- **Personal developers:** Their power law exponent, α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
+- **Org developers:** Their α remains stable at ~2.0 over time, suggesting professional team structures distribute work more evenly
 
 This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian.
 
