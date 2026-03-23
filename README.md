@@ -469,6 +469,8 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 
 The point estimates show a clear declining trend in α for personal developers (1.991 → 1.779), consistent with increasing concentration. However, the wide confidence intervals in later years (due to high variance in the heavy tail) mean we cannot reject the null hypothesis of no change when comparing 2019 to 2024 directly. The pattern across all six years is more informative than any single pairwise comparison.
 
+*Note on widening CIs:* The confidence intervals widen substantially after 2020 (e.g., 2024: [1.765, 2.168] vs 2019: [1.958, 2.031]). This widening is itself evidence of increasing concentration — as α declines and the tail gets heavier, the distribution's variance increases, making α harder to estimate precisely. The instability in estimation reflects the instability in the underlying distribution.
+
 ---
 
 ## References
