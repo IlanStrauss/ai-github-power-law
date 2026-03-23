@@ -61,6 +61,16 @@ Our data is aggregated at the **developer level**. Each observation represents o
 
 This aggregation is performed via `groupby("actor_login")` in our extraction code, summing all `distinct_size` commits per developer per year.
 
+### 2.0.1 Are Commits a Good Measure of Productivity?
+
+Short answer: no, but it's often the best available proxy — with important caveats.
+
+*Why commits are appealing as a measure.* Commits are observable and objective (no self-reporting bias), universally available at scale via GH Archive, temporally precise, and correlate loosely with activity volume across large populations.
+
+*Why commits are a poor productivity measure.* First, commit counts are subject to gaming and normative distortion: "commit early, commit often" culture inflates counts, squash merges collapse 50 commits into 1, and auto-generated commits (version bumps, lockfile updates) add noise. Second, size variance is enormous — one commit can be a typo fix or a 10,000-line refactor. Third, invisible work (code review, architecture decisions, mentoring) doesn't appear in commits. Fourth, quality is absent entirely — a commit that introduces a bug is indistinguishable from one that fixes it.
+
+*For this research though.* We're not measuring individual productivity — we're measuring distributional shifts in commit behavior across millions of repos. Commits work better for this purpose because: (1) we're looking for power-law behavior across populations, not ranking individuals; (2) systematic biases in commit behavior are consistent across time, so a change in the signal likely reflects a real change in behavior; (3) the unit of analysis is the population, not the person. Commits are a reasonable instrument for detecting *whether and how fast* coding behavior is changing at scale — just not for measuring whether that coding is more or less productive.
+
 ### 2.1 Source: GH Archive
 
 We use [GH Archive](https://www.gharchive.org/), which records all public GitHub events in real-time since 2011. Each hourly file contains JSON records of every public event on GitHub, including:
