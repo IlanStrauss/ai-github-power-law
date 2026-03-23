@@ -1,4 +1,4 @@
-# GitHub Commit Concentration Analysis
+# GitHub Concentration Analysis
 
 ## 1. Introduction
 
