@@ -16,24 +16,24 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-We find a **dramatic increase in commit concentration** from 2019-2024 among multi-repo developers (n=64,406 in 2019; n=131,530 in 2024):
+**The rise of superstar coders is driven by personal/hobbyist developers, not professionals.**
 
-| Metric | 2019 (n=64,406) | 2024 (n=131,530) | Change |
-|--------|-----------------|------------------|--------|
-| Power Law α | 1.96 | 1.63 | -0.33 |
-| Top 1% Share | 45.3% | 63.9% | +18.6pp |
-| Gini Coefficient | 0.750 | 0.895 | +0.145 |
-| P99/P50 Ratio | 45 | 215 | 4.8x |
+We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Using power law analysis, we find:
 
-**Power law interpretation:** The declining α exponent (1.96 → 1.63) indicates the commit distribution is becoming increasingly heavy-tailed — more activity is concentrated in fewer accounts. An α below 2 implies infinite variance, characteristic of extreme winner-take-all dynamics.
+| Developer Type | 2019 α | 2024 α | Δα | Interpretation |
+|----------------|--------|--------|-----|----------------|
+| **Personal-only** (n=53,945→102,204) | 1.99 | **1.78** | -0.21 | Increasing concentration |
+| **Org developers** (n=9,824→25,490) | 2.04 | 2.04 | 0 | Stable |
 
-**Who is driving concentration?** The increase is driven by **personal/hobbyist developers**, not professionals:
-- Org developers (contribute to Google, Microsoft, etc.): α stable at ~2.0
-- Personal-only developers: α declined from 1.99 → 1.78
+**What does this mean?**
+- **Personal developers:** α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
+- **Org developers:** α remains stable at ~2.0, suggesting professional team structures distribute work more evenly
 
-This suggests AI tools may be amplifying individual developer productivity, creating "superstar coders" outside traditional organizational structures.
+This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian.
 
-**Robustness:** Results hold across multiple filters (multi-repo, strict developer definitions) and are not driven by bot activity.
+**Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
+
+**Pooled sample:** Looking at all developers combined, α declined from 1.96 to 1.63, with Top 1% share rising from 45.3% to 63.9%. See Section 4 and Appendix for details.
 
 ---
 
@@ -169,6 +169,23 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
 
 *Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`*
+
+#### Organization vs Personal Developers
+
+We classify developers by whether they contribute to **organization-owned repositories** (Google, Microsoft, Meta, Apache, etc.) — a proxy for professional developers working on public open-source vs hobbyists/individuals.
+
+| Year | Org Developers | Personal-Only | Org % of Sample |
+|------|----------------|---------------|-----------------|
+| 2019 | 9,824 | 53,945 | 15.4% |
+| 2020 | 14,502 | 73,483 | 16.5% |
+| 2021 | 18,253 | 83,614 | 17.9% |
+| 2022 | 20,764 | 92,200 | 18.4% |
+| 2023 | 23,411 | 99,585 | 19.0% |
+| 2024 | 25,490 | 102,204 | 20.0% |
+
+*Source: `output/org_developer_analysis.csv`. Org developers = at least 1 commit to a public organization repo.*
+
+**Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured.
 
 These descriptive measures show increasing concentration, but do not reveal the underlying distributional form. For that, we turn to power law analysis in Section 4.
 
