@@ -130,6 +130,8 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2023 | 124,041 | 198,435 | 322,476 | 61.5% |
 | 2024 | 131,530 | 224,719 | 356,249 | 63.1% |
 
+*Source: GH Archive PushEvents, sampled 1st of each month at 00:00, 06:00, 12:00, 18:00 UTC. Filters applied: bot exclusion, ≥3 commits/year, ≤10,000 commits/year.*
+
 #### Commit Distribution (Multi-Repo Sample)
 
 | Year | Total Commits | Mean | Median | P90 | P99 |
@@ -140,6 +142,8 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 2,865,724 | 25.1 | 6 | 22 | 321 |
 | 2023 | 3,132,816 | 25.3 | 6 | 21 | 339 |
 | 2024 | 7,463,885 | 56.7 | 6 | 25 | 1,287 |
+
+*Source: GH Archive PushEvents (distinct_size only). Multi-repo sample: accounts contributing to 2+ repositories per year.*
 
 **Observation:** The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift.
 
@@ -153,6 +157,8 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
 | 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
 | 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
+
+*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`*
 
 These descriptive measures show increasing concentration, but do not reveal the underlying distributional form. For that, we turn to power law analysis in Section 4.
 
