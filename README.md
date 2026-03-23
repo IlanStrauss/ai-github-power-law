@@ -83,6 +83,8 @@ pre-commit, mergify, stale, coveralls, travis, circleci
 
 **Evidence:** Dey et al. (2020) found bots involved in 31% of all PRs and responsible for 25% of PR accept/reject decisions.
 
+**Note on AI coding bots:** The [Star History Coding AI Leaderboard](https://www.star-history.com/coding-ai-leaderboard) tracks AI-specific accounts (coderabbitai, copilot, cursor, claude, devin, gemini-code-assist). We do not filter these because: (a) they primarily operate via PRs, not direct pushes; (b) if AI tools drive concentration, filtering them would obscure the phenomenon we're measuring.
+
 #### Filter 3: Distinct Commits Only
 
 GH Archive provides two commit counts:
