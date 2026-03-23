@@ -1,4 +1,4 @@
-# AI and the Rise of Superstar Coders on GitHub: An Analysis of Commit Data
+# AI and the Rise of Superstar Coders on GitHub: An analysis of commit data
 
 ## 1. Introduction
 
@@ -6,15 +6,16 @@
 
 ### Research Question
 
-Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?
+*Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?* We aim to assess the fromer using a rich dataset of commits by developers. We do not yet have direct data on AI usage though.
 
 ### Motivation
 
 GitHub hosts over 100 million developers and serves as the primary platform for open-source software development. Understanding how commit activity is distributed — and whether this distribution is changing — has implications for:
 
-- **Labor economics:** Productivity concentration may reflect skill premiums or automation displacement
-- **Platform governance:** Concentration affects power dynamics in open-source communities
 - **AI impact measurement:** If AI tools amplify individual productivity, we should see concentration increasing
+- **Labor economics:** Productivity concentration may reflect skill premiums or automation displacement
+- **Institutional economics:** We can understand the role of institutions and work processes in mediating how AI is used and impacts worker productivity
+- **Platform governance:** Concentration affects power dynamics in open-source communities
 
 ### Key Findings
 
@@ -193,7 +194,7 @@ These descriptive measures show increasing concentration, but do not reveal the 
 
 ---
 
-## 3. Methodology
+## 3. Method: Power Law Estimation
 
 ### 3.1 Power Law Estimation
 
@@ -242,7 +243,7 @@ A declining α indicates heavier tails — more probability mass concentrated am
 
 ---
 
-## 4. Results
+## 4. Power Law Results
 
 ### 4.1 Power Law Analysis: Organization vs Personal Developers
 
