@@ -1,81 +1,264 @@
-# GitHub Concentration Analysis
+# GitHub Commit Concentration Analysis
 
-**Research Question:** Is GitHub activity becoming more concentrated over time, and has this accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?
+## 1. Introduction
 
-## Key Findings
+### Research Question
 
-### Main Result: Dramatic Concentration Increase (Multi-Repo Developers)
+Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?
 
-**Sample Filter:** We restrict to accounts contributing to **2+ repositories**. This filters out single-repo accounts (likely CI/CD automation, bots, or inactive forks) to isolate genuine developer activity.
+### Motivation
 
-| Year | Accounts | Total Commits | Top 1% Share | Top 10% Share | Gini | P99/P50 | Notes |
-|------|----------|---------------|--------------|---------------|------|---------|-------|
-| 2019 | 64,406 | 1,384,035 | 45.3% | 71.9% | 0.750 | 45 | Pre-AI baseline |
-| 2020 | 88,765 | 1,924,456 | 47.8% | 72.2% | 0.753 | 44 | COVID year |
-| 2021 | 102,867 | 2,525,459 | 52.2% | 75.2% | 0.779 | 51 | Copilot preview |
-| 2022 | 113,981 | 2,865,724 | 53.7% | 76.1% | 0.787 | 54 | Copilot GA (June) |
-| 2023 | 124,041 | 3,132,816 | 54.6% | 76.9% | 0.792 | 56 | Full AI era |
-| **2024** | **131,530** | **7,463,885** | **63.9%** | **89.2%** | **0.895** | **215** | **Peak AI adoption** |
+GitHub hosts over 100 million developers and serves as the primary platform for open-source software development. Understanding how commit activity is distributed — and whether this distribution is changing — has implications for:
 
-**Key Trends (2019 → 2024):**
-- **Top 1% Share:** 45.3% → 63.9% (+18.6 percentage points)
-- **Top 10% Share:** 71.9% → 89.2% (+17.3 percentage points)
-- **Gini coefficient:** 0.750 → 0.895 (+0.145)
-- **P99/P50 ratio:** 45 → 215 (4.8x increase)
+- **Labor economics:** Productivity concentration may reflect skill premiums or automation displacement
+- **Platform governance:** Concentration affects power dynamics in open-source communities
+- **AI impact measurement:** If AI tools amplify individual productivity, we should see concentration increasing
 
-### Power Law Analysis (Multi-Repo Sample)
+### Key Findings
 
-Using Clauset-Shalizi-Newman (2009) methodology:
+We find a **dramatic increase in commit concentration** from 2019-2024:
 
-| Year | Alpha (α) | Xmin | R (vs LogN) | p-value |
-|------|-----------|------|-------------|---------|
-| 2019 | 1.96 | 25 | -3.16 | 0.100 |
-| 2020 | 1.93 | 34 | -5.64 | 0.026 |
-| 2021 | 2.09 | 5 | 6.33 | 0.000 |
-| 2022 | 1.85 | 36 | -6.47 | 0.014 |
-| 2023 | 1.82 | 40 | -14.32 | 0.000 |
-| 2024 | 1.63 | 30 | -31.58 | 0.000 |
+| Metric | 2019 | 2024 | Change |
+|--------|------|------|--------|
+| Top 1% Share | 45.3% | 63.9% | +18.6pp |
+| Top 10% Share | 71.9% | 89.2% | +17.3pp |
+| Gini Coefficient | 0.750 | 0.895 | +0.145 |
+| P99/P50 Ratio | 45 | 215 | +170 |
 
-The declining α suggests the distribution is becoming **more heavy-tailed** over time — more commits concentrated in fewer accounts.
+This concentration increase is **robust** to filtering for multi-repo developers, suggesting it reflects genuine behavioral change rather than bot activity.
 
-### Outlier Trend: Automation Explosion
+---
 
-Accounts exceeding 10,000 commits/year (excluded from main analysis):
+## 2. Data
 
-| Year | Outliers | YoY Change |
-|------|----------|------------|
-| 2019 | 46 | - |
+### 2.1 Source: GH Archive
+
+We use [GH Archive](https://www.gharchive.org/), which records all public GitHub events in real-time since 2011. Each hourly file contains JSON records of every public event on GitHub, including:
+
+- **PushEvents** (commits) — our focus
+- WatchEvents (stars)
+- ForkEvents
+- PullRequestEvents
+- IssueEvents
+
+GH Archive is the canonical source for large-scale GitHub research, used by studies in MSR, ICSE, and Empirical Software Engineering.
+
+### 2.2 Sampling Strategy
+
+Processing the full GH Archive is prohibitively expensive (~50TB uncompressed). We use a stratified sample:
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| **Time of day** | 4 samples (00:00, 06:00, 12:00, 18:00 UTC) | Captures global activity across US, Europe, Asia time zones |
+| **Day selection** | 1st of each month | Consistent sampling frame; avoids weekend effects |
+| **Years** | 2019-2024 | Pre-AI baseline (2019-2021) through peak AI adoption (2024) |
+| **Sample size** | 288 hourly files | ~21GB compressed |
+
+This sampling provides approximately **1/180th** of total GitHub activity while preserving temporal and geographic variation.
+
+### 2.3 Data Quality Filters
+
+We apply filters following best practices from the mining software repositories (MSR) literature, particularly Kalliamvakou et al. (2016) "The Promises and Perils of Mining GitHub" and Dey et al. (2020) on bot detection.
+
+#### Filter 1: Event Type (PushEvents Only)
+
+We analyze only PushEvents containing commit data. This excludes:
+- Issue comments and PR discussions
+- Stars and forks (popularity metrics)
+- Administrative events
+
+**Rationale:** Commits are the primary unit of code contribution. Other event types measure engagement, not productivity.
+
+#### Filter 2: Bot Account Exclusion
+
+We exclude accounts matching 15+ bot patterns from the MSR literature:
+
+```
+[bot], -bot, dependabot, renovate, github-actions, codecov,
+greenkeeper, snyk, imgbot, allcontributors, semantic-release,
+pre-commit, mergify, stale, coveralls, travis, circleci
+```
+
+**Evidence:** Dey et al. (2020) found bots involved in 31% of all PRs and responsible for 25% of PR accept/reject decisions.
+
+#### Filter 3: Distinct Commits Only
+
+GH Archive provides two commit counts:
+- `size`: Total commits in push (includes merges)
+- `distinct_size`: Unique commits (excludes merges)
+
+We use `distinct_size` to avoid merge commit double-counting, which can artificially inflate activity for accounts that frequently merge branches.
+
+#### Filter 4: Minimum Activity Threshold (≥3 commits/year)
+
+We require at least 3 commits per year to be included in the sample.
+
+**Rationale:** Kalliamvakou et al. found 50% of GitHub users have <10 commits total. Including minimally-active accounts inflates the denominator and understates true concentration.
+
+#### Filter 5: Behavioral Ceiling (≤10,000 commits/year)
+
+Accounts exceeding 10,000 commits/year are excluded as likely automation.
+
+**Rationale:** Pattern-matching alone fails for sophisticated automation. In 2024, one account had **2.84 million commits** while passing all bot pattern filters. The 10,000 ceiling catches CI pipelines and enterprise automation that escaped username detection.
+
+#### Filter 6: Multi-Repo Filter (2+ repositories)
+
+Our **primary sample** restricts to accounts contributing to 2+ distinct repositories per year.
+
+**Rationale:** Single-repo accounts (60-63% of all accounts) are predominantly:
+- CI/CD automation scripts
+- Personal project forks with minimal activity
+- Sync bots and auto-update tools
+- Enterprise monorepo automation
+
+Multi-repo contributors are more likely to represent human developers working across projects.
+
+### Descriptive Statistics
+
+#### Sample Sizes by Year
+
+| Year | Multi-Repo Accounts | Single-Repo Accounts | Total Accounts | Single-Repo % |
+|------|---------------------|----------------------|----------------|---------------|
+| 2019 | 64,406 | 102,523 | 166,929 | 61.4% |
+| 2020 | 88,765 | 134,000 | 222,765 | 60.2% |
+| 2021 | 102,867 | 157,557 | 260,424 | 60.5% |
+| 2022 | 113,981 | 180,882 | 294,863 | 61.3% |
+| 2023 | 124,041 | 198,435 | 322,476 | 61.5% |
+| 2024 | 131,530 | 224,719 | 356,249 | 63.1% |
+
+#### Commit Distribution (Multi-Repo Sample)
+
+| Year | Total Commits | Mean | Median | P90 | P99 |
+|------|---------------|------|--------|-----|-----|
+| 2019 | 1,384,035 | 21.5 | 6 | 23 | 268 |
+| 2020 | 1,924,456 | 21.7 | 6 | 22 | 265 |
+| 2021 | 2,525,459 | 24.6 | 6 | 22 | 306 |
+| 2022 | 2,865,724 | 25.1 | 6 | 22 | 321 |
+| 2023 | 3,132,816 | 25.3 | 6 | 21 | 339 |
+| 2024 | 7,463,885 | 56.7 | 6 | 25 | 1,287 |
+
+**Observation:** The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift.
+
+---
+
+## 3. Methodology
+
+### Concentration Metrics
+
+We compute standard inequality measures:
+
+**Top K% Share:** The fraction of total commits made by the top K% of accounts, ranked by commit count.
+
+**Gini Coefficient:** Ranges from 0 (perfect equality) to 1 (perfect concentration). Computed as:
+
+$$G = \frac{\sum_{i=1}^{n}\sum_{j=1}^{n}|x_i - x_j|}{2n\sum_{i=1}^{n}x_i}$$
+
+**Percentile Ratios:** P99/P50 compares the 99th percentile to the median, capturing upper-tail dispersion.
+
+### Power Law Analysis
+
+We follow the Clauset-Shalizi-Newman (2009) methodology, as recommended by Yang (2025):
+
+1. **Maximum Likelihood Estimation (MLE):** Fit the power law exponent α for the upper tail
+2. **Threshold Selection:** Determine xmin using the Kolmogorov-Smirnov (KS) statistic
+3. **Alternative Comparison:** Compare power law fit to log-normal using likelihood ratio test
+
+The power law probability density function is:
+
+$$p(x) = \frac{\alpha - 1}{x_{\min}} \left(\frac{x}{x_{\min}}\right)^{-\alpha}$$
+
+**Interpretation of α:**
+- α < 2: Infinite variance (extremely heavy tails)
+- 2 < α < 3: Finite variance, infinite mean for tail
+- α > 3: Finite variance and mean
+
+**Interpretation of R (likelihood ratio):**
+- R > 0: Power law fits better than log-normal
+- R < 0: Log-normal fits better than power law
+
+### Robustness Checks
+
+1. **Full sample vs. multi-repo:** Compare concentration with and without single-repo filter
+2. **Ceiling sensitivity:** Examine accounts hitting the 10,000-commit cap
+3. **AI detection:** Search for explicit AI markers in commit messages
+
+---
+
+## 4. Results
+
+### 4.1 Concentration Metrics
+
+#### Main Finding: Dramatic Concentration Increase
+
+| Year | Accounts | Commits | Top 1% Share | Top 10% Share | Gini | P99/P50 |
+|------|----------|---------|--------------|---------------|------|---------|
+| 2019 | 64,406 | 1,384,035 | 45.3% | 71.9% | 0.750 | 45 |
+| 2020 | 88,765 | 1,924,456 | 47.8% | 72.2% | 0.753 | 44 |
+| 2021 | 102,867 | 2,525,459 | 52.2% | 75.2% | 0.779 | 51 |
+| 2022 | 113,981 | 2,865,724 | 53.7% | 76.1% | 0.787 | 54 |
+| 2023 | 124,041 | 3,132,816 | 54.6% | 76.9% | 0.792 | 56 |
+| **2024** | **131,530** | **7,463,885** | **63.9%** | **89.2%** | **0.895** | **215** |
+
+**Findings:**
+- Top 1% share increased **every year** from 2019-2024
+- Total increase: +18.6 percentage points (45.3% → 63.9%)
+- The 2024 jump (+9.3pp from 2023) is the **largest single-year increase**
+- P99/P50 ratio increased nearly **5-fold** (45 → 215), indicating extreme tail growth
+
+### 4.2 Power Law Analysis
+
+Following the CNS methodology:
+
+| Year | α (exponent) | xmin | R (vs. log-normal) | p-value | Best Fit |
+|------|--------------|------|---------------------|---------|----------|
+| 2019 | 1.96 | 25 | -3.16 | 0.100 | Log-normal |
+| 2020 | 1.93 | 34 | -5.64 | 0.026 | Log-normal |
+| 2021 | 2.09 | 5 | +6.33 | 0.000 | Power law |
+| 2022 | 1.85 | 36 | -6.47 | 0.013 | Log-normal |
+| 2023 | 1.82 | 40 | -14.32 | 0.000 | Log-normal |
+| 2024 | 1.63 | 30 | -31.58 | 0.000 | Log-normal |
+
+**Findings:**
+1. **Declining α:** The exponent dropped from 1.96 (2019) to 1.63 (2024), indicating progressively heavier tails. Lower α means more mass in the upper tail — consistent with increasing concentration.
+
+2. **Log-normal vs. power law:** In most years, the log-normal distribution provides a better fit (R < 0). This is common for productivity distributions, which typically show log-normal bodies with power-law tails (Gabaix, 2016).
+
+3. **2024 anomaly:** The R value (-31.58) is the most negative, suggesting the 2024 distribution deviates significantly from a pure power law — likely due to the explosion in high-volume automated accounts.
+
+### 4.3 Robustness: Full Sample vs. Multi-Repo
+
+Does the multi-repo filter create the concentration trend artificially?
+
+| Year | Full Sample Top 1% | Multi-Repo Top 1% | Difference |
+|------|--------------------|--------------------|------------|
+| 2019 | 49.5% | 45.3% | -4.2pp |
+| 2020 | 51.3% | 47.8% | -3.5pp |
+| 2021 | 54.8% | 52.2% | -2.6pp |
+| 2022 | 56.4% | 53.7% | -2.7pp |
+| 2023 | 60.2% | 54.6% | -5.6pp |
+| 2024 | 68.9% | 63.9% | -5.0pp |
+
+**Finding:** Both samples show the same upward trend. The multi-repo filter reduces concentration by 3-5pp (as expected — single-repo automation inflates the upper tail), but the **trend direction and magnitude are robust**.
+
+### 4.4 Automation and Ceiling Effects
+
+#### Extreme Outliers (>10,000 commits/year)
+
+| Year | Accounts >10k | YoY Change |
+|------|---------------|------------|
+| 2019 | 46 | — |
 | 2020 | 73 | +59% |
 | 2021 | 79 | +8% |
 | 2022 | 131 | +66% |
 | 2023 | 175 | +34% |
 | **2024** | **1,155** | **+560%** |
 
-The 6.6x jump in 2024 suggests massive growth in automation/AI-assisted bulk operations. In 2024, **180 accounts hit our 10,000-commit ceiling** (vs 0 in 2019-2022).
+**Finding:** The 6.6x explosion in 2024 (175 → 1,155 accounts) indicates a **fundamental shift** in automated commit activity — likely enterprise-scale CI/CD, AI-assisted bulk operations, or new automation patterns.
 
-### Multi-Repo Filter: Isolating "Real" Developers
+#### Accounts Hitting the 10,000-Commit Cap
 
-A critical question: Is the concentration increase driven by bots/automation, or does it reflect genuine developer behavior?
-
-**Filter:** Restrict to accounts contributing to 2+ repositories (filters out automation that commits to only one repo).
-
-| Year | Full Sample | Multi-Repo Only | Difference | Single-Repo % |
-|------|-------------|-----------------|------------|---------------|
-| 2019 | 49.5% | 45.3% | -4.2pp | 61.4% |
-| 2020 | 51.3% | 47.8% | -3.5pp | 60.2% |
-| 2021 | 54.8% | 52.2% | -2.6pp | 60.5% |
-| 2022 | 56.4% | 53.7% | -2.7pp | 61.3% |
-| 2023 | 60.2% | 54.6% | -5.6pp | 61.5% |
-| **2024** | **68.9%** | **63.9%** | **-5.0pp** | **63.1%** |
-
-**Key Finding:** Even among multi-repo contributors (likely humans), the Top 1% share rose from **45.3% to 63.9%** (+18.6pp). The concentration increase is **real**, not just a bot artifact.
-
-### The 10,000 Commit Cap: Hidden Explosion
-
-We cap accounts at 10,000 commits/year to filter automation. But in 2024, many accounts hit this ceiling:
-
-| Year | Accounts at 10k Cap | Accounts ≥ 9k |
-|------|---------------------|---------------|
+| Year | Accounts at Cap | Accounts ≥9k |
+|------|-----------------|--------------|
 | 2019 | 0 | 1 |
 | 2020 | 0 | 7 |
 | 2021 | 0 | 13 |
@@ -83,151 +266,116 @@ We cap accounts at 10,000 commits/year to filter automation. But in 2024, many a
 | 2023 | 1 | 24 |
 | **2024** | **180** | **262** |
 
-**Implication:** The 2024 concentration metrics are *understated*. Those 180 capped accounts could have 50,000+ commits each. One account had **2.84 million commits** before being filtered.
+**Finding:** In 2024, 180 accounts are **capped at 10,000** — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
 
-### AI Detection Analysis
+### 4.5 AI Detection
 
-Most AI-assisted code leaves **no explicit markers** in commit messages. Using strict pattern matching:
+#### Explicit AI Markers in Commit Messages
 
-| Year | Total Commits | AI-Attributed | Rate | Notes |
-|------|---------------|---------------|------|-------|
-| 2019 | 1,936,241 | 0 | 0.0000% | Pre-AI |
-| 2020 | 2,803,770 | 0 | 0.0000% | |
-| 2021 | 3,716,022 | 0 | 0.0000% | Copilot preview |
-| 2022 | 4,615,220 | 0 | 0.0000% | Copilot GA |
-| 2023 | 6,259,638 | 50 | 0.0008% | ChatGPT era |
-| 2024 | 7,882,625 | 115 | 0.0015% | Claude Code, Cursor |
+| Year | Total Commits | AI-Attributed | Rate |
+|------|---------------|---------------|------|
+| 2019 | 1,936,241 | 0 | 0.000% |
+| 2020 | 2,803,770 | 0 | 0.000% |
+| 2021 | 3,716,022 | 0 | 0.000% |
+| 2022 | 4,615,220 | 0 | 0.000% |
+| 2023 | 6,259,638 | 50 | 0.001% |
+| 2024 | 7,882,625 | 115 | 0.001% |
 
-**Detection patterns (high confidence only):**
-- `aider:` prefix (72 commits in 2024)
-- `Co-authored-by: Copilot` (23 commits)
-- `generated by GPT/Claude` (17 commits)
-- `AI-generated code` explicit markers (2 commits)
+**Detection patterns used:**
+- `aider:` prefix (72 commits in 2024) — Aider tool marker
+- `Co-authored-by: Copilot` (23 commits) — GitHub autofix
+- `generated by GPT/Claude/Copilot` (18 commits) — explicit attribution
+- `AI-generated code` (2 commits) — explicit marker
 
-**Why so few?** Developers rarely tag AI-assisted commits. The explicit markers capture <0.002% of commits, while industry surveys suggest 30-50% of developers use AI tools.
+**Finding:** Only **0.001%** of commits have explicit AI markers, despite industry surveys suggesting 30-50% of developers use AI tools. Reasons include:
+- No incentive for disclosure
+- Most AI tools don't auto-tag commits
+- AI suggestions are edited before commit
 
-**AI Usage Among Top Developers:** Only 1 out of 1,315 top 1% developers (0.1%) had AI-attributed commits. This strongly suggests top developers either don't tag their AI usage or the tools they use don't leave explicit markers. The lack of AI attribution makes it impossible to directly measure AI's contribution to concentration.
+**AI and Top Developers:** Only 1 of 1,315 top 1% developers (0.08%) had AI-attributed commits. We **cannot directly measure** AI's contribution to concentration using commit message attribution.
 
-## Methodology
+---
 
-### Data Source
+## 5. Discussion
 
-[GH Archive](https://www.gharchive.org/) — records all public GitHub events since 2011.
+### What's Driving Concentration?
 
-**Sampling Strategy:**
-- 4 hours per day (00:00, 06:00, 12:00, 18:00 UTC) to capture global activity
-- 1 day per month (first of month)
-- Years: 2019-2024
-- Total: 288 files, ~21GB
+The data suggests multiple forces:
 
-### Quality Filters (Following Best Practices)
+1. **Automation scale-up:** The 6.6x explosion in >10k-commit accounts indicates enterprise-scale automation
+2. **AI-assisted velocity:** Developers using AI tools may commit more frequently, though explicit markers are rare
+3. **Platform effects:** GitHub's network effects may concentrate activity toward established projects
+4. **Winner-take-all dynamics:** Top developers may be capturing an increasing share of high-value open-source work
 
-Based on Kalliamvakou et al. (2014/2016) "Promises and Perils of Mining GitHub" and Dey et al. (2020) bot detection research:
+### The Human-AI Measurement Problem
 
-1. **Bot patterns**: 15+ username patterns (`[bot]`, `dependabot`, `renovate`, `github-actions`, etc.)
-2. **Behavioral ceiling**: Accounts >10,000 commits/year excluded (likely automation)
-3. **Distinct commits only**: Uses `distinct_size` to filter merge commit inflation
-4. **Minimum activity**: 3 commits/year (filters inactive/casual accounts)
-5. **Monorepo flagging**: Accounts with 95%+ commits in single repo flagged for robustness
+When a developer uses Copilot to write 50% of their code, whose productivity are we measuring? The distinction between "human productivity" and "AI-assisted productivity" is increasingly blurred. This creates fundamental challenges for:
 
-### Power Law Fitting
+- Labor productivity statistics
+- Individual performance evaluation
+- Attribution of open-source contributions
 
-Clauset-Shalizi-Newman (2009) method:
-- Estimate xmin via KS statistic
-- Fit α using MLE
-- Compare to log-normal alternative
+### Limitations
 
-## Project Structure
+1. **Correlation ≠ causation:** Concentration increases alongside AI adoption, but we cannot establish causality
+2. **AI detection:** Most AI usage leaves no trace (<0.002% explicit attribution)
+3. **Sampling:** Monthly first-day samples may miss weekly/seasonal patterns
+4. **Ceiling effects:** The 10,000-commit cap understates 2024 concentration
+5. **Bot detection:** Some automation evades our pattern filters
+
+---
+
+## 6. Project Structure
 
 ```
-github-analysis/
 ├── scripts/
-│   ├── 01a_download_gharchive_direct.py  # Data download
-│   ├── 02a_power_law_from_sample.py      # Main analysis (year-by-year)
-│   ├── 03_accurate_ai_detection.py       # AI commit detection
-│   ├── 04_smart_ai_regex.py              # Improved AI patterns
-│   ├── 07_robustness_analysis.py         # Multi-repo and rank analysis
-│   └── data_extraction.py                 # Quality filters module
-├── docs/
-│   └── methodology_best_practices.md      # Literature review
-├── data/raw/                              # GH Archive files (~21GB)
+│   ├── 01a_download_gharchive_direct.py   # Data download
+│   ├── 02a_power_law_from_sample.py       # Concentration analysis
+│   ├── 03_accurate_ai_detection.py        # AI commit detection
+│   ├── 07_robustness_analysis.py          # Multi-repo analysis
+│   └── data_extraction.py                 # Quality filters
 ├── output/
-│   ├── intermediate/                      # Per-year developer parquets
-│   ├── power_law_results_sample.csv       # Main concentration results
-│   ├── comprehensive_descriptive_stats.csv # Full stats table
-│   ├── ai_detection_review.json           # AI commit examples
-│   └── power_law_analysis_sample.png      # Visualization
-├── tasks/
-│   └── todo.md                            # Analysis progress tracking
-└── README.md
+│   ├── multi_repo_analysis.csv            # Main results
+│   ├── full_sample_analysis.csv           # Robustness comparison
+│   ├── ai_detection_results.csv           # AI commit counts
+│   └── outlier_trend.csv                  # Automation trends
+└── data/raw/                              # GH Archive files (~21GB)
 ```
 
-## Quick Start
+### Replication
 
 ```bash
-# 1. Install dependencies
+# Install dependencies
 pip install pandas numpy matplotlib powerlaw pyarrow
 
-# 2. Download data (4x sample, ~21GB)
+# Download data (~21GB)
 python scripts/01a_download_gharchive_direct.py \
-    --years 2019-2024 \
-    --sample monthly \
-    --hours 0,6,12,18
+    --years 2019-2024 --sample monthly --hours 0,6,12,18
 
-# 3. Run analysis (processes year-by-year with incremental saves)
+# Run analysis
 python scripts/02a_power_law_from_sample.py
 ```
 
-## Discussion
-
-### What's Driving the 2024 Explosion?
-
-The data reveals a dramatic structural break in 2024:
-
-1. **Automation scale-up**: 180 accounts hit our 10,000-commit ceiling vs. just 1 in 2023
-2. **Genuine concentration**: Even filtering to multi-repo developers shows +18.6pp concentration increase
-3. **Explicit AI is rare**: Only 0.0015% of commits have AI attribution markers
-
-This suggests multiple forces:
-- **Enterprise automation**: CI/CD pipelines, auto-updates, and sync bots
-- **AI-assisted velocity**: Developers using AI tools may commit more frequently
-- **Platform effects**: GitHub's network effects may concentrate activity
-
-### The Human-AI Blur
-
-The dramatic 2024 outlier explosion (1,155 accounts vs 175 in 2023) raises questions about what it means to measure "developer productivity" in the AI era. Like asking "did one worker make 10,000 t-shirts?" when machines are involved—the distinction between human and AI contributions is becoming increasingly blurred.
-
-### Why Explicit AI Markers Are Rare
-
-Our AI detection finds only ~100 commits/year with explicit markers, yet industry surveys suggest 30-50% of developers use AI tools. Reasons:
-
-1. **No incentive**: Developers don't benefit from tagging AI-assisted code
-2. **Privacy concerns**: Some prefer not to disclose AI usage
-3. **Tool design**: Most AI tools don't auto-add commit markers
-4. **Human editing**: AI suggestions get edited before commit
-
-### Key Caveats
-
-1. **Correlation ≠ causation**: Multiple factors affect productivity trends
-2. **AI detection**: Most AI-assisted code has NO explicit attribution
-3. **Sampling**: Monthly samples may miss temporal patterns
-4. **Ceiling effects**: Our 10,000-commit cap understates 2024 concentration
-5. **Bot detection gaps**: Some automation passes our pattern filters
+---
 
 ## References
 
 ### Methodology
-- Kalliamvakou et al. (2016). "An in-depth study of the promises and perils of mining GitHub." *Empirical Software Engineering*.
-- Dey et al. (2020). "Detecting and characterizing bots that commit code." *MSR 2020*.
-- Golzadeh et al. (2021). "A ground-truth dataset and classification model for detecting bots." *Journal of Systems and Software*.
-- Ziegler, Kalliamvakou et al. (2024). "Measuring GitHub Copilot's Impact on Productivity." *Communications of the ACM*.
+- Kalliamvakou, E., et al. (2016). "An in-depth study of the promises and perils of mining GitHub." *Empirical Software Engineering*, 21(5), 2035-2071.
+- Dey, T., et al. (2020). "Detecting and characterizing bots that commit code." *MSR 2020*.
 
-### Statistical Methods
-- Clauset, Shalizi, Newman (2009). "Power-law distributions in empirical data." *SIAM Review*.
+### Power Law Analysis
+- Clauset, A., Shalizi, C. R., & Newman, M. E. J. (2009). "Power-law distributions in empirical data." *SIAM Review*, 51(4), 661-703.
+- Gabaix, X. (2016). "Power laws in economics: An introduction." *Journal of Economic Perspectives*, 30(1), 185-206.
+
+### AI and Productivity
+- Ziegler, A., Kalliamvakou, E., et al. (2024). "Measuring GitHub Copilot's Impact on Productivity." *Communications of the ACM*, 67(3).
 
 ### Data
 - GH Archive: https://www.gharchive.org/
 - Python powerlaw package: https://github.com/jeffalstott/powerlaw
+
+---
 
 ## License
 
