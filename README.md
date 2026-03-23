@@ -30,9 +30,11 @@ We analyze GitHub commit concentration from 2019-2024 among (multi-repo) develop
 - **Personal developers:** Their power law exponent, α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
 - **Org developers:** Their α remains stable at ~2.0 over time, suggesting professional team structures distribute work more evenly
 
-This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian. 
+This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains less impacted on a pure output basis. This may be due to institutional restrictions on how code is produced. 
 
-A significant limitation of our analysis is the inability to identify use of AI-assisted tools. As a result our analysis is not able to establish any sort of meaningful correlation with AI use.
+Note that we are not observing changing in work quality between these two groups, only raw output. 
+
+Another significant limitation of our analysis is the inability to identify use of AI-assisted tools. As a result our analysis is not able to establish any sort of meaningful correlation with AI use.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
