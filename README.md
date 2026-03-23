@@ -21,11 +21,13 @@ We find a **dramatic increase in commit concentration** from 2019-2024:
 | Metric | 2019 | 2024 | Change |
 |--------|------|------|--------|
 | Top 1% Share | 45.3% | 63.9% | +18.6pp |
-| Top 10% Share | 71.9% | 89.2% | +17.3pp |
 | Gini Coefficient | 0.750 | 0.895 | +0.145 |
-| P99/P50 Ratio | 45 | 215 | +170 |
+| P99/P50 Ratio | 45 | 215 | 4.8x |
+| Power Law α | 1.96 | 1.63 | -0.33 |
 
-This concentration increase is **robust** to filtering for multi-repo developers, suggesting it reflects genuine behavioral change rather than bot activity.
+**Power law interpretation:** The declining α exponent (1.96 → 1.63) indicates the commit distribution is becoming increasingly heavy-tailed — more activity is concentrated in fewer accounts. An α below 2 implies infinite variance, characteristic of extreme winner-take-all dynamics.
+
+**Robustness:** This concentration increase holds even after filtering to multi-repo developers (those contributing to 2+ repositories), suggesting it reflects genuine behavioral change rather than bot activity.
 
 ---
 
