@@ -1,4 +1,5 @@
-# AI and the Rise of Superstar Coders on GitHub: An analysis of commit data
+# AI and the Rise of Superstar Coders on GitHub
+###An analysis of commit data
 
 ## 1. Introduction
 
