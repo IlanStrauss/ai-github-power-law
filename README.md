@@ -1,4 +1,4 @@
-# AI and the Rise of Superstar Coders on GitHub: An Analysis of Commit Data
+# AI and the Rise of Superstar Coders on GitHub: An analysis of commit data
 
 ## 1. Introduction
 
@@ -191,9 +191,8 @@ These descriptive measures show increasing concentration, but do not reveal the 
 
 ---
 
-## 3. Methodology
+## 3. Method: Power Law Estimation
 
-### 3.0 Unit of Analysis
 
 **Our data is aggregated at the developer level.** Each observation represents one developer in one year, with their total commits summed across all repositories they contributed to.
 
@@ -204,8 +203,6 @@ The core question is: **How are commits distributed across developers?**
 - The power law exponent α measures how extreme this concentration is
 
 This aggregation is performed via `groupby("actor_login")` in our extraction code, summing all `distinct_size` commits per developer per year.
-
-### 3.1 Power Law Estimation
 
 We follow the Clauset-Shalizi-Newman (2009) methodology, as applied by Strauss, Yang & Mazzucato (2025) to platform earnings distributions:
 
@@ -258,7 +255,7 @@ A declining α indicates heavier tails — more probability mass concentrated am
 
 ---
 
-## 4. Results
+## 4. Power Law Results
 
 ### 4.1 Power Law Analysis: Organization vs Personal Developers
 
