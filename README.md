@@ -58,6 +58,8 @@ Processing the full GH Archive is prohibitively expensive (~50TB uncompressed). 
 
 This sampling provides approximately **1/180th** of total GitHub activity while preserving temporal and geographic variation.
 
+**Total sample:** 1,623,706 developer-year observations and 44.1 million commits across 2019-2024.
+
 ### 2.3 Data Quality Filters
 
 We apply filters following best practices from the mining software repositories (MSR) literature, particularly Kalliamvakou et al. (2016) "The Promises and Perils of Mining GitHub" and Dey et al. (2020) on bot detection.
@@ -116,6 +118,8 @@ Our **primary sample** restricts to accounts contributing to 2+ distinct reposit
 - Enterprise monorepo automation
 
 Multi-repo contributors are more likely to represent human developers working across projects.
+
+**Final analysis sample:** After applying all filters, our primary multi-repo sample contains **625,590 developer-year observations** and **19.3 million commits** across 2019-2024.
 
 ### Descriptive Statistics
 
@@ -266,6 +270,23 @@ Does the multi-repo filter create the concentration trend artificially?
 | 2024 | 68.9% | 63.9% | -5.0pp |
 
 **Finding:** Both samples show the same upward trend. The multi-repo filter reduces concentration by 3-5pp (as expected — single-repo automation inflates the upper tail), but the **trend direction and magnitude are robust**.
+
+#### Power Law α Robustness Across Developer Filters
+
+To ensure our findings reflect human developers rather than automation, we test stricter filters:
+
+| Year | Multi-Repo (n≥2 repos) | Strict (n≥3 repos, ≥10 commits) | Very Strict (n≥4 repos, ≥20 commits) |
+|------|------------------------|----------------------------------|---------------------------------------|
+| 2019 | 1.96 | 1.96 | 1.93 |
+| 2020 | 1.93 | 1.94 | 1.91 |
+| 2021 | 2.09 | 1.87 | 1.87 |
+| 2022 | 1.85 | 1.81 | 1.80 |
+| 2023 | 1.82 | 1.81 | 1.80 |
+| 2024 | 1.63 | 1.64 | 1.64 |
+
+*Source: `output/developer_powerlaw_analysis.csv`. Sample sizes: multi-repo n=625,590; strict n=93,964; very strict n=26,606 developer-years.*
+
+**Finding:** The **α decline from ~1.95 to ~1.64 is robust across all developer definitions**. Even among the most active, clearly-human developers (≥4 repos, ≥20 commits/year), concentration is increasing at the same rate.
 
 ### 4.4 Automation and Ceiling Effects
 
