@@ -1,4 +1,4 @@
-# GitHub Concentration Analysis
+# AI and the Rise of Superstar Coders on GitHub: An Analysis of Commit Data
 
 ## 1. Introduction
 
