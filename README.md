@@ -19,7 +19,7 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals. Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).**
+**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals.** *Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).*
 
 We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
 
@@ -228,9 +228,7 @@ Compare power law to log-normal using likelihood ratio test (R statistic):
 
 This comparison is crucial because many productivity distributions exhibit log-normal bodies with power-law tails (Gabaix, 2016).
 
-### 3.2 Interpreting the α Exponent
-
-The power law exponent α has well-established statistical and economic interpretations:
+The power law exponent α has well-established statistical and economic interpretations relating to how inequality-reproducing a given dynamic is.
 
 **Statistical properties (Newman, 2005; Clauset et al., 2009):**
 - **α ≤ 2:** Infinite variance — the distribution has no stable mean; dominated by extreme values
@@ -245,7 +243,7 @@ The power law exponent α has well-established statistical and economic interpre
 
 ### 4.1 Power Law Analysis: Organization vs Personal Developers
 
-We estimate power law exponents separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos):
+We estimate power law exponents α separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos), we also show sample size (n), and xmin and R test for each α, which assesses if the power law is the best fit to the distribution:
 
 | Year | Org (n) | α | xmin | R | Personal (n) | α | xmin | R |
 |:----:|:-------:|:----:|:----:|:----:|:------------:|:----:|:----:|:----:|
