@@ -18,12 +18,12 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 **The rise of superstar coders is driven by personal/hobbyist developers, not professionals.**
 
-We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Using power law analysis, we find:
+We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the **power law exponent α** for each group:
 
-| Developer Type | n (2019→2024) | 2019 α | 2024 α | Δα | Interpretation |
-|----------------|---------------|--------|--------|-----|----------------|
-| **Personal-only** | 53,945→102,204 | 1.99 | **1.78** | -0.21 | Increasing concentration |
-| **Org developers** | 9,824→25,490 | 2.04 | 2.04 | 0 | Stable |
+| Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
+|----------------|-----------------|--------------------|--------------------|------|----------------|
+| **Personal-only** | 53,945 → 102,204 | 1.99 | **1.78** | −0.21 | Increasing concentration |
+| **Org developers** | 9,824 → 25,490 | 2.04 | 2.04 | 0 | Stable |
 
 **What does this mean?**
 - **Personal developers:** α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
