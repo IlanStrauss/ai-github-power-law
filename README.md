@@ -32,7 +32,7 @@ We analyze GitHub commit concentration from 2019-2024 among (multi-repo) develop
 
 This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian. 
 
-A major weakeness of our analysis is the inability to identify use of AI-assisted tools. As a result our analysis is not able to establish any sort of meaningful correlation with AI use.
+A significant limitation of our analysis is the inability to identify use of AI-assisted tools. As a result our analysis is not able to establish any sort of meaningful correlation with AI use.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
