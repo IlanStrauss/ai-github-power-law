@@ -20,10 +20,10 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Using power law analysis, we find:
 
-| Developer Type | 2019 α | 2024 α | Δα | Interpretation |
-|----------------|--------|--------|-----|----------------|
-| **Personal-only** (n=53,945→102,204) | 1.99 | **1.78** | -0.21 | Increasing concentration |
-| **Org developers** (n=9,824→25,490) | 2.04 | 2.04 | 0 | Stable |
+| Developer Type | n (2019→2024) | 2019 α | 2024 α | Δα | Interpretation |
+|----------------|---------------|--------|--------|-----|----------------|
+| **Personal-only** | 53,945→102,204 | 1.99 | **1.78** | -0.21 | Increasing concentration |
+| **Org developers** | 9,824→25,490 | 2.04 | 2.04 | 0 | Stable |
 
 **What does this mean?**
 - **Personal developers:** α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
@@ -260,44 +260,9 @@ A declining α indicates heavier tails — more probability mass concentrated am
 
 ## 4. Results
 
-### 4.1 Power Law Estimates
+### 4.1 Power Law Analysis: Organization vs Personal Developers
 
-We estimate the power law exponent α for each year using the methodology described in Section 3.1:
-
-| Year | α (exponent) | xmin | R (vs. log-normal) | Best Fit |
-|------|--------------|------|--------------------|----------|
-| 2019 | 1.96 | 25 | -3.16 | Log-normal |
-| 2020 | 1.93 | 34 | -5.64 | Log-normal |
-| 2021 | 2.09 | 5 | +6.33 | Power law |
-| 2022 | 1.85 | 36 | -6.47 | Log-normal |
-| 2023 | 1.82 | 40 | -14.32 | Log-normal |
-| **2024** | **1.63** | **30** | **-31.58** | **Log-normal** |
-
-#### Interpretation
-
-**1. Declining α indicates increasing concentration**
-
-The power law exponent dropped from **1.96 (2019) to 1.63 (2024)**. This shift has clear statistical and economic significance:
-
-- In 2019, α ≈ 2 placed GitHub commits in line with classic power law phenomena: city sizes (Gabaix, 1999), firm sizes (Axtell, 2001), and the upper tail of income distributions (Pareto, 1896)
-- By 2024, α = 1.63 indicates commit activity has become **more concentrated than typical economic distributions** — comparable to extreme wealth concentration
-- An α below 2 implies **infinite variance** (Newman, 2005): the distribution has no stable mean, and is dominated by a few extreme values. This is the statistical signature of winner-take-all dynamics
-
-**2. Log-normal body, power-law tail**
-
-The negative R values indicate log-normal provides a better overall fit than pure power law. This is consistent with Gabaix (2016): productivity distributions typically exhibit log-normal bodies with power-law upper tails. The relevant question is not "is this a power law?" but "how heavy is the tail?" — and the declining α shows the tail is getting heavier.
-
-**3. xmin marks the "superstar threshold"**
-
-The xmin parameter identifies where power law behavior begins — the threshold separating typical developers from the heavy tail. In 2019-2023, xmin ranged from 25-40 commits/year, meaning the power law describes developers with roughly 2-4 commits/month or more. In 2024, xmin = 30 commits/year. Developers above this threshold exhibit the extreme concentration characteristic of power law distributions.
-
-**4. 2024 structural break**
-
-The 2024 α (1.63) represents a **discontinuous shift** from the 2019-2023 range (1.82-2.09). The R value (-31.58) is the most negative, indicating the 2024 distribution deviates significantly from both power law and log-normal — likely due to the explosion in high-volume automated accounts hitting our 10,000-commit ceiling.
-
-### 4.2 Organization vs Personal Developers
-
-We classify developers by whether they contribute to **organization-owned repositories** (Google, Microsoft, Meta, Apache, etc.) — a proxy for professional developers vs hobbyists.
+We estimate power law exponents separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos):
 
 | Year | Org Developers (n) | α | Personal-Only (n) | α |
 |------|--------------------|----|-------------------|-----|
@@ -308,48 +273,33 @@ We classify developers by whether they contribute to **organization-owned reposi
 | 2023 | 23,411 | 2.06 | 99,585 | 1.82 |
 | 2024 | 25,490 | 2.04 | 102,204 | 1.78 |
 
-*Source: `output/org_developer_analysis.csv`. Org developers = at least 1 commit to an organization repo.*
+*Source: `output/org_developer_analysis.csv`*
 
-**Key finding:** The concentration increase is driven by **personal/hobbyist developers**, not professionals:
+#### Interpretation
 
-- **Org developers:** α remains stable at ~2.0 (finite variance, moderate concentration)
-- **Personal-only developers:** α declined from 1.99 to 1.78 (infinite variance, extreme concentration)
+**1. Personal developers: Increasing concentration**
 
-This suggests the "superstar coder" phenomenon is emerging among individual developers — potentially aided by AI tools that amplify individual productivity — rather than within professional organizations where team structures may distribute work more evenly.
+The α exponent for personal-only developers declined from **1.99 (2019) to 1.78 (2024)**:
+- By 2024, α < 2 implies **infinite variance** (Newman, 2005): the distribution has no stable mean and is dominated by extreme values
+- This places personal developer commits in the same statistical regime as wealth distributions (Pareto, 1896)
+- The "superstar coder" phenomenon is emerging among individuals
 
-### 4.3 Robustness: Full Sample vs. Multi-Repo
+**2. Org developers: Stable concentration**
 
-Does the multi-repo filter create the concentration trend artificially?
+The α exponent for org developers remained stable at **~2.0**:
+- This suggests professional open-source development maintains relatively egalitarian distribution
+- Team structures and code review processes may distribute work more evenly
+- No evidence of increasing concentration among professional contributors
 
-| Year | Full Sample Top 1% | Multi-Repo Top 1% | Difference |
-|------|--------------------|--------------------|------------|
-| 2019 | 49.5% | 45.3% | -4.2pp |
-| 2020 | 51.3% | 47.8% | -3.5pp |
-| 2021 | 54.8% | 52.2% | -2.6pp |
-| 2022 | 56.4% | 53.7% | -2.7pp |
-| 2023 | 60.2% | 54.6% | -5.6pp |
-| 2024 | 68.9% | 63.9% | -5.0pp |
+**3. The divergence is the key finding**
 
-**Finding:** Both samples show the same upward trend. The multi-repo filter reduces concentration by 3-5pp (as expected — single-repo automation inflates the upper tail), but the **trend direction and magnitude are robust**.
+The contrast between personal (α declining) and org (α stable) developers is striking. It suggests the mechanism driving concentration is specific to individual developers — potentially AI coding tools that amplify individual productivity without changing team dynamics.
 
-#### Power Law α Robustness Across Developer Filters
+### 4.2 Pooled Sample Analysis
 
-To ensure our findings reflect human developers rather than automation, we test stricter filters:
+Looking at all developers combined (org + personal), the power law α declined from 1.96 to 1.63. See **Appendix A** for detailed pooled analysis and robustness checks.
 
-| Year | Multi-Repo (n≥2 repos) | Strict (n≥3 repos, ≥10 commits) | Very Strict (n≥4 repos, ≥20 commits) |
-|------|------------------------|----------------------------------|---------------------------------------|
-| 2019 | 1.96 | 1.96 | 1.93 |
-| 2020 | 1.93 | 1.94 | 1.91 |
-| 2021 | 2.09 | 1.87 | 1.87 |
-| 2022 | 1.85 | 1.81 | 1.80 |
-| 2023 | 1.82 | 1.81 | 1.80 |
-| 2024 | 1.63 | 1.64 | 1.64 |
-
-*Source: `output/developer_powerlaw_analysis.csv`. Sample sizes: multi-repo n=625,590; strict n=93,964; very strict n=26,606 developer-years.*
-
-**Finding:** The **α decline from ~1.95 to ~1.64 is robust across all developer definitions**. Even among the most active, clearly-human developers (≥4 repos, ≥20 commits/year), concentration is increasing at the same rate.
-
-### 4.4 Automation and Ceiling Effects
+### 4.3 Automation and Ceiling Effects
 
 #### Extreme Outliers (>10,000 commits/year)
 
@@ -377,7 +327,7 @@ To ensure our findings reflect human developers rather than automation, we test 
 
 **Finding:** In 2024, 180 accounts are **capped at 10,000** — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
 
-### 4.5 AI Detection
+### 4.4 AI Detection
 
 #### Explicit AI Markers in Commit Messages
 
@@ -502,6 +452,57 @@ python scripts/02a_power_law_from_sample.py
 ### Data
 - GH Archive: https://www.gharchive.org/
 - Python powerlaw package: https://github.com/jeffalstott/powerlaw
+
+---
+
+## Appendix A: Pooled Sample Analysis and Robustness
+
+### A.1 Pooled Power Law Estimates
+
+Combining all multi-repo developers (org + personal):
+
+| Year | α (exponent) | xmin | R (vs. log-normal) | Best Fit |
+|------|--------------|------|--------------------|----------|
+| 2019 | 1.96 | 25 | -3.16 | Log-normal |
+| 2020 | 1.93 | 34 | -5.64 | Log-normal |
+| 2021 | 2.09 | 5 | +6.33 | Power law |
+| 2022 | 1.85 | 36 | -6.47 | Log-normal |
+| 2023 | 1.82 | 40 | -14.32 | Log-normal |
+| 2024 | 1.63 | 30 | -31.58 | Log-normal |
+
+*Source: `output/multi_repo_analysis.csv`*
+
+**xmin interpretation:** The xmin parameter (25-40 commits/year) identifies where power law behavior begins — roughly 2-4 commits/month. Developers above this threshold are in the heavy tail.
+
+**Log-normal vs power law:** Negative R values indicate log-normal body with power-law tail — consistent with Gabaix (2016) on productivity distributions.
+
+### A.2 Robustness: Full Sample vs. Multi-Repo
+
+| Year | Full Sample Top 1% | Multi-Repo Top 1% | Difference |
+|------|--------------------|--------------------|------------|
+| 2019 | 49.5% | 45.3% | -4.2pp |
+| 2020 | 51.3% | 47.8% | -3.5pp |
+| 2021 | 54.8% | 52.2% | -2.6pp |
+| 2022 | 56.4% | 53.7% | -2.7pp |
+| 2023 | 60.2% | 54.6% | -5.6pp |
+| 2024 | 68.9% | 63.9% | -5.0pp |
+
+**Finding:** Both samples show the same upward trend. Multi-repo filter reduces concentration by 3-5pp but trend is robust.
+
+### A.3 Power Law α Robustness Across Developer Filters
+
+| Year | Multi-Repo (n≥2 repos) | Strict (n≥3 repos, ≥10 commits) | Very Strict (n≥4 repos, ≥20 commits) |
+|------|------------------------|----------------------------------|---------------------------------------|
+| 2019 | 1.96 | 1.96 | 1.93 |
+| 2020 | 1.93 | 1.94 | 1.91 |
+| 2021 | 2.09 | 1.87 | 1.87 |
+| 2022 | 1.85 | 1.81 | 1.80 |
+| 2023 | 1.82 | 1.81 | 1.80 |
+| 2024 | 1.63 | 1.64 | 1.64 |
+
+*Source: `output/developer_powerlaw_analysis.csv`*
+
+**Finding:** The α decline is robust across all developer definitions.
 
 ---
 
