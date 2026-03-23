@@ -19,7 +19,7 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals. Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).**
+**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals.** *Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).*
 
 We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
 
