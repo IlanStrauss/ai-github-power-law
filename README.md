@@ -252,7 +252,11 @@ The power law exponent dropped from **1.96 (2019) to 1.63 (2024)**. This shift h
 
 The negative R values indicate log-normal provides a better overall fit than pure power law. This is consistent with Gabaix (2016): productivity distributions typically exhibit log-normal bodies with power-law upper tails. The relevant question is not "is this a power law?" but "how heavy is the tail?" — and the declining α shows the tail is getting heavier.
 
-**3. 2024 structural break**
+**3. xmin marks the "superstar threshold"**
+
+The xmin parameter identifies where power law behavior begins — the threshold separating typical developers from the heavy tail. In 2019-2023, xmin ranged from 25-40 commits/year, meaning the power law describes developers with roughly 2-4 commits/month or more. In 2024, xmin = 30 commits/year. Developers above this threshold exhibit the extreme concentration characteristic of power law distributions.
+
+**4. 2024 structural break**
 
 The 2024 α (1.63) represents a **discontinuous shift** from the 2019-2023 range (1.82-2.09). The R value (-31.58) is the most negative, indicating the 2024 distribution deviates significantly from both power law and log-normal — likely due to the explosion in high-volume automated accounts hitting our 10,000-commit ceiling.
 
