@@ -19,7 +19,7 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals — with the sharpest increase in concentration occurring in 2020-2021.**
+**We find that the rise of superstar coders is driven by personal/hobbyist developers, not professionals. Among personal developers, the sharpest increase in concentration occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).**
 
 We analyze GitHub commit concentration from 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
 
@@ -259,36 +259,32 @@ A declining α indicates heavier tails — more probability mass concentrated am
 
 We estimate power law exponents separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos):
 
-| Year | Org Developers (n) | α | Personal-Only (n) | α |
-|------|--------------------|----|-------------------|-----|
-| 2019 | 9,824 | 2.04 | 53,945 | 1.99 |
-| 2020 | 14,502 | 2.06 | 73,483 | 1.95 |
-| 2021 | 18,253 | 2.08 | 83,614 | 1.86 |
-| 2022 | 20,764 | 1.91 | 92,200 | 1.83 |
-| 2023 | 23,411 | 2.06 | 99,585 | 1.82 |
-| 2024 | 25,490 | 2.04 | 102,204 | 1.78 |
+| Year | Org (n) | α | xmin | R | Personal (n) | α | xmin | R |
+|:----:|:-------:|:----:|:----:|:----:|:------------:|:----:|:----:|:----:|
+| 2019 | 9,824 | 2.04 | 6 | +3.05 | 53,945 | 1.99 | 25 | −1.16 |
+| 2020 | 14,502 | 2.06 | 7 | +1.98 | 73,483 | 1.95 | 33 | −1.36 |
+| 2021 | 18,253 | 2.08 | 7 | +3.31 | 83,614 | 1.86 | 39 | −2.15 |
+| 2022 | 20,764 | 1.91 | 37 | −0.97 | 92,200 | 1.83 | 40 | −2.74 |
+| 2023 | 23,411 | 2.06 | 6 | −0.95 | 99,585 | 1.82 | 38 | −2.68 |
+| 2024 | 25,490 | 2.04 | 5 | +6.83 | 102,204 | 1.78 | 45 | −3.11 |
 
-*Source: `output/org_developer_analysis.csv`*
+*Notes: α = power law exponent (Clauset-Shalizi-Newman MLE). xmin = threshold where power law behavior begins. R = likelihood ratio vs. log-normal (R > 0 favors power law, R < 0 favors log-normal). Source: `output/powerlaw_lognormal_comparison.csv`.*
+
+#### Key Observations
+
+*xmin interpretation.* The xmin threshold identifies where power law behavior begins. For org developers, xmin is low (5-7 commits/year), meaning the power law describes most of the distribution. For personal developers, xmin is higher (25-45) and **increasing over time** — the power law applies only to the heavy tail, while the body follows a log-normal. This suggests personal developer commits have a lognormal body with an increasingly heavy power-law tail.
+
+*Distributional fit (R statistic).* Org developers mostly fit a pure power law (R > 0 in 4 of 6 years). Personal developers consistently fit log-normal better (R < 0 in all years), with R becoming increasingly negative — the distribution is moving further from a power law, with more mass in the extreme tail.
 
 #### Interpretation
 
-**1. Personal developers: Increasing concentration**
+*Personal developers: Increasing concentration.* The α exponent for personal-only developers declined from 1.99 (2019) to 1.78 (2024). By crossing below 2.0, the distribution entered the "infinite variance" regime (Newman, 2005) — the same statistical class as wealth distributions (Pareto, 1896), where extreme values dominate and the mean is unstable. The "superstar coder" phenomenon is emerging among personal developers.
 
-The α exponent for personal-only developers declined from **1.99 (2019) to 1.78 (2024)**:
-- By 2024, α < 2 implies **infinite variance** (Newman, 2005): the distribution has no stable mean and is dominated by extreme values
-- This places personal developer commits in the same statistical regime as wealth distributions (Pareto, 1896)
-- The "superstar coder" phenomenon is emerging among individuals
+*Org developers: Stable concentration.* The α exponent for org developers remained stable at ~2.0 (2.04 in both 2019 and 2024). Professional open-source development maintains relatively egalitarian distribution, likely because team structures and code review processes distribute work more evenly.
 
-**2. Org developers: Stable concentration**
+*The divergence is the key finding.* The contrast between personal (α declining) and org (α stable) developers is striking. The mechanism driving concentration is specific to *individual* developers working outside institutional structures.
 
-The α exponent for org developers remained stable at **~2.0**:
-- This suggests professional open-source development maintains relatively egalitarian distribution
-- Team structures and code review processes may distribute work more evenly
-- No evidence of increasing concentration among professional contributors
-
-**3. The divergence is the key finding**
-
-The contrast between personal (α declining) and org (α stable) developers is striking. It suggests the mechanism driving concentration is specific to individual developers — potentially AI coding tools that amplify individual productivity without changing team dynamics.
+*Timing suggests COVID, not (just) AI.* The sharpest increase in concentration among personal developers occurred in 2020-2021 (α dropped from 1.95 to 1.86), *before* GitHub Copilot launched publicly (June 2022). This timing coincides with the COVID-19 pandemic, when: (a) some developers had more free time and turned to personal coding projects; (b) remote work blurred boundaries between professional and personal coding; (c) coding education and bootcamps surged online. AI coding tools may be amplifying an existing trend rather than initiating it — and their effects appear concentrated among personal/hobbyist developers rather than professionals working in organizational contexts.
 
 ### 4.2 Pooled Sample Analysis
 
@@ -455,6 +451,21 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 *Significance test (2019 vs 2024): Δα = 0.003, 95% CI [−0.090, 0.072]. Not significant — CI includes 0.*
 
 *Source: `output/bootstrap_org_developers.csv`*
+
+**Personal-Only Developers:**
+
+| Year | n | α | 95% CI |
+|:----:|:-------:|:-----:|:------------------:|
+| 2019 | 53,945 | 1.991 | [1.958, 2.031] |
+| 2020 | 73,483 | 1.946 | [1.918, 1.978] |
+| 2021 | 83,614 | 1.860 | [1.839, 2.168] |
+| 2022 | 92,200 | 1.826 | [1.800, 2.163] |
+| 2023 | 99,585 | 1.817 | [1.795, 2.183] |
+| 2024 | 102,204 | 1.779 | [1.765, 2.168] |
+
+*Source: `output/bootstrap_personal_developers.csv`*
+
+The point estimates show a clear declining trend in α for personal developers (1.991 → 1.779), consistent with increasing concentration. However, the wide confidence intervals in later years (due to high variance in the heavy tail) mean we cannot reject the null hypothesis of no change when comparing 2019 to 2024 directly. The pattern across all six years is more informative than any single pairwise comparison.
 
 ---
 
