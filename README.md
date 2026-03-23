@@ -237,19 +237,7 @@ The power law exponent α has well-established statistical and economic interpre
 - **2 < α ≤ 3:** Finite variance but infinite higher moments
 - **α > 3:** All moments finite; distribution approaches "normal" behavior
 
-**Empirical benchmarks from the literature:**
-
-| Domain | Typical α | Source |
-|--------|-----------|--------|
-| Wealth/Income (top tail) | 1.5–2.0 | Pareto (1896); Gabaix (2009) |
-| City sizes | 2.0 | Zipf (1949); Gabaix (1999) |
-| Firm sizes | 2.0 | Axtell (2001) |
-| Scientific citations | 2.5–3.0 | Redner (1998) |
-| Web page visits | 2.0–2.5 | Adamic & Huberman (2000) |
-
-The mechanism generating power laws is typically **preferential attachment** (Simon, 1955; Barabási & Albert, 1999): success begets success, creating "rich-get-richer" dynamics where early advantages compound over time.
-
-A declining α indicates heavier tails — more probability mass concentrated among top performers.
+*Empirical benchmarks.* Power law exponents vary systematically across domains. Wealth and income distributions in the top tail typically exhibit α between 1.5 and 2.0 (Pareto, 1896; Gabaix, 2009). City sizes and firm sizes cluster around α ≈ 2.0 (Zipf, 1949; Gabaix, 1999; Axtell, 2001). Scientific citations show α between 2.5 and 3.0 (Redner, 1998), while web page visits fall in the 2.0–2.5 range (Adamic & Huberman, 2000). The mechanism generating these power laws is typically *preferential attachment* (Simon, 1955; Barabási & Albert, 1999): success begets success, creating "rich-get-richer" dynamics where early advantages compound over time. A declining α indicates heavier tails — more probability mass concentrated among top performers.
 
 ---
 
