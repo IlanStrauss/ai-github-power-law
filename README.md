@@ -20,10 +20,10 @@ We find a **dramatic increase in commit concentration** from 2019-2024:
 
 | Metric | 2019 | 2024 | Change |
 |--------|------|------|--------|
+| Power Law α | 1.96 | 1.63 | -0.33 |
 | Top 1% Share | 45.3% | 63.9% | +18.6pp |
 | Gini Coefficient | 0.750 | 0.895 | +0.145 |
 | P99/P50 Ratio | 45 | 215 | 4.8x |
-| Power Law α | 1.96 | 1.63 | -0.33 |
 
 **Power law interpretation:** The declining α exponent (1.96 → 1.63) indicates the commit distribution is becoming increasingly heavy-tailed — more activity is concentrated in fewer accounts. An α below 2 implies infinite variance, characteristic of extreme winner-take-all dynamics.
 
