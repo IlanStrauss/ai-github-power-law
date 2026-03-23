@@ -10,9 +10,10 @@ Is GitHub commit activity becoming more concentrated among fewer developers? Has
 
 GitHub hosts over 100 million developers and serves as the primary platform for open-source software development. Understanding how commit activity is distributed — and whether this distribution is changing — has implications for:
 
-- **Labor economics:** Productivity concentration may reflect skill premiums or automation displacement
-- **Platform governance:** Concentration affects power dynamics in open-source communities
 - **AI impact measurement:** If AI tools amplify individual productivity, we should see concentration increasing
+- **Labor economics:** Productivity concentration may reflect skill premiums or automation displacement
+- **Institutional economics:** We can understand the role of institutions and work processes in mediating how AI is used and impacts worker productivity
+- **Platform governance:** Concentration affects power dynamics in open-source communities
 
 ### Key Findings
 
@@ -29,7 +30,9 @@ We analyze GitHub commit concentration from 2019-2024 among (multi-repo) develop
 - **Personal developers:** Their power law exponent, α dropped below 2.0, entering the "infinite variance" regime characteristic of extreme winner-take-all dynamics (Pareto, wealth distributions)
 - **Org developers:** Their α remains stable at ~2.0 over time, suggesting professional team structures distribute work more evenly
 
-This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian.
+This suggests AI coding tools may be amplifying **individual** developer productivity, creating "superstar coders" outside traditional organizational structures — while professional open-source development remains relatively egalitarian. 
+
+A major weakeness of our analysis is the inability to identify use of AI-assisted tools. As a result our analysis is not able to establish any sort of meaningful correlation with AI use.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
