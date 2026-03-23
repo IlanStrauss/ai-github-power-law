@@ -16,10 +16,10 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-We find a **dramatic increase in commit concentration** from 2019-2024:
+We find a **dramatic increase in commit concentration** from 2019-2024 among multi-repo developers (n=64,406 in 2019; n=131,530 in 2024):
 
-| Metric | 2019 | 2024 | Change |
-|--------|------|------|--------|
+| Metric | 2019 (n=64,406) | 2024 (n=131,530) | Change |
+|--------|-----------------|------------------|--------|
 | Power Law α | 1.96 | 1.63 | -0.33 |
 | Top 1% Share | 45.3% | 63.9% | +18.6pp |
 | Gini Coefficient | 0.750 | 0.895 | +0.145 |
