@@ -1,0 +1,31 @@
+# Data files (too large for GitHub)
+data/raw/*.json.gz
+data/raw/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Intermediate parquet files (can be regenerated)
+output/intermediate/*.parquet
+
+# Jupyter
+.ipynb_checkpoints/

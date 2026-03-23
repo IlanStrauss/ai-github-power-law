@@ -1,0 +1,11 @@
+Searching ALL years for exact AI signatures...
+
+=== 2023 ===
+  aider_prefix: 4
+
+=== 2024 ===
+  anthropic_any: 2
+  aider_prefix: 75
+
+
+=== EXAMPLES OF ANTHROPIC.COM MENTIONS ===

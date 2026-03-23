@@ -1,0 +1,437 @@
+============================================================
+Power Law Analysis from Sampled GH Archive Data
+============================================================
+Processing YEAR-BY-YEAR with incremental saves
+============================================================
+
+Found data for years: [2019, 2020, 2021, 2022, 2023, 2024]
+Total files: 288
+Existing intermediate results for: none
+
+==================================================
+Processing 2019
+==================================================
+  Processing 48 files for 2019...
+    2019-01-01-0.json.gz: 5,781 unique (actor, repo) pairs
+    2019-01-01-12.json.gz: 13,998 unique (actor, repo) pairs
+    2019-01-01-18.json.gz: 22,728 unique (actor, repo) pairs
+    2019-01-01-6.json.gz: 27,964 unique (actor, repo) pairs
+    2019-02-01-0.json.gz: 39,598 unique (actor, repo) pairs
+    2019-02-01-12.json.gz: 54,387 unique (actor, repo) pairs
+    2019-02-01-18.json.gz: 69,134 unique (actor, repo) pairs
+    2019-02-01-6.json.gz: 78,522 unique (actor, repo) pairs
+    2019-03-01-0.json.gz: 91,428 unique (actor, repo) pairs
+    2019-03-01-12.json.gz: 108,513 unique (actor, repo) pairs
+    2019-03-01-18.json.gz: 124,867 unique (actor, repo) pairs
+    2019-03-01-6.json.gz: 137,456 unique (actor, repo) pairs
+    2019-04-01-0.json.gz: 148,247 unique (actor, repo) pairs
+    2019-04-01-12.json.gz: 169,266 unique (actor, repo) pairs
+    2019-04-01-18.json.gz: 187,842 unique (actor, repo) pairs
+    2019-04-01-6.json.gz: 201,592 unique (actor, repo) pairs
+    2019-05-01-0.json.gz: 212,943 unique (actor, repo) pairs
+    2019-05-01-12.json.gz: 227,444 unique (actor, repo) pairs
+    2019-05-01-18.json.gz: 244,942 unique (actor, repo) pairs
+    2019-05-01-6.json.gz: 253,937 unique (actor, repo) pairs
+    2019-06-01-0.json.gz: 262,626 unique (actor, repo) pairs
+    2019-06-01-12.json.gz: 273,350 unique (actor, repo) pairs
+    2019-06-01-18.json.gz: 284,358 unique (actor, repo) pairs
+    2019-06-01-6.json.gz: 292,487 unique (actor, repo) pairs
+    2019-07-01-0.json.gz: 301,250 unique (actor, repo) pairs
+    2019-07-01-12.json.gz: 319,237 unique (actor, repo) pairs
+    2019-07-01-18.json.gz: 335,192 unique (actor, repo) pairs
+    2019-07-01-6.json.gz: 347,490 unique (actor, repo) pairs
+    2019-08-01-0.json.gz: 358,297 unique (actor, repo) pairs
+    2019-08-01-12.json.gz: 376,223 unique (actor, repo) pairs
+    2019-08-01-18.json.gz: 391,809 unique (actor, repo) pairs
+    2019-08-01-6.json.gz: 405,114 unique (actor, repo) pairs
+    2019-09-01-0.json.gz: 411,797 unique (actor, repo) pairs
+    2019-09-01-12.json.gz: 422,617 unique (actor, repo) pairs
+    2019-09-01-18.json.gz: 433,505 unique (actor, repo) pairs
+    2019-09-01-6.json.gz: 440,655 unique (actor, repo) pairs
+    2019-10-01-0.json.gz: 452,782 unique (actor, repo) pairs
+    2019-10-01-12.json.gz: 472,297 unique (actor, repo) pairs
+    2019-10-01-18.json.gz: 491,934 unique (actor, repo) pairs
+    2019-10-01-6.json.gz: 504,172 unique (actor, repo) pairs
+    2019-11-01-0.json.gz: 516,596 unique (actor, repo) pairs
+    2019-11-01-12.json.gz: 532,889 unique (actor, repo) pairs
+    2019-11-01-18.json.gz: 549,563 unique (actor, repo) pairs
+    2019-11-01-6.json.gz: 561,147 unique (actor, repo) pairs
+    2019-12-01-0.json.gz: 570,429 unique (actor, repo) pairs
+    2019-12-01-12.json.gz: 583,675 unique (actor, repo) pairs
+    2019-12-01-18.json.gz: 597,915 unique (actor, repo) pairs
+    2019-12-01-6.json.gz: 606,312 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 606,312
+  Unique developers (raw): 468,783
+  After min 3 commits filter: 166,975 (removed 301,808)
+  WARNING: 46 accounts exceed 10,000 commits:
+    AndreasGocht: 28,345 commits, 2 repos, 100.0% in top repo
+    DBS06: 11,968 commits, 1 repos, 100.0% in top repo
+    GoodyIT: 23,599 commits, 1 repos, 100.0% in top repo
+    Hawk777: 18,621 commits, 1 repos, 100.0% in top repo
+    Jackeagle: 14,293 commits, 10 repos, 35.0% in top repo
+  Monorepo accounts (95%+ in single repo): 104,207 (62.4%)
+  Top 1% share: 49.5%
+  Gini: 0.747
+  SAVED: year_2019_stats.csv and year_2019_developers.parquet
+
+==================================================
+Processing 2020
+==================================================
+  Processing 48 files for 2020...
+    2020-01-01-0.json.gz: 7,610 unique (actor, repo) pairs
+    2020-01-01-12.json.gz: 17,480 unique (actor, repo) pairs
+    2020-01-01-18.json.gz: 27,845 unique (actor, repo) pairs
+    2020-01-01-6.json.gz: 33,768 unique (actor, repo) pairs
+    2020-02-01-0.json.gz: 46,549 unique (actor, repo) pairs
+    2020-02-01-12.json.gz: 60,320 unique (actor, repo) pairs
+    2020-02-01-18.json.gz: 76,060 unique (actor, repo) pairs
+    2020-02-01-6.json.gz: 85,569 unique (actor, repo) pairs
+    2020-03-01-0.json.gz: 96,474 unique (actor, repo) pairs
+    2020-03-01-12.json.gz: 111,600 unique (actor, repo) pairs
+    2020-03-01-18.json.gz: 128,011 unique (actor, repo) pairs
+    2020-03-01-6.json.gz: 138,189 unique (actor, repo) pairs
+    2020-04-01-0.json.gz: 155,361 unique (actor, repo) pairs
+    2020-04-01-12.json.gz: 181,604 unique (actor, repo) pairs
+    2020-04-01-18.json.gz: 206,215 unique (actor, repo) pairs
+    2020-04-01-6.json.gz: 222,745 unique (actor, repo) pairs
+    2020-05-01-0.json.gz: 240,440 unique (actor, repo) pairs
+    2020-05-01-12.json.gz: 262,239 unique (actor, repo) pairs
+    2020-05-01-18.json.gz: 285,357 unique (actor, repo) pairs
+    2020-05-01-6.json.gz: 299,582 unique (actor, repo) pairs
+    2020-06-01-0.json.gz: 313,452 unique (actor, repo) pairs
+    2020-06-01-12.json.gz: 336,678 unique (actor, repo) pairs
+    2020-06-01-18.json.gz: 360,313 unique (actor, repo) pairs
+    2020-06-01-6.json.gz: 375,605 unique (actor, repo) pairs
+    2020-07-01-0.json.gz: 390,204 unique (actor, repo) pairs
+    2020-07-01-12.json.gz: 412,980 unique (actor, repo) pairs
+    2020-07-01-18.json.gz: 433,527 unique (actor, repo) pairs
+    2020-07-01-6.json.gz: 449,632 unique (actor, repo) pairs
+    2020-08-01-0.json.gz: 461,199 unique (actor, repo) pairs
+    2020-08-01-12.json.gz: 475,403 unique (actor, repo) pairs
+    2020-08-01-18.json.gz: 490,073 unique (actor, repo) pairs
+    2020-08-01-6.json.gz: 501,470 unique (actor, repo) pairs
+    2020-09-01-0.json.gz: 516,413 unique (actor, repo) pairs
+    2020-09-01-12.json.gz: 539,091 unique (actor, repo) pairs
+    2020-09-01-18.json.gz: 559,439 unique (actor, repo) pairs
+    2020-09-01-6.json.gz: 575,108 unique (actor, repo) pairs
+    2020-10-01-0.json.gz: 589,508 unique (actor, repo) pairs
+    2020-10-01-12.json.gz: 615,848 unique (actor, repo) pairs
+    2020-10-01-18.json.gz: 640,725 unique (actor, repo) pairs
+    2020-10-01-6.json.gz: 659,871 unique (actor, repo) pairs
+    2020-11-01-0.json.gz: 670,546 unique (actor, repo) pairs
+    2020-11-01-12.json.gz: 686,791 unique (actor, repo) pairs
+    2020-11-01-18.json.gz: 704,735 unique (actor, repo) pairs
+    2020-11-01-6.json.gz: 714,184 unique (actor, repo) pairs
+    2020-12-01-0.json.gz: 731,905 unique (actor, repo) pairs
+    2020-12-01-12.json.gz: 756,168 unique (actor, repo) pairs
+    2020-12-01-18.json.gz: 780,190 unique (actor, repo) pairs
+    2020-12-01-6.json.gz: 799,205 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 799,205
+  Unique developers (raw): 605,795
+  After min 3 commits filter: 222,838 (removed 382,957)
+  WARNING: 73 accounts exceed 10,000 commits:
+    G-H-O-5-T: 18,825 commits, 4 repos, 100.0% in top repo
+    Hawk777: 12,383 commits, 2 repos, 100.0% in top repo
+    Joshua-Anderson: 28,998 commits, 1 repos, 100.0% in top repo
+    KamioRinn: 12,538 commits, 1 repos, 100.0% in top repo
+    MIchaelMainer: 52,725 commits, 2 repos, 100.0% in top repo
+  Monorepo accounts (95%+ in single repo): 136,128 (61.1%)
+  Top 1% share: 51.3%
+  Gini: 0.749
+  SAVED: year_2020_stats.csv and year_2020_developers.parquet
+
+==================================================
+Processing 2021
+==================================================
+  Processing 48 files for 2021...
+    2021-01-01-0.json.gz: 10,979 unique (actor, repo) pairs
+    2021-01-01-12.json.gz: 24,510 unique (actor, repo) pairs
+    2021-01-01-18.json.gz: 39,367 unique (actor, repo) pairs
+    2021-01-01-6.json.gz: 47,820 unique (actor, repo) pairs
+    2021-02-01-0.json.gz: 64,239 unique (actor, repo) pairs
+    2021-02-01-12.json.gz: 90,419 unique (actor, repo) pairs
+    2021-02-01-18.json.gz: 117,561 unique (actor, repo) pairs
+    2021-02-01-6.json.gz: 134,307 unique (actor, repo) pairs
+    2021-03-01-0.json.gz: 149,841 unique (actor, repo) pairs
+    2021-03-01-12.json.gz: 176,396 unique (actor, repo) pairs
+    2021-03-01-18.json.gz: 202,821 unique (actor, repo) pairs
+    2021-03-01-6.json.gz: 219,688 unique (actor, repo) pairs
+    2021-04-01-0.json.gz: 237,073 unique (actor, repo) pairs
+    2021-04-01-12.json.gz: 263,764 unique (actor, repo) pairs
+    2021-04-01-18.json.gz: 287,939 unique (actor, repo) pairs
+    2021-04-01-6.json.gz: 306,420 unique (actor, repo) pairs
+    2021-05-01-0.json.gz: 320,018 unique (actor, repo) pairs
+    2021-05-01-12.json.gz: 337,222 unique (actor, repo) pairs
+    2021-05-01-18.json.gz: 354,812 unique (actor, repo) pairs
+    2021-05-01-6.json.gz: 369,238 unique (actor, repo) pairs
+    2021-06-01-0.json.gz: 384,088 unique (actor, repo) pairs
+    2021-06-01-12.json.gz: 413,420 unique (actor, repo) pairs
+    2021-06-01-18.json.gz: 438,192 unique (actor, repo) pairs
+    2021-06-01-6.json.gz: 456,998 unique (actor, repo) pairs
+    2021-07-01-0.json.gz: 472,439 unique (actor, repo) pairs
+    2021-07-01-12.json.gz: 498,042 unique (actor, repo) pairs
+    2021-07-01-18.json.gz: 519,837 unique (actor, repo) pairs
+    2021-07-01-6.json.gz: 537,550 unique (actor, repo) pairs
+    2021-08-01-0.json.gz: 547,048 unique (actor, repo) pairs
+    2021-08-01-12.json.gz: 565,516 unique (actor, repo) pairs
+    2021-08-01-18.json.gz: 583,060 unique (actor, repo) pairs
+    2021-08-01-6.json.gz: 596,515 unique (actor, repo) pairs
+    2021-09-01-0.json.gz: 611,978 unique (actor, repo) pairs
+    2021-09-01-12.json.gz: 637,195 unique (actor, repo) pairs
+    2021-09-01-18.json.gz: 658,241 unique (actor, repo) pairs
+    2021-09-01-6.json.gz: 674,509 unique (actor, repo) pairs
+    2021-10-01-0.json.gz: 690,347 unique (actor, repo) pairs
+    2021-10-01-12.json.gz: 715,342 unique (actor, repo) pairs
+    2021-10-01-18.json.gz: 738,693 unique (actor, repo) pairs
+    2021-10-01-6.json.gz: 756,162 unique (actor, repo) pairs
+    2021-11-01-0.json.gz: 770,052 unique (actor, repo) pairs
+    2021-11-01-12.json.gz: 794,635 unique (actor, repo) pairs
+    2021-11-01-18.json.gz: 819,171 unique (actor, repo) pairs
+    2021-11-01-6.json.gz: 834,350 unique (actor, repo) pairs
+    2021-12-01-0.json.gz: 854,129 unique (actor, repo) pairs
+    2021-12-01-12.json.gz: 881,651 unique (actor, repo) pairs
+    2021-12-01-18.json.gz: 908,677 unique (actor, repo) pairs
+    2021-12-01-6.json.gz: 927,727 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 927,727
+  Unique developers (raw): 703,774
+  After min 3 commits filter: 260,503 (removed 443,271)
+  WARNING: 79 accounts exceed 10,000 commits:
+    Awan: 16,666 commits, 1 repos, 100.0% in top repo
+    BENKz29: 33,261 commits, 4 repos, 100.0% in top repo
+    CyborgRahil: 18,803 commits, 14 repos, 72.0% in top repo
+    DaManDOH: 12,827 commits, 1 repos, 100.0% in top repo
+    DroidFreak32: 22,665 commits, 4 repos, 99.8% in top repo
+  Monorepo accounts (95%+ in single repo): 160,210 (61.5%)
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/powerlaw/distributions.py:2792: RuntimeWarning: invalid value encountered in divide
+  return likelihoods/norm
+  Top 1% share: 54.8%
+  Gini: 0.775
+  SAVED: year_2021_stats.csv and year_2021_developers.parquet
+
+==================================================
+Processing 2022
+==================================================
+  Processing 48 files for 2022...
+    2022-01-01-0.json.gz: 12,198 unique (actor, repo) pairs
+    2022-01-01-12.json.gz: 26,694 unique (actor, repo) pairs
+    2022-01-01-18.json.gz: 42,764 unique (actor, repo) pairs
+    2022-01-01-6.json.gz: 51,761 unique (actor, repo) pairs
+    2022-02-01-0.json.gz: 71,728 unique (actor, repo) pairs
+    2022-02-01-12.json.gz: 101,201 unique (actor, repo) pairs
+    2022-02-01-18.json.gz: 130,362 unique (actor, repo) pairs
+    2022-02-01-6.json.gz: 146,038 unique (actor, repo) pairs
+    2022-03-01-0.json.gz: 165,734 unique (actor, repo) pairs
+    2022-03-01-12.json.gz: 193,075 unique (actor, repo) pairs
+    2022-03-01-18.json.gz: 219,543 unique (actor, repo) pairs
+    2022-03-01-6.json.gz: 238,304 unique (actor, repo) pairs
+    2022-04-01-0.json.gz: 258,551 unique (actor, repo) pairs
+    2022-04-01-12.json.gz: 288,087 unique (actor, repo) pairs
+    2022-04-01-18.json.gz: 313,622 unique (actor, repo) pairs
+    2022-04-01-6.json.gz: 335,505 unique (actor, repo) pairs
+    2022-05-01-0.json.gz: 348,587 unique (actor, repo) pairs
+    2022-05-01-12.json.gz: 368,579 unique (actor, repo) pairs
+    2022-05-01-18.json.gz: 389,475 unique (actor, repo) pairs
+    2022-05-01-6.json.gz: 402,360 unique (actor, repo) pairs
+    2022-06-01-0.json.gz: 421,605 unique (actor, repo) pairs
+    2022-06-01-12.json.gz: 444,411 unique (actor, repo) pairs
+    2022-06-01-18.json.gz: 465,606 unique (actor, repo) pairs
+    2022-06-01-6.json.gz: 484,682 unique (actor, repo) pairs
+    2022-07-01-0.json.gz: 502,468 unique (actor, repo) pairs
+    2022-07-01-12.json.gz: 528,637 unique (actor, repo) pairs
+    2022-07-01-18.json.gz: 551,128 unique (actor, repo) pairs
+    2022-07-01-6.json.gz: 570,681 unique (actor, repo) pairs
+    2022-08-01-0.json.gz: 585,448 unique (actor, repo) pairs
+    2022-08-01-12.json.gz: 614,661 unique (actor, repo) pairs
+    2022-08-01-18.json.gz: 641,221 unique (actor, repo) pairs
+    2022-08-01-6.json.gz: 661,234 unique (actor, repo) pairs
+    2022-09-01-0.json.gz: 683,207 unique (actor, repo) pairs
+    2022-09-01-12.json.gz: 714,781 unique (actor, repo) pairs
+    2022-09-01-18.json.gz: 742,518 unique (actor, repo) pairs
+    2022-09-01-6.json.gz: 762,994 unique (actor, repo) pairs
+    2022-10-01-0.json.gz: 779,310 unique (actor, repo) pairs
+    2022-10-01-12.json.gz: 801,844 unique (actor, repo) pairs
+    2022-10-01-18.json.gz: 824,994 unique (actor, repo) pairs
+    2022-10-01-6.json.gz: 840,833 unique (actor, repo) pairs
+    2022-11-01-0.json.gz: 862,245 unique (actor, repo) pairs
+    2022-11-01-12.json.gz: 893,138 unique (actor, repo) pairs
+    2022-11-01-18.json.gz: 923,261 unique (actor, repo) pairs
+    2022-11-01-6.json.gz: 943,526 unique (actor, repo) pairs
+    2022-12-01-0.json.gz: 967,597 unique (actor, repo) pairs
+    2022-12-01-12.json.gz: 1,000,303 unique (actor, repo) pairs
+    2022-12-01-18.json.gz: 1,032,521 unique (actor, repo) pairs
+    2022-12-01-6.json.gz: 1,054,802 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 1,054,802
+  Unique developers (raw): 806,951
+  After min 3 commits filter: 294,994 (removed 511,957)
+  WARNING: 131 accounts exceed 10,000 commits:
+    0xff-dev: 14,395 commits, 5 repos, 99.9% in top repo
+    767829413: 11,768 commits, 24 repos, 73.2% in top repo
+    911gt3: 10,520 commits, 1 repos, 100.0% in top repo
+    ABBAPOH: 46,572 commits, 2 repos, 100.0% in top repo
+    ArnoZeller: 67,954 commits, 1 repos, 100.0% in top repo
+  Monorepo accounts (95%+ in single repo): 183,812 (62.3%)
+  Top 1% share: 56.4%
+  Gini: 0.784
+  SAVED: year_2022_stats.csv and year_2022_developers.parquet
+
+==================================================
+Processing 2023
+==================================================
+  Processing 48 files for 2023...
+    2023-01-01-0.json.gz: 14,325 unique (actor, repo) pairs
+    2023-01-01-12.json.gz: 31,340 unique (actor, repo) pairs
+    2023-01-01-18.json.gz: 50,509 unique (actor, repo) pairs
+    2023-01-01-6.json.gz: 60,276 unique (actor, repo) pairs
+    2023-02-01-0.json.gz: 85,691 unique (actor, repo) pairs
+    2023-02-01-12.json.gz: 121,558 unique (actor, repo) pairs
+    2023-02-01-18.json.gz: 156,688 unique (actor, repo) pairs
+    2023-02-01-6.json.gz: 180,581 unique (actor, repo) pairs
+    2023-03-01-0.json.gz: 204,726 unique (actor, repo) pairs
+    2023-03-01-12.json.gz: 240,844 unique (actor, repo) pairs
+    2023-03-01-18.json.gz: 275,906 unique (actor, repo) pairs
+    2023-03-01-6.json.gz: 299,405 unique (actor, repo) pairs
+    2023-04-01-0.json.gz: 318,113 unique (actor, repo) pairs
+    2023-04-01-12.json.gz: 342,721 unique (actor, repo) pairs
+    2023-04-01-18.json.gz: 368,078 unique (actor, repo) pairs
+    2023-04-01-6.json.gz: 385,133 unique (actor, repo) pairs
+    2023-05-01-0.json.gz: 402,951 unique (actor, repo) pairs
+    2023-05-01-12.json.gz: 432,157 unique (actor, repo) pairs
+    2023-05-01-18.json.gz: 464,357 unique (actor, repo) pairs
+    2023-05-01-6.json.gz: 483,245 unique (actor, repo) pairs
+    2023-06-01-0.json.gz: 504,791 unique (actor, repo) pairs
+    2023-06-01-12.json.gz: 538,194 unique (actor, repo) pairs
+    2023-06-01-18.json.gz: 568,481 unique (actor, repo) pairs
+    2023-06-01-6.json.gz: 593,950 unique (actor, repo) pairs
+    2023-07-01-0.json.gz: 608,779 unique (actor, repo) pairs
+    2023-07-01-12.json.gz: 629,504 unique (actor, repo) pairs
+    2023-07-01-18.json.gz: 649,598 unique (actor, repo) pairs
+    2023-07-01-6.json.gz: 664,161 unique (actor, repo) pairs
+    2023-08-01-0.json.gz: 684,403 unique (actor, repo) pairs
+    2023-08-01-12.json.gz: 718,054 unique (actor, repo) pairs
+    2023-08-01-18.json.gz: 747,145 unique (actor, repo) pairs
+    2023-08-01-6.json.gz: 771,145 unique (actor, repo) pairs
+    2023-09-01-0.json.gz: 791,639 unique (actor, repo) pairs
+    2023-09-01-12.json.gz: 822,270 unique (actor, repo) pairs
+    2023-09-01-18.json.gz: 849,687 unique (actor, repo) pairs
+    2023-09-01-6.json.gz: 872,238 unique (actor, repo) pairs
+    2023-10-01-0.json.gz: 886,013 unique (actor, repo) pairs
+    2023-10-01-12.json.gz: 909,137 unique (actor, repo) pairs
+    2023-10-01-18.json.gz: 935,640 unique (actor, repo) pairs
+    2023-10-01-6.json.gz: 950,878 unique (actor, repo) pairs
+    2023-11-01-0.json.gz: 973,034 unique (actor, repo) pairs
+    2023-11-01-12.json.gz: 1,007,245 unique (actor, repo) pairs
+    2023-11-01-18.json.gz: 1,042,165 unique (actor, repo) pairs
+    2023-11-01-6.json.gz: 1,065,545 unique (actor, repo) pairs
+    2023-12-01-0.json.gz: 1,089,267 unique (actor, repo) pairs
+    2023-12-01-12.json.gz: 1,117,042 unique (actor, repo) pairs
+    2023-12-01-18.json.gz: 1,145,054 unique (actor, repo) pairs
+    2023-12-01-6.json.gz: 1,165,966 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 1,165,966
+  Unique developers (raw): 901,422
+  After min 3 commits filter: 322,651 (removed 578,771)
+  WARNING: 175 accounts exceed 10,000 commits:
+    19920513: 10,153 commits, 3 repos, 58.0% in top repo
+    8yumzy88: 10,338 commits, 1 repos, 100.0% in top repo
+    AGindinson: 39,604 commits, 1 repos, 100.0% in top repo
+    AaronDJohnson: 66,736 commits, 1 repos, 100.0% in top repo
+    Akmal22: 28,233 commits, 1 repos, 100.0% in top repo
+  Monorepo accounts (95%+ in single repo): 201,591 (62.5%)
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/powerlaw/distributions.py:2792: RuntimeWarning: invalid value encountered in divide
+  return likelihoods/norm
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/powerlaw/distributions.py:776: UserWarning: No valid fits found for distribution lognormal.
+  warnings.warn(f"No valid fits found for distribution {self.name}.")
+  Top 1% share: 60.2%
+  Gini: 0.809
+  SAVED: year_2023_stats.csv and year_2023_developers.parquet
+
+==================================================
+Processing 2024
+==================================================
+  Processing 48 files for 2024...
+    2024-01-01-0.json.gz: 15,715 unique (actor, repo) pairs
+    2024-01-01-12.json.gz: 37,686 unique (actor, repo) pairs
+    2024-01-01-18.json.gz: 61,931 unique (actor, repo) pairs
+    2024-01-01-6.json.gz: 75,184 unique (actor, repo) pairs
+    2024-02-01-0.json.gz: 100,254 unique (actor, repo) pairs
+    2024-02-01-12.json.gz: 136,979 unique (actor, repo) pairs
+    2024-02-01-18.json.gz: 174,713 unique (actor, repo) pairs
+    2024-02-01-6.json.gz: 200,536 unique (actor, repo) pairs
+    2024-03-01-0.json.gz: 224,230 unique (actor, repo) pairs
+    2024-03-01-12.json.gz: 259,153 unique (actor, repo) pairs
+    2024-03-01-18.json.gz: 292,484 unique (actor, repo) pairs
+    2024-03-01-6.json.gz: 317,286 unique (actor, repo) pairs
+    2024-04-01-0.json.gz: 336,789 unique (actor, repo) pairs
+    2024-04-01-12.json.gz: 368,920 unique (actor, repo) pairs
+    2024-04-01-18.json.gz: 404,097 unique (actor, repo) pairs
+    2024-04-01-6.json.gz: 427,678 unique (actor, repo) pairs
+    2024-05-01-0.json.gz: 452,577 unique (actor, repo) pairs
+    2024-05-01-12.json.gz: 489,192 unique (actor, repo) pairs
+    2024-05-01-18.json.gz: 528,651 unique (actor, repo) pairs
+    2024-05-01-6.json.gz: 554,958 unique (actor, repo) pairs
+    2024-06-01-0.json.gz: 571,499 unique (actor, repo) pairs
+    2024-06-01-12.json.gz: 596,922 unique (actor, repo) pairs
+    2024-06-01-18.json.gz: 621,651 unique (actor, repo) pairs
+    2024-06-01-6.json.gz: 640,123 unique (actor, repo) pairs
+    2024-07-01-0.json.gz: 657,675 unique (actor, repo) pairs
+    2024-07-01-12.json.gz: 693,327 unique (actor, repo) pairs
+    2024-07-01-18.json.gz: 725,070 unique (actor, repo) pairs
+    2024-07-01-6.json.gz: 751,068 unique (actor, repo) pairs
+    2024-08-01-0.json.gz: 770,829 unique (actor, repo) pairs
+    2024-08-01-12.json.gz: 803,720 unique (actor, repo) pairs
+    2024-08-01-18.json.gz: 834,929 unique (actor, repo) pairs
+    2024-08-01-6.json.gz: 860,935 unique (actor, repo) pairs
+    2024-09-01-0.json.gz: 874,700 unique (actor, repo) pairs
+    2024-09-01-12.json.gz: 899,481 unique (actor, repo) pairs
+    2024-09-01-18.json.gz: 924,146 unique (actor, repo) pairs
+    2024-09-01-6.json.gz: 941,211 unique (actor, repo) pairs
+    2024-10-01-0.json.gz: 963,776 unique (actor, repo) pairs
+    2024-10-01-12.json.gz: 1,002,275 unique (actor, repo) pairs
+    2024-10-01-18.json.gz: 1,037,260 unique (actor, repo) pairs
+    2024-10-01-6.json.gz: 1,063,615 unique (actor, repo) pairs
+    2024-11-01-0.json.gz: 1,085,448 unique (actor, repo) pairs
+    2024-11-01-12.json.gz: 1,116,691 unique (actor, repo) pairs
+    2024-11-01-18.json.gz: 1,147,117 unique (actor, repo) pairs
+    2024-11-01-6.json.gz: 1,168,591 unique (actor, repo) pairs
+    2024-12-01-0.json.gz: 1,186,717 unique (actor, repo) pairs
+    2024-12-01-12.json.gz: 1,215,959 unique (actor, repo) pairs
+    2024-12-01-18.json.gz: 1,246,110 unique (actor, repo) pairs
+    2024-12-01-6.json.gz: 1,265,701 unique (actor, repo) pairs
+  Raw records (actor, repo pairs): 1,265,701
+  Unique developers (raw): 981,317
+  After min 3 commits filter: 357,404 (removed 623,913)
+  WARNING: 1155 accounts exceed 10,000 commits:
+    0x00G: 19,738 commits, 1 repos, 100.0% in top repo
+    1208nn: 10,003 commits, 1 repos, 100.0% in top repo
+    1715173329: 10,063 commits, 9 repos, 99.4% in top repo
+    1gtm: 43,281 commits, 14 repos, 46.2% in top repo
+    2lambda123: 40,856 commits, 36 repos, 83.2% in top repo
+  Monorepo accounts (95%+ in single repo): 230,088 (64.6%)
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/powerlaw/distributions.py:2792: RuntimeWarning: invalid value encountered in divide
+  return likelihoods/norm
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/powerlaw/distributions.py:776: UserWarning: No valid fits found for distribution lognormal.
+  warnings.warn(f"No valid fits found for distribution {self.name}.")
+  Top 1% share: 68.9%
+  Gini: 0.897
+  SAVED: year_2024_stats.csv and year_2024_developers.parquet
+
+Saved combined results to: /Users/ilanstrauss/github-analysis/output/power_law_results_sample.csv
+Saved 1,623,706 total developer-year observations
+
+Generating plots...
+Saved plot to: /Users/ilanstrauss/github-analysis/output/power_law_analysis_sample.png
+
+============================================================
+SUMMARY
+============================================================
+ year  n_developers  top_1pct_share     gini  p99_p50_ratio    alpha
+ 2019        166929        0.494963 0.746624         41.400 1.915836
+ 2020        222765        0.513078 0.748576         38.800 1.894934
+ 2021        260424        0.547775 0.775312         46.600 2.176873
+ 2022        294863        0.564256 0.784210         51.000 1.807090
+ 2023        322476        0.601797 0.809180         60.200 2.134461
+ 2024        356249        0.688877 0.897408        187.704 2.033061
+
+Top 1% Share:
+  Pre-2022 average:  51.9%
+  Post-2022 average: 61.8%
+  Change: +10.0 pp

@@ -1,0 +1,715 @@
+{
+  "matches": {
+    "context_chatgpt_fwd": [
+      {
+        "actor": "f-wllr",
+        "repo": "RAMOTS/AutoShowcaseLoader",
+        "sha": "3636d5eb",
+        "message": "Pasted code from ChatGPT and added IDs",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "sidharthdas",
+        "repo": "sidharthdas/spring-ai-integration-with-chatGPT",
+        "sha": "7eb8046c",
+        "message": "Added code to generate messages from chatGPT",
+        "file": "2024-02-01-18.json.gz"
+      },
+      {
+        "actor": "tinghui2012",
+        "repo": "stevenwinnick/songsnap",
+        "sha": "d7ab25c6",
+        "message": "added script for generating song summary using ChatGPT API",
+        "file": "2024-03-01-6.json.gz"
+      },
+      {
+        "actor": "Serided",
+        "repo": "Serided/GangDev",
+        "sha": "a5eda4e7",
+        "message": "Updated some padding in the buttons to make them not newline after getting moused over. Updated the multiplayer to be better formatted and more compatible with mobile. Increased font size for main menu buttons.\nUpdated the name of the chat app, minecraftForceloadGenerator app, and added the afore created roast generator to the list of apps. Changed jens' exp squares/circles to hexagons for now. Re",
+        "file": "2024-04-01-12.json.gz"
+      },
+      {
+        "actor": "ashishjain1547",
+        "repo": "ashishjain1547/books_on_large_language_models",
+        "sha": "0aa83780",
+        "message": "Rename Sinan Ozdemir - Quick Start Guide to Large Language Models_ Strategies and Best Practices for using ChatGPT and Other LLMs-Addison-Wesley Professional (2023).pdf to Sinan Ozdemir - Quick Start Guide to Large Language Models.pdf",
+        "file": "2024-04-01-6.json.gz"
+      },
+      {
+        "actor": "rxa254",
+        "repo": "rxa254/NN_DL_book",
+        "sha": "fc4d5f87",
+        "message": "updated to python3 by ChatGPT",
+        "file": "2024-04-01-6.json.gz"
+      },
+      {
+        "actor": "CashelF",
+        "repo": "CashelF/lyric-generation",
+        "sha": "f84f23ac",
+        "message": "Add evaluate using ChatGPT",
+        "file": "2024-05-01-0.json.gz"
+      },
+      {
+        "actor": "zbaibg",
+        "repo": "zbaibg/DMDana",
+        "sha": "1935e761",
+        "message": "reconstruct this file using chatgpt",
+        "file": "2024-05-01-6.json.gz"
+      },
+      {
+        "actor": "pr-scheduler[bot]",
+        "repo": "Roald87/roaldin.ch",
+        "sha": "20a35a75",
+        "message": "Spellcheck by ChatGPT",
+        "file": "2024-06-01-0.json.gz"
+      },
+      {
+        "actor": "pr-scheduler[bot]",
+        "repo": "Roald87/roaldin.ch",
+        "sha": "a93f107e",
+        "message": "Add alt text by ChatGPT",
+        "file": "2024-06-01-0.json.gz"
+      }
+    ],
+    "signature_aider": [
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "127b2d5f",
+        "message": "aider: Replace current login form with Django's built-in `AuthenticationForm`.\n\n# Aider chat conversation:\n\nASSISTANT: Great! Now that we have the `login.html` file in *read-write* mode, we can modify it to use Django's built-in `AuthenticationForm`.\n\nHere is the *SEARCH/REPLACE* block:\n\n/home/jess/personal/UrbanLens/UL/dashboard/templates/registration/login.html\n```html\n<<<<<<< SEARCH\n{% extends ",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "da4c94cc",
+        "message": "aider: Create logout and signup templates for user authentication.\n\n# Aider chat conversation:\n\nUSER: Create any other html templates that are needed, such as a signup or logout template. Only create them if django does not provide one by default.\n\nASSISTANT: Django does not provide default templates for login, logout, or signup. It only provides the views and forms that can be used in these templ",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "a111a74c",
+        "message": "aider: Replaced \"base_generic.html\" with \"dashboard/themes/base.html\" in registration pages.\n\n# Aider chat conversation:\n\nUSER: I don't have a \"base_generic\" template. I am using base.html for my other pages. Please make that adjustment for my registration pages.\n\nASSISTANT: To make this change, we need to modify the following files:\n\n1. `dashboard/templates/registration/login.html`\n2. `dashboard/",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "956f0e5c",
+        "message": "aider: Refactor `FriendshipController.py` to use class-based views and `LoginRequiredMixin`.\n\n# Aider chat conversation:\n\nUSER: Change FriendshipController to be OOP. It should use standard django views and functionality, and apply modern best practices.\n\nASSISTANT: To refactor the `FriendshipController.py` to be Object-Oriented and use standard Django views and functionality, we need to:\n\n1. Impo",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "442a0a0a",
+        "message": "aider: Refactored `MapController.py` to use class-based views and `LoginRequiredMixin`.\n\n# Aider chat conversation:\n\nASSISTANT: To refactor the `MapController.py` to be Object-Oriented and use standard Django views and functionality, we need to:\n\n1. Import the necessary Django classes and modules.\n2. Replace the function-based views with class-based views.\n3. Use Django's built-in methods for hand",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "29f8b24b",
+        "message": "aider: Refactor ProfileController to use class-based views and LoginRequiredMixin.\n\n# Aider chat conversation:\n\nUSER: Change ProfileController to be OOP. It should use standard django views and functionality, and apply modern best practices.\n\nASSISTANT: To refactor the `ProfileController.py` to use class-based views and `LoginRequiredMixin`, we need to:\n\n1. Import the necessary classes from Django",
+        "file": "2024-01-01-0.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "01dac748",
+        "message": "aider: Add event listener for 'Escape' key to revert input field to original value and replace with span element.\n\n# Aider chat conversation:\n\nUSER: When changing a field, if they hit escape, we should not save anything, and revert the field back to the value it was before they clicked on it.\n\nASSISTANT: To implement this change, we need to modify `dashboard/templates/dashboard/pages/map/index.htm",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "52c39c38",
+        "message": "aider: Add event listener to clear last visited date input field on 'Backspace' or 'Delete' key press.\n\n# Aider chat conversation:\n\nUSER: If the user edits the last visited date and hits backspace or delete first, it should clear the last visited date value. If they begin typing numbers or changing anything, and then hit backspace or delete, the key should work normally without clearing the entire",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "daf52cbf",
+        "message": "aider: Update event listener for 'keydown' event in last visited date input field to clear the input field only if 'Backspace' or 'Delete' key is pressed as the very first input after the date field is created.\n\n# Aider chat conversation:\n\nUSER: No, that's wrong. I don't want Backspace and delete to only work when there is a value. I want backspace and delete to work normally all the time, except ",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "avranu",
+        "repo": "UrbanLens/UrbanLens",
+        "sha": "efe978c5",
+        "message": "aider: Ensure last visited date is saved as \"null\" when submitted without a value.\n\n# Aider chat conversation:\n\nUSER: If the user submits the last visited date without a value, it should be saved as \"null\". The backend stores it as a DateTimeField(null=True, blank=True) in django, so ensure it is passed to django in the right format to do that. In the frontend, it will display as \"never\".\n\nASSISTA",
+        "file": "2024-01-01-18.json.gz"
+      }
+    ],
+    "context_copilot_fwd": [
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "677c829c",
+        "message": "Fixed actions crashing on post history - Admin X (#18344)\n\nrefs https://ghost.slack.com/archives/C0568LN2CGJ/p1695642553045059\r\n\r\n- this attempts to fix an undefined error on AdminX when accessing\r\nhistory log.\r\n- At the moment I only have it reproducible on staging, so if this doesn't fix it, it will potentially be reverted.\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to gene",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "1f2f0a73",
+        "message": "Improved null handling on Admin X actions (#18346)\n\nrefs https://ghost.slack.com/archives/C0568LN2CGJ/p1695642553045059\r\n\r\n- The previous commit didn't quite handle things as expected. This adds\r\nmore null handling.\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at 1a69211</sam",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "ac7abb9e",
+        "message": "Added custom theme type to emberdatatypemapping (#18348)\n\nno issue\r\n\r\n- added a missing emberDataTypeMapping needed for theme uploads to be\r\nhandled correctly\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at 40647c6</samp>\r\n\r\nAdded support for custom theme settings API in Em",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "4f3b35e4",
+        "message": "Fixed errors not displaying when uploading broken theme in Admin X (#18350)\n\nrefs https://ghost.slack.com/archives/C0568LN2CGJ/p1695716107796769\r\n\r\n- The main culprit here was that now since we moved to using some model data from Ember as opposed to just the API, the errors key had to be renamed to gscan_errors  as that's how it's named in the Ember theme model.\r\n\r\n---\r\n\r\n<!-- Leave the line below",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "d51322c9",
+        "message": "Updated AdminX API error handling to report to Sentry (#18300)\n\nrefs https://github.com/TryGhost/Product/issues/3832\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at d434b20</samp>\r\n\r\nThis pull request refactors the error handling logic in various\r\ncomponents of the admin-x-",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "ea64107f",
+        "message": "Fixed syncing tiers status between Ember and AdminX (#18353)\n\nrefs https://github.com/TryGhost/Product/issues/3832\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at 0ddea75</samp>\r\n\r\nAdded `membersUtils` service to `AdminXSettings` component to support\r\ntiers feature. Reloade",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "6eb5dfa2",
+        "message": "Added null safety checks in AdminX actions (#18356)\n\nno issue\r\n\r\n- added additional null safety checks to the actions utility in AdminX.\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at e10aa52</samp>\r\n\r\nRefactored `action.context` access in `actions.ts` to use optional\r\nchain",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "ashrafmajdee",
+        "repo": "ashrafmajdee/Ghost",
+        "sha": "5161009e",
+        "message": "Added progress spinner to the theme upload button (#18358)\n\nno issue\r\n\r\n- Added a progress spinner to the theme upload button in AdminX for\r\nbetter UX.\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot at 68bfc1b</samp>\r\n\r\nImproved user feedback for theme upload feature. Added a",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "doridoridoriand",
+        "repo": "doridoridoriand/Ghost",
+        "sha": "f4a36ecb",
+        "message": "Fixed link to release in About modal (#18588)\n\nno issue\r\n\r\n- the link to the release has `-moya` added to it, which breaks the link\r\nto the github release. This ensures it gets removed should it be there\r\nto avoid broken links.\r\n\r\n---\r\n\r\n<!-- Leave the line below if you'd like GitHub Copilot to generate a\r\nsummary from your commit -->\r\n<!--\r\ncopilot:summary\r\n-->\r\n### <samp>\ud83e\udd16 Generated by Copilot a",
+        "file": "2024-02-01-0.json.gz"
+      },
+      {
+        "actor": "peter-wangxu",
+        "repo": "peter-wangxu/open-local",
+        "sha": "819fbe69",
+        "message": "add new test case assisted by copilot",
+        "file": "2024-03-01-12.json.gz"
+      }
+    ],
+    "context_gemini_fwd": [
+      {
+        "actor": "valentimarco",
+        "repo": "valentimarco/core",
+        "sha": "b7079d9d",
+        "message": "Changed LLMGeminiChatConfig model from gemini to gemini-pro",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "valentimarco",
+        "repo": "valentimarco/core",
+        "sha": "176bfafd",
+        "message": "Merge pull request #641 from davidegavio/bugfix/fix-gemini-setup\n\nChanged LLMGeminiChatConfig model from gemini to gemini-pro",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "Py0000",
+        "repo": "Py0000/Playwright_Crawler",
+        "sha": "035d5a72",
+        "message": "Add analysis from gemini",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "cquiroz",
+        "repo": "gemini-hlsw/ocs",
+        "sha": "5073f357",
+        "message": "Merge pull request #2229 from gemini-hlsw/p1-smtp\n\nSwitch smtp relay for p1-monitor",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "4a4aaf05",
+        "message": "Merge pull request #498 from gemini-hlsw/update/jul-to-slf4j-2.0.10\n\nUpdate jul-to-slf4j to 2.0.10",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "da6c1410",
+        "message": "Merge pull request #499 from gemini-hlsw/update/http4s-blaze-server-0.23.16\n\nUpdate http4s-blaze-server to 0.23.16",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "ce929c46",
+        "message": "Merge pull request #500 from gemini-hlsw/update/http4s-core-0.23.25\n\nUpdate http4s-circe, http4s-core, ... to 0.23.25",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "89a3610f",
+        "message": "Merge pull request #496 from gemini-hlsw/update/lucuma-schemas-0.68.0\n\nUpdate lucuma-schemas to 0.68.0",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "c48da2c1",
+        "message": "Merge pull request #501 from gemini-hlsw/update/jul-to-slf4j-2.0.11\n\nUpdate jul-to-slf4j to 2.0.11",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "jluhrs",
+        "repo": "jluhrs/navigate-server",
+        "sha": "3174d1d2",
+        "message": "Merge pull request #502 from gemini-hlsw/small-reorg\n\nCleanup removing legacy scala.js libs and authentication code",
+        "file": "2024-02-01-12.json.gz"
+      }
+    ],
+    "explicit_ai_generated": [
+      {
+        "actor": "Giraffaman",
+        "repo": "Giraffaman/shimmie2",
+        "sha": "bee8e1d8",
+        "message": "ai-generated border color",
+        "file": "2024-01-01-18.json.gz"
+      },
+      {
+        "actor": "JerushaGray",
+        "repo": "JerushaGray/GrayToneLab-GPT",
+        "sha": "12334508",
+        "message": "Update README.md\n\nWelcome to GrayToneLab-GPT, a repository designed to tailor GPT-generated content to reflect a personalized brand voice, initially inspired by Jerusha Gray's distinct style. This resource acts as both a showcase and a toolkit for individuals aiming to infuse their unique voice into AI-generated communications.",
+        "file": "2024-02-01-0.json.gz"
+      },
+      {
+        "actor": "ehave-development-team",
+        "repo": "ehave-development-team/ehavelandingpage",
+        "sha": "db1ff21f",
+        "message": "Update to choices AI powered Data",
+        "file": "2024-02-01-12.json.gz"
+      },
+      {
+        "actor": "Codel1417",
+        "repo": "Codel1417/tail_app",
+        "sha": "bb4569ce",
+        "message": "Add AI generated app icon\n\nHopefully I can make a real icon someday",
+        "file": "2024-03-01-0.json.gz"
+      },
+      {
+        "actor": "xcytxs",
+        "repo": "xcytxs/SuperAGI",
+        "sha": "898c75ff",
+        "message": "instagram APIs implemented and AI generated caption utility added",
+        "file": "2024-03-01-0.json.gz"
+      },
+      {
+        "actor": "jmoya34",
+        "repo": "jmoya34/vidGUI",
+        "sha": "bd2166b6",
+        "message": "Added AI generated code to test picam",
+        "file": "2024-03-01-6.json.gz"
+      },
+      {
+        "actor": "leo-gan",
+        "repo": "leo-gan/langchain",
+        "sha": "12861273",
+        "message": "experimental[patch]: Removed 'SQLResults:' from the LLMResponse in SQLDatabaseChain (#17104)\n\n**Description:** \r\nWhen using the SQLDatabaseChain with Llama2-70b LLM and, SQLite\r\ndatabase. I was getting `Warning: You can only execute one statement at\r\na time.`.\r\n\r\n```\r\nfrom langchain.sql_database import SQLDatabase\r\nfrom langchain_experimental.sql import SQLDatabaseChain\r\n\r\nsql_database_path = '/dc",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "kckevinchenzkk",
+        "repo": "kckevinchenzkk/AI-Powered-E-Commerce-App",
+        "sha": "26e9847c",
+        "message": "Merge branch 'Eric_DevOps' of https://github.com/ECE651Group16/AI-Powered-E-Commerce-App into Eric_DevOps",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "daviddwlee84",
+        "repo": "daviddwlee84/langchain",
+        "sha": "12861273",
+        "message": "experimental[patch]: Removed 'SQLResults:' from the LLMResponse in SQLDatabaseChain (#17104)\n\n**Description:** \r\nWhen using the SQLDatabaseChain with Llama2-70b LLM and, SQLite\r\ndatabase. I was getting `Warning: You can only execute one statement at\r\na time.`.\r\n\r\n```\r\nfrom langchain.sql_database import SQLDatabase\r\nfrom langchain_experimental.sql import SQLDatabaseChain\r\n\r\nsql_database_path = '/dc",
+        "file": "2024-04-01-6.json.gz"
+      },
+      {
+        "actor": "Raine-4",
+        "repo": "Raine-4/PNF_master",
+        "sha": "dabea9ca",
+        "message": "New Feature: AI-generated params will be automatically filled in the blank.",
+        "file": "2024-05-01-12.json.gz"
+      }
+    ],
+    "context_gpt-3_fwd": [
+      {
+        "actor": "fcoalcantarajr",
+        "repo": "fcoalcantarajr/chatbot-starter",
+        "sha": "524e469e",
+        "message": "Updated AI model to GPT-4 preview\n\nUpgraded the AI engine from GPT-3.5 Turbo to GPT-4-0125-preview to\nenhance chatbot capabilities and provide users with the latest\nadvancements in AI technology. This update aims to improve conversation\nquality and response accuracy.",
+        "file": "2024-02-01-0.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/loz",
+        "sha": "79a837af",
+        "message": "Refactor code to use new naming conventions and update tests\n\nThe commit message suggests that the code has been refactored to use new naming conventions and the tests have been updated accordingly.\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-02-01-6.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/loz",
+        "sha": "e47769e7",
+        "message": "Delete build_docker.sh script\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-02-01-6.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/fosscomics",
+        "sha": "960ef129",
+        "message": "Refactor server initialization logic for clarity and consistency\n\nMove server initialization logic into an IIFE for better organization\nand readability. This change ensures that the server setup code is\nencapsulated and separate from the main build function.\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/fosscomics",
+        "sha": "605b203b",
+        "message": "Add bin configuration for fosscomics\n\nAdd bin configuration to package-lock.json for fosscomics to specify\nthe entry point for the CLI tool.\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/fosscomics",
+        "sha": "40b4d4cd",
+        "message": "Refactor footer generation logic for better performance\n\nInitialize footerHTML variable to an empty string and refactor\nfooter generation logic to improve performance and readability.\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "joone",
+        "repo": "joone/fosscomics",
+        "sha": "bcb4fc7e",
+        "message": "Add site-navigation class to nav element in about.js and home.js\n\n- Add site-navigation class to nav element in about.js and home.js for\n  consistent styling and easier navigation.\n\nGenerated by gpt-3.5-turbo",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "yeaeunkwon",
+        "repo": "yeaeunkwon/INFO555_PJ1",
+        "sha": "4a6d1b6e",
+        "message": "zeroshot CoT by gpt-3.5",
+        "file": "2024-11-01-6.json.gz"
+      }
+    ],
+    "context_bard_fwd": [
+      {
+        "actor": "andimec",
+        "repo": "andimec/andimec.github.io",
+        "sha": "ccd495be",
+        "message": "Update single.html\n\nlimit:4 -> | reverse \r\nrecomended by bard",
+        "file": "2024-02-01-0.json.gz"
+      }
+    ],
+    "context_codeium_fwd": [
+      {
+        "actor": "Dahan-Schuster",
+        "repo": "Dahan-Schuster/Dahan-Schuster",
+        "sha": "8047f865",
+        "message": "Update README.md\n\nAdd autompletion data from Codeium",
+        "file": "2024-02-01-18.json.gz"
+      },
+      {
+        "actor": "rvnrstnsyh",
+        "repo": "rvnrstnsyh/system-nvll",
+        "sha": "fa7037ca",
+        "message": "docs: additional jsdocs by codeium\n\nalso fixed some data types",
+        "file": "2024-08-01-6.json.gz"
+      },
+      {
+        "actor": "rvnrstnsyh",
+        "repo": "rvnrstnsyh/system-nvll",
+        "sha": "4533a884",
+        "message": "docs: additional jsdocs\n\nby codeium",
+        "file": "2024-08-01-6.json.gz"
+      }
+    ],
+    "context_chatgpt_bwd": [
+      {
+        "actor": "hwbrent",
+        "repo": "hwbrent/2024-05-02--COMP3617--VR-Coursework",
+        "sha": "e04b2e7f",
+        "message": "Make code less sus\n\nIt's pretty obvious that ChatGPT generated it",
+        "file": "2024-03-01-12.json.gz"
+      },
+      {
+        "actor": "FloWi",
+        "repo": "FloWi/rust-flwi-spacetraders-leaderboard",
+        "sha": "24f1b12d",
+        "message": "got tokio-cron-scheduler working\n\nneeded to replace the chatGPT generated type signature `Result<ResultType, Box<dyn Error>>` with `Result<ResultType>` and use anyhow::Result;` now, which is a type alias for\n```rust\npub type Result<T, E = Error> = core::result::Result<T, E>;\n```",
+        "file": "2024-04-01-18.json.gz"
+      },
+      {
+        "actor": "EthanLaynePeck",
+        "repo": "EthanLaynePeck/Lumbar-Spine-Degenerative-Classification",
+        "sha": "665c8ce9",
+        "message": "Update README.md\n\nChatGPT Generated Template to be used to focus research and fill in information as each step of this project are completed.",
+        "file": "2024-08-01-18.json.gz"
+      },
+      {
+        "actor": "lawrennd",
+        "repo": "atomichuman/atomic-human-theme",
+        "sha": "40da6b20",
+        "message": "Makefile and README.md (ChatGPT generated)",
+        "file": "2024-12-01-12.json.gz"
+      },
+      {
+        "actor": "lawrennd",
+        "repo": "atomichuman/atomic-human-theme",
+        "sha": "e38eaeb1",
+        "message": "Makefile and README.md (ChatGPT generated)",
+        "file": "2024-12-01-12.json.gz"
+      }
+    ],
+    "context_cursor_fwd": [
+      {
+        "actor": "calculuschild",
+        "repo": "Gazook89/homebrewery",
+        "sha": "5a79795e",
+        "message": "Indicate tags are clickable by cursor",
+        "file": "2024-03-01-6.json.gz"
+      },
+      {
+        "actor": "sharryy",
+        "repo": "sharryy/framework",
+        "sha": "67d4d0dd",
+        "message": "[10.x] Binding order is incorrect when using cursor paginate with multiple unions with a where (#50884)\n\n* Add failing test for binding order\r\n\r\n* Add failing test for bindings with multiple order clauses\r\n\r\n* Fix binding order for cursor paginate with multiple unions\r\n\r\n* Use setBindings to clear the union bindings\r\n\r\n* Add bindings to nested union builders\r\n\r\n* Only reset union bindings if union",
+        "file": "2024-05-01-0.json.gz"
+      },
+      {
+        "actor": "cs716",
+        "repo": "apetavern/grubs",
+        "sha": "a009737c",
+        "message": "Remove automatic FireFinished from cursor type",
+        "file": "2024-06-01-0.json.gz"
+      },
+      {
+        "actor": "ArkadiK94",
+        "repo": "ArkadiK94/TheCyberHUB",
+        "sha": "388519ab",
+        "message": "Fixed styling issue causing cursor position error in Notes section (#829)",
+        "file": "2024-06-01-6.json.gz"
+      },
+      {
+        "actor": "gopherbot",
+        "repo": "golang/tools",
+        "sha": "d2e46216",
+        "message": "gopls/internal/server: CodeAction: interpret Only=[] as [QuickFix]\n\nThis CL changes the interpretation of an empty list of\nCodeActionKind. Previously, we have always used it to mean\n\"all kinds\"; however, the new guidance in the LSP 3.18 spec\nis that servers should treat it equivalent to [QuickFix].\n\nFollowing the spec exactly would reduce the frequency of\ndistracting lightbulbs displayed by VS Cod",
+        "file": "2024-10-01-18.json.gz"
+      },
+      {
+        "actor": "onnimonni",
+        "repo": "onnimonni/nextjs-notion-starter-kit",
+        "sha": "f993997e",
+        "message": "Get rid of dangerouslySetInnerHTML in Social image styles with the excellent hover-color suggestion from Cursor editor",
+        "file": "2024-11-01-12.json.gz"
+      },
+      {
+        "actor": "zion-off",
+        "repo": "zion-off/generate-pdf",
+        "sha": "86b89b95",
+        "message": "testing optimizations done by cursor",
+        "file": "2024-12-01-18.json.gz"
+      },
+      {
+        "actor": "zion-off",
+        "repo": "zion-off/generate-pdf",
+        "sha": "7e436c99",
+        "message": "testing optimizations done by cursor",
+        "file": "2024-12-01-18.json.gz"
+      }
+    ],
+    "context_gpt-4_fwd": [
+      {
+        "actor": "dfeldman",
+        "repo": "dfeldman/quackernews",
+        "sha": "d76c281d",
+        "message": "upgrade to gpt-4-turbo from gpt-4-turbo-preview, add google-tracking",
+        "file": "2024-05-01-0.json.gz"
+      },
+      {
+        "actor": "kolibril13",
+        "repo": "kolibril13/jupyter-tldraw",
+        "sha": "bc8040b1",
+        "message": "switch from gpt-4-vision-preview to gpt-4-turbo",
+        "file": "2024-05-01-12.json.gz"
+      },
+      {
+        "actor": "Aljendro",
+        "repo": "Aljendro/dotfiles",
+        "sha": "f3b16ec0",
+        "message": "using gpt-4-turbo for chatgpt plugin",
+        "file": "2024-09-01-18.json.gz"
+      }
+    ],
+    "context_claude_fwd": [
+      {
+        "actor": "abeatrix",
+        "repo": "sourcegraph/cody",
+        "sha": "73da4c2f",
+        "message": "Upgrade users from Claude 2 to Claude 3 and remove Claude 2 (#3971)\n\nCo-authored-by: Beatrix <beatrix@sourcegraph.com>",
+        "file": "2024-05-01-18.json.gz"
+      },
+      {
+        "actor": "acazau",
+        "repo": "acazau/SWE-agent",
+        "sha": "1e8d207d",
+        "message": "Change from claude 2 to claude 2.0 (see https://github.com/anthropics/anthropic-sdk-python/issues/255)",
+        "file": "2024-07-01-0.json.gz"
+      },
+      {
+        "actor": "incrementalcapitalist",
+        "repo": "incrementalcapitalist/accumulationindications",
+        "sha": "9e5701ed",
+        "message": "changes from Claude",
+        "file": "2024-08-01-6.json.gz"
+      },
+      {
+        "actor": "rizvifazi",
+        "repo": "rizvifazi/Java",
+        "sha": "021d6044",
+        "message": "Added REST API note from Claude",
+        "file": "2024-10-01-18.json.gz"
+      },
+      {
+        "actor": "Karimbou",
+        "repo": "Karimbou/flutter_course_update_appbrewery",
+        "sha": "096c519e",
+        "message": "The App was refactored by Claude 3.5. Sonet. Extended also the functionality\n\nThe App now plays sound when ever the button is tapped. The Inkwell Widget by Material Design is now used.",
+        "file": "2024-12-01-12.json.gz"
+      },
+      {
+        "actor": "geeknik",
+        "repo": "geeknik/brave-cats",
+        "sha": "34979c2a",
+        "message": "aider saved us from claude",
+        "file": "2024-12-01-18.json.gz"
+      },
+      {
+        "actor": "PaznerA",
+        "repo": "PaznerA/react-learning-01",
+        "sha": "257a5ba7",
+        "message": "store optimized version by Claude",
+        "file": "2024-12-01-18.json.gz"
+      },
+      {
+        "actor": "pandeiro245",
+        "repo": "pandeiro245/245cloud",
+        "sha": "2977de54",
+        "message": "update by claude",
+        "file": "2024-12-01-6.json.gz"
+      }
+    ],
+    "context_gpt4_fwd": [
+      {
+        "actor": "afederici75",
+        "repo": "freemindlabsinc/kernel-memory",
+        "sha": "26810e50",
+        "message": "Adding Basic anthropic Claude support. (#404)\n\n## With this simple PR I added a very basic support to Anthropic Claude.\r\n\r\nThere is a part that is not really correct, the part that return token count for a string, \r\nwe still have no real correct tokenizer written in C# for Claude, so for the time being\r\nit's using GPT4 tokenizer. The result is not fully correct but it is usable.\r\n\r\n---------\r\n\r\nCo",
+        "file": "2024-08-01-0.json.gz"
+      },
+      {
+        "actor": "suhana13",
+        "repo": "som-shahlab/gpt4usmle",
+        "sha": "626842cd",
+        "message": "Add script for correcting questions by GPT4",
+        "file": "2024-08-01-0.json.gz"
+      }
+    ],
+    "cursor_sh": [
+      {
+        "actor": "stang",
+        "repo": "stang/raycast-extensions",
+        "sha": "26ee20de",
+        "message": "Add Cursor's Recent Projects, Open With Cursor, Show Installed Extensions & Open New Window commands (#14439)\n\n* feat: add Cursor.sh Documentation\n\n* updated metadata\n\n* fix: update Metadata image link\n\n* Update CHANGELOG.md\n\n* Update CHANGELOG.md and optimise images\n\n* fix: update screenshot extension\n\n* fix: update issue link\n\n* feat: add visual-studio-code features\n\n* ...\n\n* ...\n\n* fix: Fix lin",
+        "file": "2024-10-01-12.json.gz"
+      }
+    ],
+    "signature_anthropic": [
+      {
+        "actor": "codehobby2022",
+        "repo": "codehobby2022/swift-markdown-ui",
+        "sha": "9a8119b3",
+        "message": "Fix custom font dynamic size (#330)\n\n* Calling `fixedSize` constructor for dynamic type\r\n\r\n* Fix tests\r\n\r\n---------\r\n\r\nCo-authored-by: Mike Lewis <ml@anthropic.com>",
+        "file": "2024-10-01-12.json.gz"
+      },
+      {
+        "actor": "wangqi",
+        "repo": "wangqi/swift-markdown-ui",
+        "sha": "9a8119b3",
+        "message": "Fix custom font dynamic size (#330)\n\n* Calling `fixedSize` constructor for dynamic type\r\n\r\n* Fix tests\r\n\r\n---------\r\n\r\nCo-authored-by: Mike Lewis <ml@anthropic.com>",
+        "file": "2024-10-01-18.json.gz"
+      }
+    ],
+    "context_copilot_bwd": [
+      {
+        "actor": "aaronpowell",
+        "repo": "CommunityToolkit/Aspire",
+        "sha": "aad4905c",
+        "message": "Fixing tests that copilot generated \ud83e\udd23",
+        "file": "2024-11-01-6.json.gz"
+      }
+    ],
+    "signature_coauthor_ai": [
+      {
+        "actor": "samsmithnz",
+        "repo": "satisfactory-factories/application",
+        "sha": "4f128e88",
+        "message": "Update web/src/components/planner/PlannerStatistics.vue\n\nCo-authored-by: Copilot <175728472+Copilot@users.noreply.github.com>",
+        "file": "2024-12-01-18.json.gz"
+      },
+      {
+        "actor": "Maelstromeous",
+        "repo": "satisfactory-factories/application",
+        "sha": "a8564324",
+        "message": "Update PlannerStatistics.vue to setleaves, Mycelia, and wood to infinity (#247)\n\n* Update PlannerStatistics.vue to make leaves, Mycelia, and wood to infinity\r\n\r\n* Update web/src/components/planner/PlannerStatistics.vue\r\n\r\nCo-authored-by: Matt Cavanagh <1776058+Maelstromeous@users.noreply.github.com>\r\n\r\n* fix: refactoring into function\r\n\r\n* fix: to parameter type + name\r\n\r\n* fix: code gardening/ind",
+        "file": "2024-12-01-18.json.gz"
+      }
+    ]
+  },
+  "counts": {
+    "context_chatgpt_fwd": 34,
+    "signature_aider": 75,
+    "context_copilot_fwd": 17,
+    "context_gemini_fwd": 48,
+    "explicit_ai_generated": 42,
+    "context_gpt-3_fwd": 8,
+    "context_bard_fwd": 1,
+    "context_codeium_fwd": 3,
+    "context_chatgpt_bwd": 5,
+    "context_cursor_fwd": 8,
+    "context_gpt-4_fwd": 3,
+    "context_claude_fwd": 8,
+    "context_gpt4_fwd": 2,
+    "cursor_sh": 1,
+    "signature_anthropic": 2,
+    "context_copilot_bwd": 1,
+    "signature_coauthor_ai": 2
+  }
+}
