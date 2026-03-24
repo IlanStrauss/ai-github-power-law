@@ -8,7 +8,7 @@
 
 *Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?*
 
-**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then concentration sharply accelerated once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
+**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers saw slow concentration growth through 2024, then sharply accelerated in 2025 once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
 
 ### Motivation
 
@@ -28,7 +28,7 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 | Developer Type | α (2019) | α (2024) | α (2025*) | Δα (2019→2025) | Interpretation |
 |:--------------:|:--------:|:--------:|:--------:|:--------------:|:--------------:|
 | **Personal-only** | 1.99 | 1.78 | 1.80 | −0.19 | Rose early (COVID then AI), now stable |
-| **Org developers** | 2.04 | 2.04 | 1.87 | −0.17 | Stable until 2025, then sharply accelerated |
+| **Org developers** | 2.04 | 2.04 | 1.87 | −0.17 | Slow decline, then sharp 2025 acceleration |
 
 *\*2025 data covers January–October only. GitHub's Events API removed commit details from PushEvent payloads on October 7, 2025; GH Archive data after this date lacks commit counts. See Data Caveats.*
 
@@ -45,7 +45,7 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 *Phase 2 (2025): Concentration sharply accelerates among org developers — AI clears enterprise hurdles.*
 - Personal α stabilized at 1.80 (already heavily concentrated from Phase 1)
-- **Org α dropped from 2.04 → 1.87** — a sharp acceleration after 6 years of stability
+- **Org α dropped from 2.04 → 1.87** — slow decline through 2024, then sharp acceleration in 2025
 - This coincides with enterprise AI coding tools reaching production-readiness: Claude Code (Feb 2025), Codex (May 2025)
 - Professional settings experienced **longer adoption lag**: security reviews, procurement cycles, and code review processes delayed AI tool adoption by ~2-3 years compared to individuals
 
@@ -337,9 +337,9 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 #### Key Observations
 
-*Phase 1 (2019-2024): Concentration rises among personal developers; orgs remain stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
+*Phase 1 (2019-2024): Concentration rises among personal developers; orgs decline slowly.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers showed gradual concentration growth through this period, with α slowly declining.
 
-*Phase 2 (2025): Concentration sharply accelerates among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to 1.87 — a sharp acceleration after 6 years of stability. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
+*Phase 2 (2025): Concentration sharply accelerates among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to 1.87 — years of slow decline culminating in sharp acceleration. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
 
 *xmin interpretation.* For org developers, xmin jumped from 5-7 (2019-2024) to 25 (2025), suggesting the power law now applies only to the heavy tail rather than most of the distribution. This shift mirrors what happened to personal developers years earlier.
 
@@ -347,7 +347,7 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 *Personal developers: COVID + AI with minimal lag.* The α exponent declined from 1.99 (2019) to 1.78 (2024), then stabilized at 1.80 (2025). COVID created conditions favorable for concentration (more free time, remote work, coding education boom), and personal developers adopted AI tools quickly once available (Copilot public June 2022). **No organizational barriers = fast adoption = early concentration.**
 
-*Org developers: AI impact delayed by adoption lag.* The α exponent held steady at ~2.04 for six years (2019-2024), then dropped sharply to 1.87 in 2025. Why the lag?
+*Org developers: AI impact delayed by adoption lag.* The α exponent declined slowly through 2024, then dropped sharply to 1.87 in 2025. Why the lag?
 - **Procurement cycles:** Enterprise AI tools require security reviews, legal approval, and budget allocation
 - **Code review processes:** Team structures that previously distributed work also slowed individual tool adoption
 - **Organizational inertia:** Unlike individuals who self-select into new tools, org developers needed institutional buy-in
@@ -437,7 +437,7 @@ Org developers operate within institutional constraints that *delayed* AI tool a
 - **Code review processes:** Teams had to agree on how AI-generated code would be reviewed
 - **Organizational inertia:** Unlike individuals, developers needed institutional permission
 
-By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — a sharp acceleration after 6 years of stability.
+By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — years of slow decline culminating in sharp acceleration.
 
 **The updated institutional hypothesis.** Institutions don't *prevent* concentration; they *delay* it. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal.
 
