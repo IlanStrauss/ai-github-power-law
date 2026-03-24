@@ -1,4 +1,4 @@
-# The Rise of Superstar Coders on GitHub: An analysis of commit data
+# The Rise of Superstar Coders on GitHub: An analysis of commit data*
 
 ## 1. Introduction
 
@@ -770,6 +770,10 @@ To test whether concentration is driven by a few extreme accounts or a broad dis
 This finding *supports* the "superstar coder" hypothesis: concentration reflects a small number of developers pulling dramatically ahead, rather than a general rightward shift in the distribution. The rise of AI coding tools appears to amplify the most productive developers disproportionately.
 
 ---
+
+---
+
+\* Thank you to Sruly Rosenblat for helpful comments.
 
 ## License
 
