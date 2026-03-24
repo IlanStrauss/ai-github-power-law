@@ -671,6 +671,84 @@ Combining all multi-repo developers (org + personal):
 
 *Finding:* The α decline is robust across all developer definitions.
 
+### A.4 Counterfactual α: Sensitivity to Tail Exclusion
+
+To test whether concentration is driven by a few extreme accounts or a broad distributional shift, we re-estimate α after dropping the top 0.1%, 1%, and 5% of accounts.
+
+| Year | α (baseline) | α (drop 0.1%) | α (drop 1%) | α (drop 5%) |
+|:----:|:------------:|:-------------:|:-----------:|:-----------:|
+| 2019 | 1.96 | 2.02 | 2.23 | 2.68 |
+| 2020 | 1.93 | 2.00 | 2.29 | 2.76 |
+| 2021 | 2.10 | 2.14 | 2.28 | 2.83 |
+| 2022 | 1.85 | 2.11 | 2.30 | 2.79 |
+| 2023 | 1.82 | 2.13 | 2.29 | 2.71 |
+| 2024 | 1.63 | 1.97 | 2.03 | 2.66 |
+| 2025 | 1.81 | 2.14 | 2.32 | 2.95 |
+
+*2025 data: January–October only (10 months).*
+
+**Sensitivity analysis:**
+
+| Comparison | Baseline Δα | Drop 5% Δα | % Persisting |
+|------------|:-----------:|:----------:|:------------:|
+| 2019 → 2024 | −0.33 | −0.03 | 7.7% |
+| 2019 → 2025 | −0.16 | +0.27 | — |
+
+*Source: `output/counterfactual_alpha.csv`*
+
+**Interpretation:** Only 7.7% of the α decline (2019→2024) persists after excluding the top 5% of accounts. This confirms that concentration is driven by **extreme accounts**, not a broad distributional shift.
+
+This finding *supports* the "superstar coder" hypothesis: concentration reflects a small number of developers pulling dramatically ahead, rather than a general rightward shift in the distribution. The rise of AI coding tools appears to amplify the most productive developers disproportionately.
+
+### A.5 Zipf Rank-Size Plot
+
+The Zipf plot shows log(rank) vs log(commits) for each year. The slope equals −1/(α−1), so a flattening line indicates increasing concentration (fatter tail).
+
+![Zipf Rank-Size Plot (2019-2025)](output/zipf_rank_size.png)
+
+*Figure: Zipf rank-size plot showing commit distributions by year. Later years (2024, 2025) show flatter slopes in the upper tail, indicating more extreme values — consistent with declining α. Reference lines show theoretical slopes for α = 2.0 and α = 1.5.*
+
+The visual is striking: the 2024 line (red) sits above other years throughout the rank distribution, especially in the tail. This means developers at every rank have higher commit counts, but the effect is strongest for top performers.
+
+*Source: `output/zipf_rank_size.png`. See also `output/zipf_tail_zoom.png` for top 1% detail.*
+
+### A.6 Transition Matrix: Superstar Persistence
+
+Do top performers stay at the top, or is high output a "lucky year" phenomenon? We track developers appearing in consecutive years and measure what fraction of top-1% developers remain in the top 1% the following year.
+
+| Transition | n (common devs) | Top 1% → Top 1% | Top 1% → Top 10% |
+|:----------:|:---------------:|:---------------:|:----------------:|
+| 2019→2020 | 12,138 | 23.8% | 56.2% |
+| 2020→2021 | 15,826 | 23.9% | 56.4% |
+| 2021→2022 | 17,247 | 23.1% | 55.8% |
+| 2022→2023 | 18,553 | 24.7% | 57.3% |
+| 2023→2024 | 19,725 | 8.6% | 32.1% |
+| 2024→2025 | 14,843 | 9.4% | 33.5% |
+
+*2025 data: January–October only (10 months).*
+
+*Source: `output/transition_matrix_results.csv`*
+
+**Summary:**
+
+| Period | Avg Top 1% Persistence |
+|--------|:----------------------:|
+| Pre-AI (2019-2021) | 23.6% |
+| Post-AI (2022-2024) | 14.2% |
+| Change | −9.4 pp |
+
+**Interpretation:** Contrary to expectations, top-1% persistence *decreased* post-AI. This suggests:
+
+1. **Concentration is not about persistent superstars** — it's driven by different developers reaching extreme output in different years
+2. **The 2024 anomaly matters** — the 560% explosion in high-volume accounts (Section 4.3) likely distorts the 2023→2024 transition
+3. **AI may enable "breakthrough years"** — developers can have exceptional output years using AI tools, but don't necessarily sustain it
+
+This is a different mechanism than "rich-get-richer": instead of persistent superstars pulling further ahead each year, we see *rotating* extreme performers. The distribution concentrates because *someone* always has an exceptional year, not because the *same* developers dominate persistently.
+
+![Top 1% Persistence Over Time](output/top1_persistence.png)
+
+*Figure: Top-1% year-over-year persistence rates. Persistence drops sharply in 2023→2024, coinciding with the automation surge.*
+
 ---
 
 ## License
