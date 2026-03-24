@@ -57,11 +57,11 @@ Remember: **lower α = more concentration.** A declining α means extreme values
 
 - *Org developers:* Saw slow concentration growth through 2024, likely dampened by team structures, code review processes, and organizational procurement cycles that created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and concentration sharply accelerated.
 
-**The adoption lag hypothesis:** Concentration rose among personal developers first because individuals adopt new tools faster than organizations. Org developers saw concentration rise later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
+**The adoption lag hypothesis:** The timing pattern — personal developers concentrating first (2020-2022), org developers later (2025) — is *consistent with* differential adoption speeds. Individuals face fewer barriers to new tool adoption than organizations, which must navigate procurement, security reviews, and workflow integration. The ~2-3 year gap aligns with typical enterprise technology adoption cycles, though we cannot rule out alternative explanations.
 
-**Superstars are becoming more persistent:** Contrary to a "rotating superstars" hypothesis, top-1% persistence *increased* post-AI. Among org developers, persistence rose from 29.6% (pre-AI average) to 37.3% (post-AI average) — a +7.7 pp increase. Among personal developers, persistence rose from 27.1% to 30.4% (+3.3 pp). This suggests the *same* developers are pulling further ahead each year. AI tools appear to amplify advantages for those who already excel, reinforcing a "rich-get-richer" dynamic.
+**Superstars are becoming more persistent:** Contrary to a "rotating superstars" hypothesis, top-1% persistence *increased* in the post-2022 period. Among org developers, persistence rose from 29.6% (pre-2022 average) to 37.3% (post-2022 average) — a +7.7 pp increase. Among personal developers, persistence rose from 27.1% to 30.4% (+3.3 pp). This pattern is *consistent with* the same developers pulling further ahead each year, though we cannot establish causation. One interpretation is that productivity tools amplify advantages for those who already excel.
 
-**Concentration is driven by extremes:** Counterfactual analysis shows only 7.7% of the α decline persists after excluding the top 5% of accounts. This confirms concentration reflects a small number of developers with extreme output, not a broad distributional shift.
+**Concentration appears driven by extremes:** Counterfactual analysis shows only 7.7% of the α decline persists after excluding the top 5% of accounts. This is consistent with concentration reflecting a small number of developers with extreme output, rather than a broad distributional shift.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
@@ -235,7 +235,7 @@ Multi-repo contributors are more likely to represent human developers working ac
 
 *Source: GH Archive PushEvents (distinct_size only). Multi-repo sample: accounts contributing to 2+ repositories per year.*
 
-The median remains stable at 6 commits/year, while the P99 explodes from 268 to 1,287. This indicates the concentration increase is driven by the upper tail, not a general productivity shift. For detailed concentration measures (Gini, Top 1% share, etc.), see Appendix.
+The median remains stable at 6 commits/year, while the P99 increases sharply from 268 to 1,287. This pattern is consistent with the concentration increase being driven by the upper tail, not a general productivity shift. For detailed concentration measures (Gini, Top 1% share, etc.), see Appendix.
 
 #### Organization vs Personal Developers
 
@@ -331,9 +331,7 @@ In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024) — ex
 
 ### 4.1 Power Law Analysis: Organization vs Personal Developers
 
-We estimate power law exponents α separately for **org developers** (contribute to public organization repos) and **personal-only developers** (contribute only to personal repos), we also show sample size (n), and xmin and R test for each α, which assesses if the power law is the best fit to the distribution.
-
-**Reminder: Lower α = more concentration.** Watch for α *declining* over time — this indicates the distribution is becoming more unequal, with more activity concentrated among top performers.
+Table 1 presents power law exponent estimates for org and personal developers separately. Recall that lower α indicates greater concentration: when α falls, extreme values (superstar developers) become more probable relative to typical developers. The threshold α = 2 marks a critical boundary — below this value, the distribution has infinite variance, meaning the sample mean becomes unstable and dominated by outliers.
 
 | Year | Org (n) | α | xmin | R | Personal (n) | α | xmin | R |
 |:----:|:-------:|:----:|:----:|:----:|:------------:|:----:|:----:|:----:|
@@ -345,109 +343,31 @@ We estimate power law exponents α separately for **org developers** (contribute
 | 2024 | 25,490 | 2.04 | 5 | +6.83 | 102,204 | 1.78 | 45 | −3.11 |
 | 2025 | 18,285 | 1.87 | 25 | −0.31 | 71,171 | 1.80 | 33 | −2.00 |
 
-*Notes: α = power law exponent (Clauset-Shalizi-Newman MLE). xmin = threshold where power law behavior begins. R = likelihood ratio vs. log-normal (R > 0 favors power law, R < 0 favors log-normal). Source: `output/powerlaw_lognormal_comparison.csv`, `output/powerlaw_2025.csv`.*
+*Table 1: Power law estimates by developer type, 2019-2025. α = power law exponent (Clauset-Shalizi-Newman MLE); lower values indicate heavier tails. xmin = minimum threshold where power law behavior begins. R = likelihood ratio test vs. log-normal alternative (R > 0 favors power law). 2025 covers January–October only. Source: `output/powerlaw_lognormal_comparison.csv`, `output/powerlaw_2025.csv`.*
 
-*2025 data: January 1 – October 31 only. GitHub removed commit details from PushEvent payloads on October 7, 2025. Lower sample sizes in 2025 reflect 10 months vs. 12 months for other years.*
+The results reveal two distinct concentration waves affecting different developer populations at different times.
+
+**Personal developers concentrated first (2019-2024).** Among personal-only developers, α declined steadily from 1.99 in 2019 to 1.78 in 2024 — a cumulative decline of 0.21 points. To interpret this magnitude: an α of 1.99 implies the probability of observing a developer with 10× the median commits is roughly 1/100; at α = 1.78, this probability approximately doubles. The distribution crossed into the infinite-variance regime (α < 2) by 2020 and continued deepening. The sharpest single-year decline occurred between 2020 and 2021 (α: 1.95 → 1.86), coinciding with COVID-era conditions — increased free time, remote work, and a coding education boom — rather than AI tool adoption (Copilot launched June 2022). By 2024-2025, personal developers' α stabilized near 1.80, suggesting this population had already reached high concentration levels.
+
+**Org developers concentrated later, but sharply (2025).** Organization developers followed a different trajectory. From 2019 through 2024, α fluctuated narrowly between 2.04 and 2.08, showing no clear trend — concentration was essentially flat. Then in 2025, α dropped abruptly to 1.87, a decline of 0.17 points in a single year (and this covers only January–October). This timing coincides with enterprise AI coding tools reaching production readiness: Claude Code launched February 2025, Codex in May 2025 — though we cannot establish that these tools *caused* the shift. The xmin parameter also shifted notably for org developers, jumping from 5-7 commits (2019-2024) to 25 commits (2025), consistent with the power law now applying only to the heavy tail rather than most of the distribution.
+
+**Interpreting the lag.** Why might org developers have concentrated later? One hypothesis is differential adoption barriers. Personal developers face no institutional barriers to tool adoption: an individual who wants to use Copilot simply installs it. Org developers operate within enterprise constraints — procurement cycles, security reviews, legal approval, and code review processes that must accommodate AI-generated contributions. If these organizational frictions delayed adoption by approximately 2-3 years, this would be consistent with typical enterprise technology diffusion cycles. The 2025 acceleration is *consistent with* these barriers being cleared, though alternative explanations cannot be ruled out. Both populations appear to be converging toward similar α values (~1.8).
+
+**Statistical notes.** The R statistic (likelihood ratio vs. log-normal) is mixed: positive values for org developers in most years indicate power law is preferred, while negative values for personal developers suggest the body of the distribution is better characterized as log-normal with a power-law tail. This is consistent with Gabaix (2016) on productivity distributions. The pattern does not affect our core finding — both the power law tail and the log-normal body show increasing concentration over time.
 
 ![Power Law α: Org vs Personal Developers (2019-2025)](output/powerlaw_alpha_comparison.png)
 
-*Figure: Power law exponent α over time. Lower α = more concentration. Personal developers (red) show steady decline 2019-2024, then stabilize. Org developers (blue) show slow decline through 2024, then sharp drop in 2025. The α = 2 line marks the "infinite variance" threshold.*
+*Figure 1: Power law exponent α over time. Lower α = more concentration. Personal developers (red) show steady decline 2019-2024, then stabilize. Org developers (blue) remain flat through 2024, then drop sharply in 2025. The dashed line at α = 2 marks the infinite-variance threshold.*
 
-#### Key Observations
+As a robustness check, we also estimate α on the pooled sample (org + personal combined). The pooled α declined from 1.96 to 1.63 over 2019-2024, confirming the concentration trend. However, pooling obscures the different timing patterns documented above. Detailed pooled analysis and additional robustness checks appear in Appendix A.
 
-*Phase 1 (2019-2024): Concentration rises among personal developers; orgs decline slowly.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers showed gradual concentration growth through this period, with α slowly declining.
+### 4.2 Transition Matrix: Developer Persistence
 
-*Phase 2 (2025): Concentration sharply accelerates among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to 1.87 — years of slow decline culminating in sharp acceleration. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
+Power law analysis tells us concentration is increasing — but it doesn't tell us *who* is concentrating. Are the same developers dominating year after year ("persistent superstars"), or do different developers have exceptional years and then fade ("rotating superstars")? The transition matrix answers this by tracking individual developers across consecutive years.
 
-*xmin interpretation.* For org developers, xmin jumped from 5-7 (2019-2024) to 25 (2025), suggesting the power law now applies only to the heavy tail rather than most of the distribution. This shift mirrors what happened to personal developers years earlier.
+We classify developers into quantiles (Top 1%, Top 10%, Middle, Bottom 50%) based on each year's commit distribution, then measure what fraction of developers in each quantile remain there the following year. Our key metric is **Top 1% → Top 1% persistence**: the probability that a top-1% developer in year T remains in the top 1% in year T+1. High persistence (e.g., 40%+) indicates the same developers dominate year after year — classic "rich-get-richer" dynamics. Low persistence (e.g., <20%) suggests rotating superstars, where different developers have exceptional years then fade.
 
-#### Interpretation: Adoption Lag Explains the Two Waves
-
-*Personal developers: COVID + AI with minimal lag.* The α exponent declined from 1.99 (2019) to 1.78 (2024), then stabilized at 1.80 (2025). COVID created conditions favorable for concentration (more free time, remote work, coding education boom), and personal developers adopted AI tools quickly once available (Copilot public June 2022). **No organizational barriers = fast adoption = early concentration.**
-
-*Org developers: AI impact delayed by adoption lag.* The α exponent declined slowly through 2024, then dropped sharply to 1.87 in 2025. Why the lag?
-- **Procurement cycles:** Enterprise AI tools require security reviews, legal approval, and budget allocation
-- **Code review processes:** Team structures that previously distributed work also slowed individual tool adoption
-- **Organizational inertia:** Unlike individuals who self-select into new tools, org developers needed institutional buy-in
-
-The 2025 drop coincides with AI coding tools clearing enterprise hurdles: Claude Code (Feb 2025), Codex (May 2025). **Organizational barriers = delayed adoption = lagged concentration.**
-
-*The adoption lag hypothesis.* The ~2-3 year gap between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal — the only difference was when organizations allowed it.
-
-### 4.2 Pooled Sample Analysis
-
-Looking at all developers combined (org + personal), the power law α declined from 1.96 to 1.63. See **Appendix A** for detailed pooled analysis and robustness checks.
-
-### 4.3 Automation and Ceiling Effects
-
-Our analysis applies a 10,000 commits/year ceiling to exclude automated accounts that pass bot pattern filters. This section examines what these excluded accounts reveal about automation trends and how they affect our concentration estimates.
-
-#### Why This Matters
-
-Accounts exceeding 10,000 commits/year are almost certainly automated — no human developer makes 27+ commits per day, every day of the year. These accounts escaped our bot pattern filters (dependabot, github-actions, etc.) because they use custom usernames or operate CI/CD pipelines under human-like accounts.
-
-The sharp increase in such accounts in 2024 suggests a fundamental shift in how automation operates on GitHub.
-
-#### Extreme Outliers (>10,000 commits/year)
-
-| Year | Accounts >10k | YoY Change |
-|------|---------------|------------|
-| 2019 | 46 | — |
-| 2020 | 73 | +59% |
-| 2021 | 79 | +8% |
-| 2022 | 131 | +66% |
-| 2023 | 175 | +34% |
-| 2024 | 1,155 | +560% |
-| 2025 | 157 | −86% |
-
-*Note: 2025 covers January–October only (10 months). The sharp decline from 2024 likely reflects both the truncated year and different automation patterns.*
-
-*Finding:* The 6.6x explosion in 2024 (175 → 1,155 accounts) indicates a **fundamental shift** in automated commit activity — likely enterprise-scale CI/CD, AI-assisted bulk operations, or new automation patterns.
-
-#### Accounts Hitting the 10,000-Commit Cap
-
-| Year | Accounts at Cap | Accounts ≥9k |
-|------|-----------------|--------------|
-| 2019 | 0 | 1 |
-| 2020 | 0 | 7 |
-| 2021 | 0 | 13 |
-| 2022 | 0 | 19 |
-| 2023 | 1 | 24 |
-| 2024 | 180 | 262 |
-| 2025 | 0 | 173 |
-
-*Note: 2025 covers January–October only (10 months).*
-
-*Finding:* In 2024, 180 accounts are capped at 10,000 — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
-
-#### Implications for Concentration Estimates
-
-The ceiling creates a **conservative bias** in our 2024 estimates. If we included these accounts at their true commit counts, concentration would be even higher. The 560% increase in high-volume accounts suggests:
-
-1. **Enterprise automation maturity:** More organizations deploying sophisticated CI/CD pipelines
-2. **AI-assisted bulk operations:** Tools that can generate or modify code across many files
-3. **Monorepo adoption:** Large companies (Google, Microsoft) with automated commit workflows
-
-This supports our main finding: concentration is increasing, and our estimates are likely lower bounds.
-
-### 4.4 Transition Matrix: Are Superstars Persistent?
-
-Power law analysis tells us concentration is increasing — but it doesn't tell us *who* is concentrating. Are the same developers dominating year after year ("persistent superstars"), or do different developers have exceptional years and then fade ("rotating superstars")?
-
-**What the transition matrix measures:** We track individual developers across consecutive years. If a developer was in the Top 1% in 2020, where did they end up in 2021? The transition matrix shows the probability of moving between quantiles. **Top 1% → Top 1% persistence** is our key metric: what fraction of top performers *remain* top performers the following year?
-
-- **High persistence** (e.g., 40%+): Same developers stay at the top — "rich-get-richer" dynamics
-- **Low persistence** (e.g., <20%): Different developers rise and fall each year — rotating superstars
-
-**Method:** We build a Markov transition matrix tracking developer mobility across commit quantiles:
-
-1. **Identify common developers:** Find developers who appear in both year T and year T+1
-2. **Assign quantiles:** For each year, classify developers into Top 1%, Top 10%, Middle, or Bottom 50% based on that year's commit distribution
-3. **Compute transitions:** For each quantile in year T, calculate what fraction moved to each quantile in year T+1
-
-We analyze org and personal developers separately, since these populations have different commit patterns and AI adoption timelines.
-
-**Org Developers:**
+Table 2 presents transition probabilities for org developers; Table 3 for personal developers.
 
 | Transition | n (common devs) | Top 1% → Top 1% | Top 1% → Top 10% |
 |:----------:|:---------------:|:---------------:|:----------------:|
@@ -458,7 +378,7 @@ We analyze org and personal developers separately, since these populations have 
 | 2023→2024 | 3,719 | 31.6% | 68.4% |
 | 2024→2025 | 2,920 | 33.3% | 56.7% |
 
-**Personal Developers:**
+*Table 2: Transition probabilities for org developers. n = developers appearing in both years.*
 
 | Transition | n (common devs) | Top 1% → Top 1% | Top 1% → Top 10% |
 |:----------:|:---------------:|:---------------:|:----------------:|
@@ -469,22 +389,44 @@ We analyze org and personal developers separately, since these populations have 
 | 2023→2024 | 13,527 | 28.7% | 64.7% |
 | 2024→2025 | 10,195 | 35.3% | 61.8% |
 
-*2025 data: January–October only (10 months). Source: `output/transition_matrix_org_split.csv`*
+*Table 3: Transition probabilities for personal developers. 2025 covers January–October only. Source: `output/transition_matrix_org_split.csv`*
 
-![Top 1% Persistence: Org vs Personal Developers](output/transition_matrix_org_split.png)
-
-*Figure: Top-1% year-over-year persistence by developer type. Both groups show increased persistence post-AI.*
-
-**Post-AI persistence increased — superstars are becoming more stable:**
+The results are striking. Among org developers, the average Top 1% → Top 1% persistence was 29.6% in the pre-AI period (2019-2021 transitions) and rose to 37.3% post-AI (2022-2024 transitions) — an increase of 7.7 percentage points. Among personal developers, persistence rose from 27.1% to 30.4%, a gain of 3.3 percentage points. Both groups show the same directional pattern: **superstars are becoming more persistent over time, not less.**
 
 | Group | Pre-AI Avg (2019-2021) | Post-AI Avg (2022-2024) | Change |
 |-------|:----------------------:|:-----------------------:|:------:|
 | Org Developers | 29.6% | 37.3% | +7.7 pp |
 | Personal Developers | 27.1% | 30.4% | +3.3 pp |
 
-Contrary to a "rotating superstars" hypothesis, persistence *increased* post-AI. The *same* developers are more likely to remain at the top from year to year. This supports a "rich-get-richer" interpretation: AI tools amplify advantages for those who already excel, making top performers more entrenched rather than enabling newcomers to break through.
+*Table 4: Summary of persistence changes pre- vs post-AI.*
 
-**Why org developers show higher persistence gains:** Org developers' persistence increased more (+7.7 pp vs +3.3 pp), potentially because: (1) enterprise AI tools provide consistent productivity gains within established workflows; (2) organizational structures that previously slowed adoption now lock in advantages once tools are integrated; (3) code review and collaboration patterns in org settings favor persistent high performers.
+![Top 1% Persistence: Org vs Personal Developers](output/transition_matrix_org_split.png)
+
+*Figure 2: Top-1% year-over-year persistence by developer type. Both groups show increased persistence post-AI, with org developers showing larger gains.*
+
+These findings are inconsistent with a simple "rotating superstars" hypothesis. If new productivity tools democratized exceptional output — enabling different developers to have breakthrough years — we would expect persistence to *decline*. Instead, the same developers appear more likely to remain at the top from year to year. This pattern is *consistent with* a "rich-get-richer" interpretation, though we cannot establish causation: productivity tools may amplify advantages for those who already excel, but alternative explanations (selection effects, changing developer composition) cannot be ruled out.
+
+Why do org developers show larger persistence gains (+7.7 pp vs +3.3 pp)? One possibility is that enterprise AI tools, once integrated into established workflows, provide consistent productivity gains that compound over time. Organizational structures that initially slowed adoption may now lock in advantages once tools are deployed. Code review and collaboration patterns in team settings may also favor persistent high performers who build institutional knowledge alongside technical output.
+
+### 4.3 Automation and Ceiling Effects
+
+Our analysis applies a 10,000 commits/year ceiling to exclude automated accounts that pass bot pattern filters. Accounts exceeding this threshold are almost certainly automated — no human developer makes 27+ commits per day, every day of the year. These accounts escaped our bot pattern filters (dependabot, github-actions, etc.) because they use custom usernames or operate CI/CD pipelines under human-like accounts.
+
+| Year | Accounts >10k | YoY Change | Accounts at Cap |
+|------|---------------|------------|-----------------|
+| 2019 | 46 | — | 0 |
+| 2020 | 73 | +59% | 0 |
+| 2021 | 79 | +8% | 0 |
+| 2022 | 131 | +66% | 0 |
+| 2023 | 175 | +34% | 1 |
+| 2024 | 1,155 | +560% | 180 |
+| 2025 | 157 | −86% | 0 |
+
+*Table 5: Extreme automation accounts. 2025 covers January–October only.*
+
+The 6.6× increase in 2024 (175 → 1,155 accounts exceeding 10,000 commits) suggests a notable shift in automated commit activity — possibly enterprise-scale CI/CD, AI-assisted bulk operations, or monorepo automation at large companies. In 2024, 180 accounts hit our 10,000-commit ceiling; their true counts could be 50k, 100k, or higher. One account had 2.84 million commits before filtering.
+
+This creates a **conservative bias** in our 2024 concentration estimates. If we included these accounts at their true commit counts, concentration would be even higher. Our findings are therefore lower bounds on actual concentration
 
 ---
 
@@ -492,30 +434,19 @@ Contrary to a "rotating superstars" hypothesis, persistence *increased* post-AI.
 
 ### What's Driving Concentration? The Adoption Lag Story
 
-The key finding — that concentration increased among personal developers first (2020-2022) and org developers later (2025) — points to **adoption lag** as the critical factor. Both groups eventually concentrate; the difference is *when*, not *whether*.
+The key pattern — that concentration increased among personal developers first (2020-2022) and org developers later (2025) — is *consistent with* adoption lag as a potentially important factor. Both groups eventually concentrate; the difference appears to be *when*, not *whether*.
 
 **Phase 1 (2020-2024): Concentration rises among personal developers first.**
 
-Personal developers faced no organizational barriers to adopting new tools or work patterns. COVID created favorable conditions (more free time, remote work normalization, coding education surge), and when AI tools arrived (Copilot, June 2022), they were immediately accessible to individuals. The result: concentration increased rapidly as early adopters pulled ahead.
+Personal developers faced no organizational barriers to adopting new tools or work patterns. COVID may have created favorable conditions (more free time, remote work normalization, coding education surge), and when AI tools arrived (Copilot, June 2022), they were immediately accessible to individuals. Concentration increased as α dropped from 1.99 → 1.78.
 
-- No procurement cycles or security reviews
-- No code review processes requiring team buy-in
-- Self-selection: individuals who adopt tools fastest benefit first
-- α dropped from 1.99 → 1.78 (2019-2024)
+**Phase 2 (2025): Org developers concentrate later.**
 
-**Phase 2 (2025): Org developers catch up — after clearing enterprise hurdles.**
+Org developers operate within institutional constraints that may have *delayed* adoption of new productivity tools. By 2025, enterprise AI coding tools launched with enterprise-grade features: Claude Code (Feb 2025) and Codex (May 2025). Org developers' α dropped from 2.04 → 1.87 — though we cannot establish that tool adoption caused this change.
 
-Org developers operate within institutional constraints that *delayed* AI tool adoption:
-- **Security reviews:** Enterprise AI requires compliance approval
-- **Procurement cycles:** Budget allocation and vendor selection take time
-- **Code review processes:** Teams had to agree on how AI-generated code would be reviewed
-- **Organizational inertia:** Unlike individuals, developers needed institutional permission
+**The updated institutional hypothesis.** If the adoption lag interpretation is correct, institutions don't *prevent* concentration; they *delay* it. The ~2-3 year gap between personal concentration (2020-2022) and org concentration (2025) would be consistent with typical enterprise technology adoption cycles. Both groups appear to be converging toward similar α values (~1.8), which is consistent with — though does not prove — productivity amplification effects being universal across developer types.
 
-By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — years of slow decline culminating in sharp acceleration.
-
-**The updated institutional hypothesis.** Institutions don't *prevent* concentration; they *delay* it. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal.
-
-**Implications beyond GitHub:** Any market that requires institutional adoption of new technologies will show lagged concentration effects. Gig platforms and individual creators concentrate first; traditional employment and team-based production concentrate later — but both eventually concentrate when productivity-amplifying tools become available.
+**Potential implications beyond GitHub:** If the adoption lag pattern generalizes, markets requiring institutional adoption of new technologies may show lagged concentration effects compared to markets where individuals can adopt tools directly. This hypothesis warrants investigation in other contexts.
 
 ### Limitations
 
@@ -770,9 +701,9 @@ To test whether concentration is driven by a few extreme accounts or a broad dis
 
 *Source: `output/counterfactual_alpha.csv`*
 
-**Interpretation:** Only 7.7% of the α decline (2019→2024) persists after excluding the top 5% of accounts. This confirms that concentration is driven by **extreme accounts**, not a broad distributional shift.
+**Interpretation:** Only 7.7% of the α decline (2019→2024) persists after excluding the top 5% of accounts. This is consistent with concentration being driven by **extreme accounts** rather than a broad distributional shift.
 
-This finding *supports* the "superstar coder" hypothesis: concentration reflects a small number of developers pulling dramatically ahead, rather than a general rightward shift in the distribution. The rise of AI coding tools appears to amplify the most productive developers disproportionately.
+This pattern is consistent with a "superstar coder" hypothesis: concentration may reflect a small number of developers pulling dramatically ahead, rather than a general rightward shift in the distribution. If AI coding tools amplify productivity, this effect appears concentrated among the most productive developers.
 
 ### A.5 Zipf Rank-Size Plots
 
