@@ -418,15 +418,11 @@ This supports our main finding: concentration is increasing, and our estimates a
 
 ### 4.4 Zipf Rank-Size Plot: Visualizing Concentration
 
-The Zipf plot ranks all developers by commits (rank 1 = highest) and plots rank vs commits on log-log axes.
-
-**How to read it:** A line sitting *higher* means developers at each rank have more commits. If the 2024 line sits above the 2019 line, then the rank-100 developer in 2024 has more commits than the rank-100 developer in 2019.
+The Zipf plot ranks all developers by commits (rank 1 = highest) and plots rank vs commits on log-log axes. A line sitting *higher* means developers at each rank have more commits.
 
 ![Zipf Rank-Size Plot (2019-2025)](output/zipf_rank_size.png)
 
-*Figure: Zipf rank-size plot. Each line shows one year's distribution. The 2024 line (red) sits above earlier years throughout the distribution, meaning top performers have pulled further ahead.*
-
-**What this shows:** The 2024 line sits above all other years, especially at low ranks (top performers). This means the gap between top developers and typical developers widened — concentration increased. The effect is visible across the entire distribution but strongest in the upper tail.
+*Figure: Zipf rank-size plot. Each line shows one year's distribution. The 2024 line (red) sits above earlier years, especially at low ranks (top performers) — the gap between top developers and typical developers widened.*
 
 ### 4.5 Transition Matrix: Are Superstars Persistent?
 
@@ -451,16 +447,9 @@ For example, if 100 developers were in the Top 1% in 2019, and 24 of them were a
 
 *2025 data: January–October only (10 months). Source: `output/transition_matrix_results.csv`*
 
-**How to read this table:**
+Top 1% → Top 1% = 23.8% means only 23.8% of top-1% developers in 2019 remained in the top 1% in 2020. Even before AI, top-1% status was **not sticky** — there's substantial year-over-year churn at the top.
 
-- **Top 1% → Top 1% = 23.8%** means: Of developers who were in the top 1% in 2019, only 23.8% were still in the top 1% in 2020. The other 76.2% dropped to lower quantiles.
-- **Top 1% → Top 10% = 56.2%** means: Of top-1% developers in 2019, 56.2% remained in the top 10% (including top 1%) in 2020. So ~44% fell below the top 10%.
-
-**What these numbers tell us:**
-
-Even before AI tools, top-1% status was **not sticky**. Only ~24% of top performers stayed in the top 1% the following year. This is lower than you might expect if "superstars" were a stable class of developers. Instead, there's substantial year-over-year churn at the top.
-
-**The post-AI collapse in persistence:**
+**Post-AI persistence collapsed:**
 
 | Period | Avg Top 1% Persistence |
 |--------|:----------------------:|
@@ -474,18 +463,9 @@ After 2022, persistence dropped sharply — from ~24% to ~9%. This means top-1% 
 
 *Figure: Top-1% year-over-year persistence. The sharp drop in 2023→2024 suggests increased churn at the top.*
 
-**Why this matters for the "superstar" hypothesis:**
+A classic "rich-get-richer" story predicts the *same* developers pull further ahead each year. If AI gives persistent advantages, persistence should *increase*. Instead, **persistence decreased** — suggesting "**rotating superstars**" rather than persistent ones. AI tools may enable breakthrough years for different developers; the distribution concentrates because *someone* always has an exceptional year, not because the same people dominate.
 
-A classic "rich-get-richer" story (preferential attachment) would predict that the *same* developers pull further ahead each year. If AI tools give persistent advantages, we'd expect persistence to *increase* — the same superstars would stay on top.
-
-Instead, we see the opposite: **persistence decreased**. This suggests a different mechanism:
-
-- AI tools enable **breakthrough years** for different developers
-- The distribution concentrates because *someone* always has an exceptional year
-- But it's not the *same* people dominating year after year
-- This is "**rotating superstars**" rather than "persistent superstars"
-
-**Caveat:** The 2023→2024 drop is dramatic (24.7% → 8.6%). Possible explanations: (1) influx of new high-performers displacing incumbents; (2) AI tools enabling different developers to have breakthrough years; (3) changes in how top developers work (more project-hopping). The 2024→2025 comparison is affected by the 10-month truncation.
+**Caveat:** The 2023→2024 drop is dramatic (24.7% → 8.6%). Possible explanations: (1) influx of new high-performers displacing incumbents; (2) AI tools enabling different developers to have breakthrough years; (3) changes in developer behavior. The 2024→2025 comparison is affected by the 10-month truncation.
 
 ---
 
