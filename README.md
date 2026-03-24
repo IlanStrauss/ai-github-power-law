@@ -21,7 +21,7 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**The rise of superstar coders happened in two waves — driven by different factors with different adoption lags.**
+**The rise of superstar coders happened in two waves — but with a twist: these are *rotating* superstars, not persistent ones.**
 
 We analyze GitHub commit concentration from 2019-2025 (through October 31) among multi-repo developers. The power law exponent α measures concentration: **lower α = more concentration** (see Section 3 for interpretation).
 
@@ -58,6 +58,10 @@ Remember: **lower α = more concentration.** A declining α means extreme values
 - *Org developers:* Saw slow concentration growth through 2024, likely dampened by team structures, code review processes, and organizational procurement cycles that created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and concentration sharply accelerated.
 
 **The adoption lag hypothesis:** Concentration rose among personal developers first because individuals adopt new tools faster than organizations. Org developers saw concentration rise later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
+
+**The rotating superstars finding:** Surprisingly, top-1% persistence *decreased* post-AI (from 23.6% to 14.2%). This suggests concentration is not about the *same* developers pulling further ahead each year. Instead, AI enables **breakthrough years** — different developers have exceptional output in different years. The distribution concentrates because *someone* always has a breakthrough year, not because persistent superstars dominate.
+
+**Concentration is driven by extremes:** Counterfactual analysis shows only 7.7% of the α decline persists after excluding the top 5% of accounts. This confirms concentration reflects a small number of developers with extreme output, not a broad distributional shift.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
@@ -412,19 +416,29 @@ The ceiling creates a **conservative bias** in our 2024 estimates. If we include
 
 This supports our main finding: concentration is increasing, and our estimates are likely lower bounds.
 
-### 4.4 Zipf Rank-Size Plot: Visualizing the Fat Tail
+### 4.4 Zipf Rank-Size Plot: Visualizing Concentration
 
-The Zipf plot shows log(rank) vs log(commits) for each year. The slope equals −1/(α−1), so a flattening line indicates increasing concentration (fatter tail). This is the most intuitive visualization of concentration.
+The Zipf plot ranks all developers by commits (rank 1 = highest) and plots rank vs commits on log-log axes.
+
+**How to read it:** A line sitting *higher* means developers at each rank have more commits. If the 2024 line sits above the 2019 line, then the rank-100 developer in 2024 has more commits than the rank-100 developer in 2019.
 
 ![Zipf Rank-Size Plot (2019-2025)](output/zipf_rank_size.png)
 
-*Figure: Zipf rank-size plot showing commit distributions by year. Later years (2024, 2025) show flatter slopes in the upper tail, indicating more extreme values — consistent with declining α. Reference lines show theoretical slopes for α = 2.0 and α = 1.5.*
+*Figure: Zipf rank-size plot. Each line shows one year's distribution. The 2024 line (red) sits above earlier years throughout the distribution, meaning top performers have pulled further ahead.*
 
-The visual is striking: the 2024 line (red) sits above other years throughout the rank distribution, especially in the tail. This means developers at every rank have higher commit counts, but the effect is strongest for top performers.
+**What this shows:** The 2024 line sits above all other years, especially at low ranks (top performers). This means the gap between top developers and typical developers widened — concentration increased. The effect is visible across the entire distribution but strongest in the upper tail.
 
 ### 4.5 Transition Matrix: Are Superstars Persistent?
 
-Do top performers stay at the top, or is high output a "lucky year" phenomenon? We track developers appearing in consecutive years and measure what fraction of top-1% developers remain in the top 1% the following year.
+Do top performers stay at the top, or is high output a "lucky year" phenomenon?
+
+**Method:** We build a Markov transition matrix tracking developer mobility across commit quantiles:
+
+1. **Identify common developers:** Find developers who appear in both year T and year T+1
+2. **Assign quantiles:** For each year, classify developers into Top 1%, Top 10%, Middle, or Bottom 50% based on that year's commit distribution
+3. **Compute transitions:** For each quantile in year T, calculate what fraction moved to each quantile in year T+1
+
+For example, if 100 developers were in the Top 1% in 2019, and 24 of them were also in the Top 1% in 2020, then Top 1% → Top 1% persistence = 24%.
 
 | Transition | n (common devs) | Top 1% → Top 1% | Top 1% → Top 10% |
 |:----------:|:---------------:|:---------------:|:----------------:|
@@ -437,7 +451,16 @@ Do top performers stay at the top, or is high output a "lucky year" phenomenon? 
 
 *2025 data: January–October only (10 months). Source: `output/transition_matrix_results.csv`*
 
-**Summary:**
+**How to read this table:**
+
+- **Top 1% → Top 1% = 23.8%** means: Of developers who were in the top 1% in 2019, only 23.8% were still in the top 1% in 2020. The other 76.2% dropped to lower quantiles.
+- **Top 1% → Top 10% = 56.2%** means: Of top-1% developers in 2019, 56.2% remained in the top 10% (including top 1%) in 2020. So ~44% fell below the top 10%.
+
+**What these numbers tell us:**
+
+Even before AI tools, top-1% status was **not sticky**. Only ~24% of top performers stayed in the top 1% the following year. This is lower than you might expect if "superstars" were a stable class of developers. Instead, there's substantial year-over-year churn at the top.
+
+**The post-AI collapse in persistence:**
 
 | Period | Avg Top 1% Persistence |
 |--------|:----------------------:|
@@ -445,15 +468,24 @@ Do top performers stay at the top, or is high output a "lucky year" phenomenon? 
 | Post-AI (2022-2024) | 14.2% |
 | Change | −9.4 pp |
 
-**Key finding: Persistence *decreased* post-AI.** This is the opposite of what a simple "rich-get-richer" story would predict. Instead of the same superstars pulling further ahead each year, we see **rotating superstars** — different developers having exceptional years.
+After 2022, persistence dropped sharply — from ~24% to ~9%. This means top-1% status became *even less stable* post-AI.
 
 ![Top 1% Persistence Over Time](output/top1_persistence.png)
 
-*Figure: Top-1% year-over-year persistence rates. Persistence drops sharply in 2023→2024, coinciding with the automation surge.*
+*Figure: Top-1% year-over-year persistence. The sharp drop in 2023→2024 suggests increased churn at the top.*
 
-**Interpretation:** AI may enable "breakthrough years" rather than persistent advantage. The distribution concentrates because *someone* always has an exceptional year using AI tools, not because the *same* developers dominate persistently. This is a different mechanism than classic preferential attachment.
+**Why this matters for the "superstar" hypothesis:**
 
-**Caveat:** The sharp drop in 2023→2024 persistence requires explanation. Since we filter accounts >10,000 commits/year, the automation explosion doesn't directly affect these numbers. Possible explanations: (1) influx of new high-performers in 2024 displacing incumbents; (2) AI tools enabling different developers to have breakthrough years; (3) the 10-month 2025 truncation affecting 2024→2025 comparisons.
+A classic "rich-get-richer" story (preferential attachment) would predict that the *same* developers pull further ahead each year. If AI tools give persistent advantages, we'd expect persistence to *increase* — the same superstars would stay on top.
+
+Instead, we see the opposite: **persistence decreased**. This suggests a different mechanism:
+
+- AI tools enable **breakthrough years** for different developers
+- The distribution concentrates because *someone* always has an exceptional year
+- But it's not the *same* people dominating year after year
+- This is "**rotating superstars**" rather than "persistent superstars"
+
+**Caveat:** The 2023→2024 drop is dramatic (24.7% → 8.6%). Possible explanations: (1) influx of new high-performers displacing incumbents; (2) AI tools enabling different developers to have breakthrough years; (3) changes in how top developers work (more project-hopping). The 2024→2025 comparison is affected by the 10-month truncation.
 
 ---
 

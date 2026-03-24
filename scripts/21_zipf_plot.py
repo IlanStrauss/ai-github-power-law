@@ -80,29 +80,12 @@ def create_zipf_plot(df):
                   markersize=3, linewidth=1.5,
                   label=label)
 
-    # Reference lines for different α values
-    x_ref = np.array([1, 100000])
-
-    # α = 2.0 → slope = -1/(2-1) = -1.0
-    y_ref_2 = 10000 * (x_ref ** -1.0)
-    ax.loglog(x_ref, y_ref_2, '--', color='gray', alpha=0.5, linewidth=1, label='α = 2.0')
-
-    # α = 1.5 → slope = -1/(1.5-1) = -2.0
-    y_ref_15 = 50000 * (x_ref ** -2.0)
-    ax.loglog(x_ref, y_ref_15, ':', color='gray', alpha=0.5, linewidth=1, label='α = 1.5')
-
-    ax.set_xlabel('Rank', fontsize=12)
+    ax.set_xlabel('Rank (1 = highest commits)', fontsize=12)
     ax.set_ylabel('Commits per Year', fontsize=12)
-    ax.set_title('Zipf Plot: GitHub Commit Concentration (2019-2025)', fontsize=14, fontweight='bold')
+    ax.set_title('Commit Distribution by Developer Rank (2019-2025)', fontsize=14, fontweight='bold')
 
-    ax.legend(loc='lower left', fontsize=10)
-    ax.grid(True, alpha=0.3, which='both')
-
-    # Add annotation
-    ax.annotate('Tail getting fatter →\n(more superstars)',
-                xy=(100, 1000), xytext=(500, 3000),
-                fontsize=10, alpha=0.7,
-                arrowprops=dict(arrowstyle='->', color='gray', alpha=0.5))
+    ax.legend(loc='lower left', fontsize=10, title='Year')
+    ax.grid(True, alpha=0.3, which='major')
 
     ax.set_xlim(1, 200000)
     ax.set_ylim(1, 15000)
