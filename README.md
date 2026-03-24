@@ -113,7 +113,7 @@ Commit data is captured via **PushEvent** records in the payload:
 - There are times when the GH Archive crawler goes offline or hits the API rate limit and misses events; backfilling these gaps is outside the project's scope
 - Commit *dates* are not directly available — you only have the push date as a proxy
 
-#### ⚠️ Schema Break: October 7, 2025 — Data Ends Here
+#### Schema Break: October 7, 2025 — Data Ends Here
 
 GitHub [announced](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) in August 2025 that the Activity Events API would trim push payloads by removing "commit summaries and counts," with rollout on **October 7, 2025**.
 
@@ -146,7 +146,7 @@ This sampling provides approximately **1/180th** of total GitHub activity while 
 
 **Total sample:** ~1.7 million developer-year observations and ~58 million commits across 2019-2025.
 
-**⚠️ Data cutoff: October 31, 2025.** GitHub's Events API [removed commit details](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) from PushEvent payloads on October 7, 2025. GH Archive inherited this change, so **our 2025 data covers January 1 – October 31 only**. All 2025 figures in this analysis reflect 10 months of data.
+**Data cutoff: October 31, 2025.** GitHub's Events API [removed commit details](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) from PushEvent payloads on October 7, 2025. GH Archive inherited this change, so **our 2025 data covers January 1 – October 31 only**. All 2025 figures in this analysis reflect 10 months of data.
 
 ### 2.3 Data Quality Filters
 
