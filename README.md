@@ -41,7 +41,7 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 - Sharpest drop was 2020-2021 (α: 1.95 → 1.86), during COVID — *before* Copilot launched (June 2022)
 - COVID created favorable conditions (increased free time, remote work, coding education boom)
 - When AI tools arrived (Copilot, June 2022), personal developers adopted them quickly — **minimal adoption lag** among individuals who self-select into new tools
-- Org developers remained stable at α ≈ 2.04 throughout this period
+- Org developers saw slow concentration growth through this period
 
 *Phase 2 (2025): Concentration sharply accelerates among org developers — AI clears enterprise hurdles.*
 - Personal α stabilized at 1.80 (already heavily concentrated from Phase 1)
@@ -55,7 +55,7 @@ Remember: **lower α = more concentration.** A declining α means extreme values
 
 - *Personal developers:* Concentration increased sharply during COVID (2020-2021), with early AI tools accelerating the trend. Hobbyists and individuals self-selected into productivity tools quickly — **minimal adoption lag**. By 2024, concentration had plateaued because early adopters already dominated.
 
-- *Org developers:* Were insulated through 2024, likely because team structures, code review processes, and organizational procurement cycles created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and began amplifying individual productivity even within professional settings.
+- *Org developers:* Saw slow concentration growth through 2024, likely dampened by team structures, code review processes, and organizational procurement cycles that created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and concentration sharply accelerated.
 
 **The adoption lag hypothesis:** Concentration rose among personal developers first because individuals adopt new tools faster than organizations. Org developers saw concentration rise later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
 
@@ -333,7 +333,7 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 ![Power Law α: Org vs Personal Developers (2019-2025)](output/powerlaw_alpha_comparison.png)
 
-*Figure: Power law exponent α over time. Lower α = more concentration. Personal developers (red) show steady decline 2019-2024, then stabilize. Org developers (blue) remain stable until 2025, then drop. The α = 2 line marks the "infinite variance" threshold.*
+*Figure: Power law exponent α over time. Lower α = more concentration. Personal developers (red) show steady decline 2019-2024, then stabilize. Org developers (blue) show slow decline through 2024, then sharp drop in 2025. The α = 2 line marks the "infinite variance" threshold.*
 
 #### Key Observations
 

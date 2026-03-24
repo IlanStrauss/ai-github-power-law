@@ -1,0 +1,124 @@
+/Users/ilanstrauss/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Loaded 89,456 developers from 2025 data
+Sampled to 10,000 developers
+
+Querying 10,000 developers for 2026 Q1...
+Estimated time: ~120 minutes
+
+  100/10,000 — 97 valid, 3 errors
+  200/10,000 — 190 valid, 10 errors
+  300/10,000 — 286 valid, 14 errors
+  400/10,000 — 384 valid, 16 errors
+  500/10,000 — 480 valid, 20 errors
+  600/10,000 — 576 valid, 24 errors
+  700/10,000 — 668 valid, 32 errors
+  800/10,000 — 761 valid, 39 errors
+  900/10,000 — 858 valid, 42 errors
+  1,000/10,000 — 953 valid, 47 errors
+  1,100/10,000 — 1,050 valid, 50 errors
+  1,200/10,000 — 1,149 valid, 51 errors
+  1,300/10,000 — 1,242 valid, 58 errors
+  1,400/10,000 — 1,337 valid, 63 errors
+  1,500/10,000 — 1,433 valid, 67 errors
+  1,600/10,000 — 1,524 valid, 76 errors
+  1,700/10,000 — 1,621 valid, 79 errors
+  1,800/10,000 — 1,718 valid, 82 errors
+  1,900/10,000 — 1,818 valid, 82 errors
+  2,000/10,000 — 1,912 valid, 88 errors
+  2,100/10,000 — 2,009 valid, 91 errors
+  2,200/10,000 — 2,107 valid, 93 errors
+  2,300/10,000 — 2,205 valid, 95 errors
+  2,400/10,000 — 2,301 valid, 99 errors
+  2,500/10,000 — 2,397 valid, 103 errors
+  2,600/10,000 — 2,494 valid, 106 errors
+  2,700/10,000 — 2,589 valid, 111 errors
+  2,800/10,000 — 2,684 valid, 116 errors
+  2,900/10,000 — 2,778 valid, 122 errors
+  3,000/10,000 — 2,875 valid, 125 errors
+  3,100/10,000 — 2,973 valid, 127 errors
+  3,200/10,000 — 3,071 valid, 129 errors
+  3,300/10,000 — 3,164 valid, 136 errors
+  3,400/10,000 — 3,260 valid, 140 errors
+  3,500/10,000 — 3,357 valid, 143 errors
+  3,600/10,000 — 3,456 valid, 144 errors
+  3,700/10,000 — 3,552 valid, 148 errors
+  3,800/10,000 — 3,651 valid, 149 errors
+  3,900/10,000 — 3,749 valid, 151 errors
+  4,000/10,000 — 3,844 valid, 156 errors
+  4,100/10,000 — 3,941 valid, 159 errors
+  4,200/10,000 — 4,037 valid, 163 errors
+  4,300/10,000 — 4,132 valid, 168 errors
+  4,400/10,000 — 4,229 valid, 171 errors
+  4,500/10,000 — 4,327 valid, 173 errors
+  4,600/10,000 — 4,425 valid, 175 errors
+  4,700/10,000 — 4,523 valid, 177 errors
+  4,800/10,000 — 4,618 valid, 182 errors
+  4,900/10,000 — 4,714 valid, 186 errors
+  5,000/10,000 — 4,811 valid, 189 errors
+  5,100/10,000 — 4,909 valid, 191 errors
+  5,200/10,000 — 5,004 valid, 196 errors
+  5,300/10,000 — 5,100 valid, 200 errors
+  5,400/10,000 — 5,196 valid, 204 errors
+  5,500/10,000 — 5,294 valid, 206 errors
+  5,600/10,000 — 5,387 valid, 213 errors
+  5,700/10,000 — 5,484 valid, 216 errors
+  5,800/10,000 — 5,581 valid, 219 errors
+  5,900/10,000 — 5,679 valid, 221 errors
+  6,000/10,000 — 5,776 valid, 224 errors
+  6,100/10,000 — 5,874 valid, 226 errors
+  6,200/10,000 — 5,970 valid, 230 errors
+  6,300/10,000 — 6,063 valid, 237 errors
+  6,400/10,000 — 6,153 valid, 247 errors
+  6,500/10,000 — 6,251 valid, 249 errors
+  6,600/10,000 — 6,350 valid, 250 errors
+  6,700/10,000 — 6,446 valid, 254 errors
+  6,800/10,000 — 6,542 valid, 258 errors
+  6,900/10,000 — 6,637 valid, 263 errors
+  7,000/10,000 — 6,734 valid, 266 errors
+  7,100/10,000 — 6,831 valid, 269 errors
+  7,200/10,000 — 6,927 valid, 273 errors
+  7,300/10,000 — 7,026 valid, 274 errors
+  7,400/10,000 — 7,123 valid, 277 errors
+  7,500/10,000 — 7,222 valid, 278 errors
+  7,600/10,000 — 7,320 valid, 280 errors
+  7,700/10,000 — 7,418 valid, 282 errors
+  7,800/10,000 — 7,515 valid, 285 errors
+  7,900/10,000 — 7,613 valid, 287 errors
+  8,000/10,000 — 7,710 valid, 290 errors
+  8,100/10,000 — 7,804 valid, 296 errors
+  8,200/10,000 — 7,899 valid, 301 errors
+  8,300/10,000 — 7,994 valid, 306 errors
+  8,400/10,000 — 8,089 valid, 311 errors
+  8,500/10,000 — 8,185 valid, 315 errors
+  8,600/10,000 — 8,279 valid, 321 errors
+  8,700/10,000 — 8,379 valid, 321 errors
+  8,800/10,000 — 8,477 valid, 323 errors
+  8,900/10,000 — 8,573 valid, 327 errors
+  9,000/10,000 — 8,671 valid, 329 errors
+  9,100/10,000 — 8,770 valid, 330 errors
+  9,200/10,000 — 8,867 valid, 333 errors
+  9,300/10,000 — 8,964 valid, 336 errors
+  9,400/10,000 — 9,058 valid, 342 errors
+  9,500/10,000 — 9,153 valid, 347 errors
+  9,600/10,000 — 9,250 valid, 350 errors
+  9,700/10,000 — 9,345 valid, 355 errors
+  9,800/10,000 — 9,444 valid, 356 errors
+  9,900/10,000 — 9,542 valid, 358 errors
+  10,000/10,000 — 9,638 valid, 362 errors
+
+Done! 9,638 developers with 2026 data
+
+============================================================
+2026 Q1 RESULTS
+============================================================
+Developers queried: 10,000
+Valid responses: 9,638
+After filters: 5,186
+
+  Org developers: 1,118
+  Personal-only: 4,068
+
+Commit distribution:
+  Mean: 187.2
+  Median: 59
