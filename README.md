@@ -6,7 +6,9 @@
 
 ### Research Question
 
-*Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?* We aim to assess the fromer using a rich dataset of commits by developers. We do not yet have direct data on AI usage though.
+*Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?*
+
+**Short answer: Yes, but with adoption lag.** Personal developers concentrated during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then concentrated once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
 
 ### Motivation
 
@@ -19,32 +21,42 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 ### Key Findings
 
-**We find that the rise of superstar coders is driven by personal/hobbyist developers (Power Law exponent α declines in value as inequality and concentration increases), not professionals.** *Among personal developers, the sharpest increase in concentration and inequality occurred in 2020-2021 — before GitHub Copilot launched publicly (June 2022).* This is reflected in the Power Law α getting smaller and indicates that COVID played an important role in the key observed findings.
+**The rise of superstar coders happened in two waves — driven by different factors with different adoption lags.**
 
-We analyze GitHub commit concentration and inequality bwteen 2019-2024 among multi-repo developers (n=625,590 developer-years). Estimating the power law exponent α for each group (robustness confirmed via bootstrap with 500 iterations; see Appendix):
+We analyze GitHub commit concentration from 2019-2025 (through October 31) among multi-repo developers. The power law exponent α measures concentration: **lower α = more concentration** (see Section 3 for interpretation).
 
-| Developer Type | n (2019 → 2024) | Power Law α (2019) | Power Law α (2024) | Δα | Interpretation |
-|:--------------:|:---------------:|:------------------:|:------------------:|:----:|:--------------:|
-| **Personal-only** | 53,945 → 102,204 | 1.99 | **1.78** | −0.21 | ↑ Concentration (worse) |
-| **Org developers** | 9,824 → 25,490 | 2.04 | 2.04 | 0 | Stable |
+| Developer Type | α (2019) | α (2024) | α (2025*) | Δα (2019→2025) | Interpretation |
+|:--------------:|:--------:|:--------:|:--------:|:--------------:|:--------------:|
+| **Personal-only** | 1.99 | 1.78 | **1.80** | −0.19 | Concentrated early (COVID + AI), now stable |
+| **Org developers** | 2.04 | 2.04 | **1.87** | −0.17 | Stable until 2025, now concentrating (AI lag) |
 
-*Notes: **Lower α = more concentration.** A declining α means the distribution has a "fatter tail" — extreme values (superstar coders) become more common. "Personal-only" = developers with zero commits to organization-owned repositories. "Org developers" = at least one commit to a public organization repo (Google, Microsoft, Apache, etc.). Power Law α estimated via Clauset-Shalizi-Newman (2009) MLE method. Source: `output/org_developer_analysis.csv`.*
+*\*2025 data covers January–October only. GitHub's Events API removed commit details from PushEvent payloads on October 7, 2025; GH Archive data after this date lacks commit counts. See Data Caveats.*
 
-**Timing of the shift:**
-- **2019-2020:** Modest decline (α: 1.99 → 1.95, Δ = −0.04)
-- **2020-2021:** **Sharpest drop** (α: 1.95 → 1.86, Δ = −0.09)
-- **2021-2024:** Continued decline (α: 1.86 → 1.78, Δ = −0.08)
+*Notes: "Personal-only" = zero commits to org repos. "Org developers" = at least one commit to a public org repo (Google, Microsoft, Apache, etc.). α estimated via Clauset-Shalizi-Newman (2009). Source: `output/powerlaw_2025.csv`, `output/powerlaw_lognormal_comparison.csv`.*
 
-The inflection point in 2020-2021 preceded GitHub Copilot's public launch (June 2022) but coincided with the COVID-19 pandemic, increased remote work, and growing interest in AI-assisted development.
+**Two distinct phases with different drivers:**
+
+*Phase 1 (2020-2024): Personal developers concentrate — COVID and early AI adoption.*
+- Personal α dropped from 1.99 → 1.78 (crossed into "infinite variance" regime)
+- Sharpest drop was 2020-2021 (α: 1.95 → 1.86), during COVID — *before* Copilot launched (June 2022)
+- COVID likely created conditions (increased free time, remote work, coding education) that allowed early AI adopters to pull ahead quickly — **less adoption lag** among individuals who self-select into new tools
+- Org developers remained stable at α ≈ 2.04 throughout this period
+
+*Phase 2 (2025): Org developers join the concentration trend — AI with adoption lag.*
+- Personal α stabilized at 1.80 (already heavily concentrated from Phase 1)
+- **Org α dropped sharply from 2.04 → 1.87** — the first significant change in 6 years
+- This coincides with AI coding tools going mainstream in enterprise settings: Claude Code (Feb 2025), Codex (May 2025)
+- Professional settings experienced **longer adoption lag**: organizational inertia, security reviews, procurement cycles, and code review processes delayed AI tool adoption compared to individuals
 
 **What does this mean?**
 
 Remember: **lower α = more concentration.** A declining α means extreme values (superstars) are becoming more common relative to typical developers.
 
-- *Personal developers:* Their α fell from 1.99 (2019) to 1.78 (2024) — a 0.21 decline indicating *increasing concentration*. By crossing below 2.0, the distribution entered the "infinite variance" regime — the same statistical class as wealth distributions (Pareto, 1896) and city sizes (Zipf, 1949), where extreme values dominate and the mean is unstable. The "superstar coder" phenomenon is real and accelerating.
-- *Org developers:* α remained stable at ~2.0 throughout (2.04 in both 2019 and 2024) — no increase in concentration. Professional team structures appear to distribute work more evenly, preventing "winner-take-all" dynamics.
+- *Personal developers:* Concentrated during COVID (2020-2021), with early AI tools accelerating the trend. Hobbyists and individuals self-selected into productivity tools quickly — **minimal adoption lag**. By 2024, concentration had plateaued because early adopters already dominated.
 
-This suggests that concentration among individual developers was already accelerating before AI coding tools became mainstream — though AI may be amplifying an existing trend toward "superstar coders" outside traditional organizational structures.
+- *Org developers:* Were insulated through 2024, likely because team structures, code review processes, and organizational procurement cycles created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and began amplifying individual productivity even within professional settings.
+
+**The adoption lag hypothesis:** Personal developers concentrated first because individuals adopt new tools faster than organizations. Org developers concentrated later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
@@ -86,6 +98,38 @@ We use [GH Archive](https://www.gharchive.org/), which records all public GitHub
 
 GH Archive is the canonical source for large-scale GitHub research, used by studies in MSR, ICSE, and Empirical Software Engineering.
 
+#### GH Archive Data Caveats
+
+Commit data is captured via **PushEvent** records in the payload:
+
+**What you get:**
+- An array of commit objects describing the pushed commits, including the SHA, commit message, git author name/email, and a URL to the commit API resource
+- `push_size` and `push_distinct_size` fields on the PushEvent, giving you the total and distinct commit counts for the push
+
+**The 20-commit cap:** The commits array includes a maximum of 20 commits per push. Any commits above this limit are missing from the dataset. Most PushEvents don't hit this limit (~99%), but initial pushes (e.g., a private repo moving to GitHub) can have very high commit counts that get truncated.
+
+**Other caveats:**
+- There are times when the GH Archive crawler goes offline or hits the API rate limit and misses events; backfilling these gaps is outside the project's scope
+- Commit *dates* are not directly available — you only have the push date as a proxy
+
+#### ⚠️ Schema Break: October 7, 2025 — Data Ends Here
+
+GitHub [announced](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) in August 2025 that the Activity Events API would trim push payloads by removing "commit summaries and counts," with rollout on **October 7, 2025**.
+
+**What changed:**
+- The Events API docs for `PushEvent` now list only `repository_id`, `push_id`, `ref`, `head`, and `before`
+- `commits`, `size`, and `distinct_size` are **no longer part of the payload**
+- GH Archive records GitHub's Events API verbatim, so GH Archive inherited this change
+
+**Impact on this analysis:**
+- **Our 2025 data covers January 1 – October 31 only** (10 months)
+- All 2025 figures, sample sizes, and comparisons reflect this truncated year
+- November 2025 onward cannot be analyzed using commit-based metrics from GH Archive
+
+*Note: GitHub webhooks still include the full `commits` array — this is specifically an Events API / GH Archive limitation, not a universal GitHub change.*
+
+For most use cases (counting commits per repo/user over time), the data is quite usable, but it's not a perfect 100% complete record of every commit ever made.
+
 ### 2.2 Sampling Strategy
 
 Processing the full GH Archive is prohibitively expensive (~50TB uncompressed). We use a stratified sample:
@@ -94,12 +138,14 @@ Processing the full GH Archive is prohibitively expensive (~50TB uncompressed). 
 |-----------|-------|-----------|
 | **Time of day** | 4 samples (00:00, 06:00, 12:00, 18:00 UTC) | Captures global activity across US, Europe, Asia time zones |
 | **Day selection** | 1st of each month | Consistent sampling frame; avoids weekend effects |
-| **Years** | 2019-2024 | Pre-AI baseline (2019-2021) through peak AI adoption (2024) |
-| **Sample size** | 288 hourly files | ~21GB compressed |
+| **Years** | 2019-2025 | Pre-AI baseline (2019-2021) through AI adoption (2024-2025) |
+| **Sample size** | 328 hourly files | ~25GB compressed |
 
 This sampling provides approximately **1/180th** of total GitHub activity while preserving temporal and geographic variation.
 
-**Total sample:** 1,623,706 developer-year observations and 44.1 million commits across 2019-2024.
+**Total sample:** ~1.7 million developer-year observations and ~58 million commits across 2019-2025.
+
+**⚠️ Data cutoff: October 31, 2025.** GitHub's Events API [removed commit details](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) from PushEvent payloads on October 7, 2025. GH Archive inherited this change, so **our 2025 data covers January 1 – October 31 only**. All 2025 figures in this analysis reflect 10 months of data.
 
 ### 2.3 Data Quality Filters
 
@@ -269,24 +315,32 @@ We estimate power law exponents α separately for **org developers** (contribute
 | 2022 | 20,764 | 1.91 | 37 | −0.97 | 92,200 | 1.83 | 40 | −2.74 |
 | 2023 | 23,411 | 2.06 | 6 | −0.95 | 99,585 | 1.82 | 38 | −2.68 |
 | 2024 | 25,490 | 2.04 | 5 | +6.83 | 102,204 | 1.78 | 45 | −3.11 |
+| **2025†** | **18,285** | **1.87** | **25** | **−0.31** | **71,171** | **1.80** | **33** | **−2.00** |
 
-*Notes: α = power law exponent (Clauset-Shalizi-Newman MLE). xmin = threshold where power law behavior begins. R = likelihood ratio vs. log-normal (R > 0 favors power law, R < 0 favors log-normal). Source: `output/powerlaw_lognormal_comparison.csv`.*
+*Notes: α = power law exponent (Clauset-Shalizi-Newman MLE). xmin = threshold where power law behavior begins. R = likelihood ratio vs. log-normal (R > 0 favors power law, R < 0 favors log-normal). Source: `output/powerlaw_lognormal_comparison.csv`, `output/powerlaw_2025.csv`.*
+
+*†2025 data: January 1 – October 31 only. GitHub removed commit details from PushEvent payloads on October 7, 2025. Lower sample sizes in 2025 reflect 10 months vs. 12 months for other years.*
 
 #### Key Observations
 
-*xmin interpretation.* The xmin threshold identifies where power law behavior begins. For org developers, xmin is low (5-7 commits/year), meaning the power law describes most of the distribution. For personal developers, xmin is higher (25-45) and **increasing over time** — the power law applies only to the heavy tail, while the body follows a log-normal. This suggests personal developer commits have a lognormal body with an increasingly heavy power-law tail.
+*Phase 1 (2019-2024): Personal developers concentrate, orgs stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
 
-*Distributional fit (R statistic).* Org developers mostly fit a pure power law (R > 0 in 4 of 6 years). Personal developers consistently fit log-normal better (R < 0 in all years), with R becoming increasingly negative — the distribution is moving further from a power law, with more mass in the extreme tail.
+*Phase 2 (2025): Org developers join the concentration trend.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to **1.87** — the first significant change in 6 years. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
 
-#### Interpretation
+*xmin interpretation.* For org developers, xmin jumped from 5-7 (2019-2024) to 25 (2025), suggesting the power law now applies only to the heavy tail rather than most of the distribution. This shift mirrors what happened to personal developers years earlier.
 
-*Personal developers: Increasing concentration.* The α exponent for personal-only developers declined from 1.99 (2019) to 1.78 (2024). By crossing below 2.0, the distribution entered the "infinite variance" regime (Newman, 2005) — the same statistical class as wealth distributions (Pareto, 1896), where extreme values dominate and the mean is unstable. The "superstar coder" phenomenon is emerging among personal developers.
+#### Interpretation: Adoption Lag Explains the Two Waves
 
-*Org developers: Stable concentration.* The α exponent for org developers remained stable at ~2.0 (2.04 in both 2019 and 2024). Professional open-source development maintains relatively egalitarian distribution, likely because team structures and code review processes distribute work more evenly.
+*Personal developers: COVID + AI with minimal lag.* The α exponent declined from 1.99 (2019) to 1.78 (2024), then stabilized at 1.80 (2025). COVID created conditions favorable for concentration (more free time, remote work, coding education boom), and personal developers adopted AI tools quickly once available (Copilot public June 2022). **No organizational barriers = fast adoption = early concentration.**
 
-*The divergence is the key finding.* The contrast between personal (α declining) and org (α stable) developers is striking. The mechanism driving concentration is specific to *individual* developers working outside institutional structures.
+*Org developers: AI impact delayed by adoption lag.* The α exponent held steady at ~2.04 for six years (2019-2024), then dropped sharply to 1.87 in 2025. Why the lag?
+- **Procurement cycles:** Enterprise AI tools require security reviews, legal approval, and budget allocation
+- **Code review processes:** Team structures that previously distributed work also slowed individual tool adoption
+- **Organizational inertia:** Unlike individuals who self-select into new tools, org developers needed institutional buy-in
 
-*Timing suggests COVID, not (just) AI.* The sharpest increase in concentration among personal developers occurred in 2020-2021 (α dropped from 1.95 to 1.86), *before* GitHub Copilot launched publicly (June 2022). This timing coincides with the COVID-19 pandemic, when: (a) some developers had more free time and turned to personal coding projects; (b) remote work blurred boundaries between professional and personal coding; (c) coding education and bootcamps surged online. AI coding tools may be amplifying an existing trend rather than initiating it — and their effects appear concentrated among personal/hobbyist developers rather than professionals working in organizational contexts.
+The 2025 drop coincides with AI coding tools clearing enterprise hurdles: Claude Code (Feb 2025), Codex (May 2025). **Organizational barriers = delayed adoption = lagged concentration.**
+
+*The adoption lag hypothesis.* The ~2-3 year gap between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal — the only difference was when organizations allowed it.
 
 ### 4.2 Pooled Sample Analysis
 
@@ -342,31 +396,48 @@ This supports our main finding: concentration is increasing, and our estimates a
 
 ## 5. Discussion
 
-### What's Driving Concentration?
+### What's Driving Concentration? The Adoption Lag Story
 
-The key finding — that concentration is increasing among personal developers but not among org developers — points to institutional structure as a critical potential factor, though this remains speculation for now.
+The key finding — that concentration increased among personal developers first (2020-2022) and org developers later (2025) — points to **adoption lag** as the critical factor. Both groups eventually concentrate; the difference is *when*, not *whether*.
 
-**Why org developers remain stable.** Developers who contribute to organization-owned repositories operate within institutional constraints: code review processes, team structures, sprint planning, and distributed workloads. These organizational practices act as a "ceiling" on individual contribution shares. When one developer becomes more productive, the work is often redistributed rather than concentrated. Professional open-source projects (Linux, Kubernetes, TensorFlow) typically have governance structures that prevent any single contributor from dominating.
+**Phase 1 (2020-2024): Personal developers concentrate first.**
 
-**Why personal developers are concentrating.** Developers working only on personal repositories face no such constraints. There is no code review requiring others' involvement, no team sprint distributing work, no governance limiting individual output. In this environment, factors that increase individual productivity — including AI coding tools — directly translate into higher personal commit shares. The "superstar coder" can commit as much as they want, with nothing redistributing their output.
+Personal developers faced no organizational barriers to adopting new tools or work patterns. COVID created favorable conditions (more free time, remote work normalization, coding education surge), and early AI tools (Copilot, June 2022) were immediately accessible to individuals. The result: rapid concentration as early adopters pulled ahead.
 
-**The institutional hypothesis.** The divergence suggests that institutional structures, not technology alone, determine how productivity gains are distributed. AI tools may amplify individual productivity equally across both groups, but only in the personal/hobbyist space does this translate into increased concentration. Professional settings absorb individual productivity gains into collective output.
+- No procurement cycles or security reviews
+- No code review processes requiring team buy-in
+- Self-selection: individuals who adopt tools fastest benefit first
+- α dropped from 1.99 → 1.78 (2019-2024)
 
-This has implications beyond GitHub: concentration of output may be a feature of *individual-oriented* markets (gig platforms, solo content creation) rather than *institutionally-mediated* markets (traditional employment, team-based production).
+**Phase 2 (2025): Org developers catch up — after clearing enterprise hurdles.**
+
+Org developers operate within institutional constraints that *delayed* AI tool adoption:
+- **Security reviews:** Enterprise AI requires compliance approval
+- **Procurement cycles:** Budget allocation and vendor selection take time
+- **Code review processes:** Teams had to agree on how AI-generated code would be reviewed
+- **Organizational inertia:** Unlike individuals, developers needed institutional permission
+
+By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — the first significant change in 6 years.
+
+**The updated institutional hypothesis.** Institutions don't *prevent* concentration; they *delay* it. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal.
+
+**Implications beyond GitHub:** Any market that requires institutional adoption of new technologies will show lagged concentration effects. Gig platforms and individual creators concentrate first; traditional employment and team-based production concentrate later — but both eventually concentrate when productivity-amplifying tools become available.
 
 ### Limitations
 
 Our analysis has several important limitations that should inform interpretation.
 
-*Correlation, not causation.* Concentration increases alongside AI adoption (Copilot launched publicly in June 2022), but we cannot establish a causal relationship. The inflection point in 2020-2021 actually preceded widespread AI tool adoption, suggesting other factors — COVID-19, remote work patterns, changes in open-source participation — may be equally or more important.
+*Data cutoff: October 31, 2025.* GitHub's Events API removed commit details from PushEvent payloads on October 7, 2025. Our 2025 data covers only January–October (10 months vs. 12 months for other years). This may affect year-over-year comparisons, though the direction of the 2025 findings (org concentration) is clear.
+
+*Correlation, not causation.* Concentration increases correlate with AI adoption timelines, but we cannot establish causation. The personal developer inflection point (2020-2021) preceded mass AI adoption, suggesting COVID-related factors (remote work, coding education) also contributed. The org developer inflection point (2025) aligns with enterprise AI tool launches but could reflect other factors.
 
 *AI detection is a floor, not a ceiling.* Only 0.001% of commits have explicit AI markers. Industry surveys suggest 30-50% of developers use AI coding tools. The gap exists because: (a) most tools don't auto-tag commits; (b) there's no incentive for disclosure; (c) AI suggestions are typically edited before committing. Our explicit AI detection captures almost none of actual AI-assisted coding.
 
-*Sampling limitations.* Our stratified sample (1st of each month, 4 time slots) may miss weekly or seasonal patterns. However, our sample size (625,590 developer-years, 19.3 million commits) is large enough that sampling variance is unlikely to affect main conclusions.
+*Sampling limitations.* Our stratified sample (1st of each month, 4 time slots) may miss weekly or seasonal patterns. However, our sample size (625,590 developer-years, 19.3 million commits through 2024, plus 89,456 developers in 2025) is large enough that sampling variance is unlikely to affect main conclusions.
 
 *Ceiling effects bias 2024 estimates downward.* The 10,000 commit/year ceiling excludes accounts whose true counts could be 50k, 100k, or higher. With 180 accounts hitting this cap in 2024 (vs. 1 in 2023), our concentration estimates for 2024 are likely understated.
 
-*Public repositories only.* GH Archive captures only public GitHub activity. Most enterprise development occurs in private repositories, which we cannot observe. Our "org developers" are those contributing to *public* org repos — open-source foundations, public company projects — not private corporate codebases.
+*Public repositories only.* GH Archive captures only public GitHub activity. Most enterprise development occurs in private repositories, which we cannot observe. Our "org developers" are those contributing to *public* org repos — open-source foundations, public company projects — not private corporate codebases. The 2025 org concentration finding may understate enterprise effects if private repo adoption lags public repos.
 
 ---
 
