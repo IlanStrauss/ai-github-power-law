@@ -269,7 +269,26 @@ These descriptive measures show increasing concentration, but do not reveal the 
 
 ## 3. Method: Power Law Estimation
 
-### 3.1 Power Law Estimation
+### 3.1 The Power Law Distribution
+
+A power law distribution describes the probability of observing a value x:
+
+$$P(x) \propto x^{-\alpha}$$
+
+where α (alpha) is the **power law exponent**. This equation says the probability of observing x decreases as x increases, but the rate of decrease is controlled by α.
+
+**Why power laws matter for understanding system dynamics:**
+
+Power laws emerge from specific generative processes — most commonly **preferential attachment** ("rich-get-richer"). When success breeds more success (popular repos attract more contributors, productive developers get more visibility), the resulting distribution follows a power law. The exponent α tells us *how strong* this compounding effect is:
+
+- **Lower α → stronger compounding.** Extreme values (superstars) become increasingly likely. Early advantages snowball into massive gaps.
+- **Higher α → weaker compounding.** The distribution is more compressed. Success still begets success, but advantages don't compound as dramatically.
+
+A *declining* α over time signals that the system's dynamics are becoming more winner-take-all. This is why tracking α year-over-year reveals whether concentration is increasing.
+
+**Contrast with normal distributions:** In a normal (Gaussian) distribution, extreme values are exponentially rare — 6-sigma events are essentially impossible. In a power law, extreme values are merely *polynomially* rare — they're uncommon but not impossible. This is why GitHub can have developers with 10,000+ commits while the median is 6.
+
+### 3.2 Estimation Method
 
 We follow the Clauset-Shalizi-Newman (2009) methodology, as applied by Strauss, Yang & Mazzucato (2025) to platform earnings distributions:
 
@@ -291,18 +310,13 @@ Compare power law to log-normal using likelihood ratio test (R statistic):
 
 This comparison is crucial because many productivity distributions exhibit log-normal bodies with power-law tails (Gabaix, 2016).
 
-The power law exponent α has well-established statistical and economic interpretations relating to how inequality-reproducing a given dynamic is.
+### 3.3 Interpreting α
 
-**How to interpret α (the key intuition):**
-
-**Lower α = more concentration = more inequality.** A power law distribution has the form P(x) ∝ x^(−α), where α controls how fast the probability of extreme values decays. When α is smaller, the decay is slower — meaning extreme values (superstar coders with thousands of commits) are *more likely*. When α is larger, extreme values are rarer and the distribution is more equal.
-
-Think of it this way:
-- **High α (e.g., 2.5-3.0):** The "rich" tail falls off quickly. Top performers exist but don't dominate.
+- **High α (e.g., 2.5-3.0):** The tail falls off quickly. Top performers exist but don't dominate.
 - **Low α (e.g., 1.5-1.8):** The tail is "fat" — extreme values are common. A small number of superstars capture most of the activity.
-- **α declining over time:** Concentration is *increasing*. The distribution is becoming more unequal.
+- **α declining over time:** The system is becoming more winner-take-all.
 
-In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024). This means extreme commit counts became *more common* — concentration increased significantly.
+In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024) — extreme commit counts became more common.
 
 **Statistical properties (Newman, 2005; Clauset et al., 2009):**
 - **α ≤ 2:** Infinite variance — the distribution has no stable mean; dominated by extreme values
