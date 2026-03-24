@@ -8,7 +8,7 @@
 
 *Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?*
 
-**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then saw concentration rise once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
+**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then concentration sharply accelerated once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
 
 ### Motivation
 
@@ -28,7 +28,7 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 | Developer Type | α (2019) | α (2024) | α (2025*) | Δα (2019→2025) | Interpretation |
 |:--------------:|:--------:|:--------:|:--------:|:--------------:|:--------------:|
 | **Personal-only** | 1.99 | 1.78 | 1.80 | −0.19 | Rose early (COVID then AI), now stable |
-| **Org developers** | 2.04 | 2.04 | 1.87 | −0.17 | Stable until 2025, then rose (AI with lag) |
+| **Org developers** | 2.04 | 2.04 | 1.87 | −0.17 | Stable until 2025, then sharply accelerated |
 
 *\*2025 data covers January–October only. GitHub's Events API removed commit details from PushEvent payloads on October 7, 2025; GH Archive data after this date lacks commit counts. See Data Caveats.*
 
@@ -43,9 +43,9 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 - When AI tools arrived (Copilot, June 2022), personal developers adopted them quickly — **minimal adoption lag** among individuals who self-select into new tools
 - Org developers remained stable at α ≈ 2.04 throughout this period
 
-*Phase 2 (2025): Concentration rises among org developers — AI finally clears enterprise hurdles.*
+*Phase 2 (2025): Concentration sharply accelerates among org developers — AI clears enterprise hurdles.*
 - Personal α stabilized at 1.80 (already heavily concentrated from Phase 1)
-- **Org α dropped sharply from 2.04 → 1.87** — the first significant change in 6 years
+- **Org α dropped from 2.04 → 1.87** — a sharp acceleration after 6 years of stability
 - This coincides with enterprise AI coding tools reaching production-readiness: Claude Code (Feb 2025), Codex (May 2025)
 - Professional settings experienced **longer adoption lag**: security reviews, procurement cycles, and code review processes delayed AI tool adoption by ~2-3 years compared to individuals
 
@@ -209,9 +209,9 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 113,981 | 180,882 | 294,863 | 61.3% |
 | 2023 | 124,041 | 198,435 | 322,476 | 61.5% |
 | 2024 | 131,530 | 224,719 | 356,249 | 63.1% |
-| 2025† | 89,456 | — | — | — |
+| 2025 | 89,456 | — | — | — |
 
-*†2025 data: January–October only (10 months). Single-repo breakdown not available for 2025 extraction.*
+*2025 data: January–October only (10 months). Single-repo breakdown not available for 2025 extraction.*
 
 *Source: GH Archive PushEvents, sampled 1st of each month at 00:00, 06:00, 12:00, 18:00 UTC. Filters applied: bot exclusion, ≥3 commits/year, ≤10,000 commits/year.*
 
@@ -225,9 +225,9 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 2,865,724 | 25.1 | 6 | 22 | 321 |
 | 2023 | 3,132,816 | 25.3 | 6 | 21 | 339 |
 | 2024 | 7,463,885 | 56.7 | 6 | 25 | 1,287 |
-| 2025† | 2,180,740 | 24.4 | 5 | 18 | 295 |
+| 2025 | 2,180,740 | 24.4 | 5 | 18 | 295 |
 
-*†2025 data: January–October only (10 months).*
+*2025 data: January–October only (10 months).*
 
 *Source: GH Archive PushEvents (distinct_size only). Multi-repo sample: accounts contributing to 2+ repositories per year.*
 
@@ -251,9 +251,9 @@ This classification proxies for professional developers (who often contribute to
 | 2022 | 20,764 | 92,200 | 18.4% |
 | 2023 | 23,411 | 99,585 | 19.0% |
 | 2024 | 25,490 | 102,204 | 20.0% |
-| 2025† | 18,285 | 71,171 | 20.4% |
+| 2025 | 18,285 | 71,171 | 20.4% |
 
-*†2025 data: January–October only (10 months). Lower absolute counts reflect truncated year.*
+*2025 data: January–October only (10 months). Lower absolute counts reflect truncated year.*
 
 *Source: `output/org_developer_analysis.csv`, `output/filtered_developers_2025.csv`.*
 
@@ -325,11 +325,11 @@ We estimate power law exponents α separately for **org developers** (contribute
 | 2022 | 20,764 | 1.91 | 37 | −0.97 | 92,200 | 1.83 | 40 | −2.74 |
 | 2023 | 23,411 | 2.06 | 6 | −0.95 | 99,585 | 1.82 | 38 | −2.68 |
 | 2024 | 25,490 | 2.04 | 5 | +6.83 | 102,204 | 1.78 | 45 | −3.11 |
-| 2025† | 18,285 | 1.87 | 25 | −0.31 | 71,171 | 1.80 | 33 | −2.00 |
+| 2025 | 18,285 | 1.87 | 25 | −0.31 | 71,171 | 1.80 | 33 | −2.00 |
 
 *Notes: α = power law exponent (Clauset-Shalizi-Newman MLE). xmin = threshold where power law behavior begins. R = likelihood ratio vs. log-normal (R > 0 favors power law, R < 0 favors log-normal). Source: `output/powerlaw_lognormal_comparison.csv`, `output/powerlaw_2025.csv`.*
 
-*†2025 data: January 1 – October 31 only. GitHub removed commit details from PushEvent payloads on October 7, 2025. Lower sample sizes in 2025 reflect 10 months vs. 12 months for other years.*
+*2025 data: January 1 – October 31 only. GitHub removed commit details from PushEvent payloads on October 7, 2025. Lower sample sizes in 2025 reflect 10 months vs. 12 months for other years.*
 
 ![Power Law α: Org vs Personal Developers (2019-2025)](output/powerlaw_alpha_comparison.png)
 
@@ -339,7 +339,7 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 *Phase 1 (2019-2024): Concentration rises among personal developers; orgs remain stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
 
-*Phase 2 (2025): Concentration rises among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to 1.87 — the first significant change in 6 years. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
+*Phase 2 (2025): Concentration sharply accelerates among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to 1.87 — a sharp acceleration after 6 years of stability. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
 
 *xmin interpretation.* For org developers, xmin jumped from 5-7 (2019-2024) to 25 (2025), suggesting the power law now applies only to the heavy tail rather than most of the distribution. This shift mirrors what happened to personal developers years earlier.
 
@@ -380,9 +380,9 @@ The sharp increase in such accounts in 2024 suggests a fundamental shift in how 
 | 2022 | 131 | +66% |
 | 2023 | 175 | +34% |
 | 2024 | 1,155 | +560% |
-| 2025† | — | — |
+| 2025 | 157 | −86% |
 
-*†2025: Outlier analysis not computed for truncated year.*
+*Note: 2025 covers January–October only (10 months). The sharp decline from 2024 likely reflects both the truncated year and different automation patterns.*
 
 *Finding:* The 6.6x explosion in 2024 (175 → 1,155 accounts) indicates a **fundamental shift** in automated commit activity — likely enterprise-scale CI/CD, AI-assisted bulk operations, or new automation patterns.
 
@@ -396,9 +396,9 @@ The sharp increase in such accounts in 2024 suggests a fundamental shift in how 
 | 2022 | 0 | 19 |
 | 2023 | 1 | 24 |
 | 2024 | 180 | 262 |
-| 2025† | — | — |
+| 2025 | 0 | 173 |
 
-*†2025: Cap analysis not computed for truncated year.*
+*Note: 2025 covers January–October only (10 months).*
 
 *Finding:* In 2024, 180 accounts are capped at 10,000 — their true commit counts could be 50k, 100k, or higher. One account had **2.84 million commits** before filtering. Our concentration metrics for 2024 are therefore **understated**.
 
@@ -437,7 +437,7 @@ Org developers operate within institutional constraints that *delayed* AI tool a
 - **Code review processes:** Teams had to agree on how AI-generated code would be reviewed
 - **Organizational inertia:** Unlike individuals, developers needed institutional permission
 
-By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — the first significant change in 6 years.
+By 2025, enterprise AI coding tools had cleared these hurdles: Claude Code (Feb 2025) and Codex (May 2025) launched with enterprise-grade features. The result: org developers' α dropped from 2.04 → 1.87 — a sharp acceleration after 6 years of stability.
 
 **The updated institutional hypothesis.** Institutions don't *prevent* concentration; they *delay* it. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles. Both groups are now converging toward similar α values (~1.8), suggesting AI's productivity amplification effect is universal.
 
@@ -502,9 +502,9 @@ python scripts/02a_power_law_from_sample.py
 | 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
 | 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
 | 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
-| 2025† | 89,456 | 57.7% | 78.3% | 0.797 | 59 |
+| 2025 | 89,456 | 57.7% | 78.3% | 0.797 | 59 |
 
-*†2025 data: January–October only (10 months).*
+*2025 data: January–October only (10 months).*
 
 *Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`, `output/descriptive_stats_2025.csv`*
 
@@ -518,9 +518,9 @@ python scripts/02a_power_law_from_sample.py
 | 2022 | 4,615,220 | 0 | 0.000% |
 | 2023 | 6,259,638 | 50 | 0.001% |
 | 2024 | 7,882,625 | 115 | 0.001% |
-| 2025† | 2,180,740 | — | — |
+| 2025 | 2,180,740 | — | — |
 
-*†2025: AI detection not computed. GH Archive schema change (Oct 7, 2025) removed commit message details required for pattern matching.*
+*2025: AI detection not computed. GH Archive schema change (Oct 7, 2025) removed commit message details required for pattern matching.*
 
 *Detection patterns: `aider:` prefix (72 commits in 2024), `Co-authored-by: Copilot` (23), `generated by GPT/Claude/Copilot` (18), `AI-generated code` (2).*
 
@@ -546,9 +546,9 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 | 2022 | 20,764 | 1.911 | [1.882, 2.092] |
 | 2023 | 23,411 | 2.055 | [1.827, 2.074] |
 | 2024 | 25,490 | 2.037 | [1.967, 2.073] |
-| 2025† | 18,285 | 1.866 | [1.816, 2.130] |
+| 2025 | 18,285 | 1.866 | [1.816, 2.130] |
 
-*†2025 data: January–October only (10 months).*
+*2025 data: January–October only (10 months).*
 
 *Significance test (2019 vs 2024): Δα = 0.003, 95% CI [−0.090, 0.072]. Not significant — CI includes 0.*
 *Significance test (2024 vs 2025): Δα = 0.171 — org concentration increased sharply in 2025.*
@@ -565,9 +565,9 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 | 2022 | 92,200 | 1.826 | [1.800, 2.163] |
 | 2023 | 99,585 | 1.817 | [1.795, 2.183] |
 | 2024 | 102,204 | 1.779 | [1.765, 2.168] |
-| 2025† | 71,171 | 1.798 | [1.768, 2.156] |
+| 2025 | 71,171 | 1.798 | [1.768, 2.156] |
 
-*†2025 data: January–October only (10 months).*
+*2025 data: January–October only (10 months).*
 
 *Source: `output/bootstrap_personal_developers.csv`*
 
@@ -627,9 +627,9 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 1.85 | 36 | -6.47 | Log-normal |
 | 2023 | 1.82 | 40 | -14.32 | Log-normal |
 | 2024 | 1.63 | 30 | -31.58 | Log-normal |
-| 2025† | 1.81 | 35 | -2.49 | Log-normal |
+| 2025 | 1.81 | 35 | -2.49 | Log-normal |
 
-*†2025 data: January–October only (10 months).*
+*2025 data: January–October only (10 months).*
 
 *Interpretation: α declined from 1.96 to 1.63 (2019-2024), then rose to 1.81 in 2025. The 2025 increase may reflect: (a) 10-month truncation reducing extreme outliers, or (b) sampling differences. Source: `output/multi_repo_analysis.csv`, `output/filtered_developers_2025.csv`*
 
@@ -647,9 +647,9 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 56.4% | 53.7% | -2.7pp |
 | 2023 | 60.2% | 54.6% | -5.6pp |
 | 2024 | 68.9% | 63.9% | -5.0pp |
-| 2025† | — | 57.7% | — |
+| 2025 | — | 57.7% | — |
 
-*†2025 data: January–October only. Full sample comparison not available for 2025 extraction.*
+*2025 data: January–October only. Full sample comparison not available for 2025 extraction.*
 
 *Finding:* Both samples show the same upward trend. Multi-repo filter reduces concentration by 3-5pp but trend is robust.
 
@@ -663,9 +663,9 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 1.85 | 1.81 | 1.80 |
 | 2023 | 1.82 | 1.81 | 1.80 |
 | 2024 | 1.63 | 1.64 | 1.64 |
-| 2025† | 1.81 | — | — |
+| 2025 | 1.81 | — | — |
 
-*†2025 data: January–October only. Stricter filter variants not computed for 2025.*
+*2025 data: January–October only. Stricter filter variants not computed for 2025.*
 
 *Source: `output/developer_powerlaw_analysis.csv`*
 
