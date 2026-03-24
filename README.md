@@ -27,8 +27,8 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 | Developer Type | α (2019) | α (2024) | α (2025*) | Δα (2019→2025) | Interpretation |
 |:--------------:|:--------:|:--------:|:--------:|:--------------:|:--------------:|
-| **Personal-only** | 1.99 | 1.78 | **1.80** | −0.19 | Concentrated early (COVID + AI), now stable |
-| **Org developers** | 2.04 | 2.04 | **1.87** | −0.17 | Stable until 2025, now concentrating (AI lag) |
+| **Personal-only** | 1.99 | 1.78 | **1.80** | −0.19 | Rose early (COVID then AI), now stable |
+| **Org developers** | 2.04 | 2.04 | **1.87** | −0.17 | Stable until 2025, then rose (AI with lag) |
 
 *\*2025 data covers January–October only. GitHub's Events API removed commit details from PushEvent payloads on October 7, 2025; GH Archive data after this date lacks commit counts. See Data Caveats.*
 
@@ -36,17 +36,18 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 **Two distinct phases with different drivers:**
 
-*Phase 1 (2020-2024): Personal developers concentrate — COVID and early AI adoption.*
+*Phase 1 (2020-2024): Concentration rises among personal developers — COVID, then AI.*
 - Personal α dropped from 1.99 → 1.78 (crossed into "infinite variance" regime)
 - Sharpest drop was 2020-2021 (α: 1.95 → 1.86), during COVID — *before* Copilot launched (June 2022)
-- COVID likely created conditions (increased free time, remote work, coding education) that allowed early AI adopters to pull ahead quickly — **less adoption lag** among individuals who self-select into new tools
+- COVID created favorable conditions (increased free time, remote work, coding education boom)
+- When AI tools arrived (Copilot, June 2022), personal developers adopted them quickly — **minimal adoption lag** among individuals who self-select into new tools
 - Org developers remained stable at α ≈ 2.04 throughout this period
 
-*Phase 2 (2025): Org developers join the concentration trend — AI with adoption lag.*
+*Phase 2 (2025): Concentration rises among org developers — AI finally clears enterprise hurdles.*
 - Personal α stabilized at 1.80 (already heavily concentrated from Phase 1)
 - **Org α dropped sharply from 2.04 → 1.87** — the first significant change in 6 years
-- This coincides with AI coding tools going mainstream in enterprise settings: Claude Code (Feb 2025), Codex (May 2025)
-- Professional settings experienced **longer adoption lag**: organizational inertia, security reviews, procurement cycles, and code review processes delayed AI tool adoption compared to individuals
+- This coincides with enterprise AI coding tools reaching production-readiness: Claude Code (Feb 2025), Codex (May 2025)
+- Professional settings experienced **longer adoption lag**: security reviews, procurement cycles, and code review processes delayed AI tool adoption by ~2-3 years compared to individuals
 
 **What does this mean?**
 
@@ -288,7 +289,7 @@ Think of it this way:
 - **Low α (e.g., 1.5-1.8):** The tail is "fat" — extreme values are common. A small number of superstars capture most of the activity.
 - **α declining over time:** Concentration is *increasing*. The distribution is becoming more unequal.
 
-In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024). This means the probability of "superstar coders" with extreme commit counts *increased* — concentration got worse.
+In our data, personal developers' α fell from 1.99 (2019) to 1.78 (2024). This means extreme commit counts became *more common* — concentration increased significantly.
 
 **Statistical properties (Newman, 2005; Clauset et al., 2009):**
 - **α ≤ 2:** Infinite variance — the distribution has no stable mean; dominated by extreme values
@@ -323,9 +324,9 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 #### Key Observations
 
-*Phase 1 (2019-2024): Personal developers concentrate, orgs stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
+*Phase 1 (2019-2024): Concentration rises among personal developers; orgs remain stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
 
-*Phase 2 (2025): Org developers join the concentration trend.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to **1.87** — the first significant change in 6 years. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
+*Phase 2 (2025): Concentration rises among org developers.* The 2025 data (January–October) reveals a structural break: org developers' α dropped from 2.04 to **1.87** — the first significant change in 6 years. Meanwhile, personal developers' α stabilized at 1.80 (already heavily concentrated). Both groups now show similar concentration levels.
 
 *xmin interpretation.* For org developers, xmin jumped from 5-7 (2019-2024) to 25 (2025), suggesting the power law now applies only to the heavy tail rather than most of the distribution. This shift mirrors what happened to personal developers years earlier.
 
@@ -400,9 +401,9 @@ This supports our main finding: concentration is increasing, and our estimates a
 
 The key finding — that concentration increased among personal developers first (2020-2022) and org developers later (2025) — points to **adoption lag** as the critical factor. Both groups eventually concentrate; the difference is *when*, not *whether*.
 
-**Phase 1 (2020-2024): Personal developers concentrate first.**
+**Phase 1 (2020-2024): Concentration rises among personal developers first.**
 
-Personal developers faced no organizational barriers to adopting new tools or work patterns. COVID created favorable conditions (more free time, remote work normalization, coding education surge), and early AI tools (Copilot, June 2022) were immediately accessible to individuals. The result: rapid concentration as early adopters pulled ahead.
+Personal developers faced no organizational barriers to adopting new tools or work patterns. COVID created favorable conditions (more free time, remote work normalization, coding education surge), and when AI tools arrived (Copilot, June 2022), they were immediately accessible to individuals. The result: concentration increased rapidly as early adopters pulled ahead.
 
 - No procurement cycles or security reviews
 - No code review processes requiring team buy-in
