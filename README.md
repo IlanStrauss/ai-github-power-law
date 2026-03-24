@@ -8,7 +8,7 @@
 
 *Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?*
 
-**Short answer: Yes, but with adoption lag.** Personal developers concentrated during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then concentrated once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
+**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers stayed stable until 2025, then saw concentration rise once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
 
 ### Motivation
 
@@ -52,11 +52,11 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 Remember: **lower α = more concentration.** A declining α means extreme values (superstars) are becoming more common relative to typical developers.
 
-- *Personal developers:* Concentrated during COVID (2020-2021), with early AI tools accelerating the trend. Hobbyists and individuals self-selected into productivity tools quickly — **minimal adoption lag**. By 2024, concentration had plateaued because early adopters already dominated.
+- *Personal developers:* Concentration increased sharply during COVID (2020-2021), with early AI tools accelerating the trend. Hobbyists and individuals self-selected into productivity tools quickly — **minimal adoption lag**. By 2024, concentration had plateaued because early adopters already dominated.
 
 - *Org developers:* Were insulated through 2024, likely because team structures, code review processes, and organizational procurement cycles created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and began amplifying individual productivity even within professional settings.
 
-**The adoption lag hypothesis:** Personal developers concentrated first because individuals adopt new tools faster than organizations. Org developers concentrated later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
+**The adoption lag hypothesis:** Concentration rose among personal developers first because individuals adopt new tools faster than organizations. Org developers saw concentration rise later (2025) once AI tools cleared enterprise adoption hurdles. The ~2-3 year lag between personal concentration (2020-2022) and org concentration (2025) reflects typical enterprise technology adoption cycles.
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* org repos (open-source foundations, public company projects).
 
