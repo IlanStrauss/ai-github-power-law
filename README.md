@@ -209,6 +209,9 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 113,981 | 180,882 | 294,863 | 61.3% |
 | 2023 | 124,041 | 198,435 | 322,476 | 61.5% |
 | 2024 | 131,530 | 224,719 | 356,249 | 63.1% |
+| **2025†** | **89,456** | **—** | **—** | **—** |
+
+*†2025 data: January–October only (10 months). Single-repo breakdown not available for 2025 extraction.*
 
 *Source: GH Archive PushEvents, sampled 1st of each month at 00:00, 06:00, 12:00, 18:00 UTC. Filters applied: bot exclusion, ≥3 commits/year, ≤10,000 commits/year.*
 
@@ -222,6 +225,9 @@ Multi-repo contributors are more likely to represent human developers working ac
 | 2022 | 2,865,724 | 25.1 | 6 | 22 | 321 |
 | 2023 | 3,132,816 | 25.3 | 6 | 21 | 339 |
 | 2024 | 7,463,885 | 56.7 | 6 | 25 | 1,287 |
+| **2025†** | **2,180,740** | **24.4** | **5** | **18** | **295** |
+
+*†2025 data: January–October only (10 months).*
 
 *Source: GH Archive PushEvents (distinct_size only). Multi-repo sample: accounts contributing to 2+ repositories per year.*
 
@@ -245,8 +251,11 @@ This classification proxies for professional developers (who often contribute to
 | 2022 | 20,764 | 92,200 | 18.4% |
 | 2023 | 23,411 | 99,585 | 19.0% |
 | 2024 | 25,490 | 102,204 | 20.0% |
+| **2025†** | **18,285** | **71,171** | **20.4%** |
 
-*Source: `output/org_developer_analysis.csv`.*
+*†2025 data: January–October only (10 months). Lower absolute counts reflect truncated year.*
+
+*Source: `output/org_developer_analysis.csv`, `output/filtered_developers_2025.csv`.*
 
 **Caveat:** GH Archive contains only **public repositories**. Private organization repos (where most enterprise development occurs) are not captured. Our "org developers" are those contributing to *public* organization repos (open-source foundations, public company projects like tensorflow, kubernetes, etc.).
 
@@ -483,8 +492,11 @@ python scripts/02a_power_law_from_sample.py
 | 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
 | 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
 | 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
+| **2025†** | **89,456** | **57.7%** | **78.3%** | **0.797** | **59** |
 
-*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`*
+*†2025 data: January–October only (10 months).*
+
+*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`, `output/descriptive_stats_2025.csv`*
 
 ### A.4 AI Detection in Commit Messages
 
@@ -521,8 +533,12 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 | 2022 | 20,764 | 1.911 | [1.882, 2.092] |
 | 2023 | 23,411 | 2.055 | [1.827, 2.074] |
 | 2024 | 25,490 | 2.037 | [1.967, 2.073] |
+| **2025†** | **18,285** | **1.866** | **[1.816, 2.130]** |
+
+*†2025 data: January–October only (10 months).*
 
 *Significance test (2019 vs 2024): Δα = 0.003, 95% CI [−0.090, 0.072]. Not significant — CI includes 0.*
+*Significance test (2024 vs 2025): Δα = 0.171 — org concentration increased sharply in 2025.*
 
 *Source: `output/bootstrap_org_developers.csv`*
 
@@ -536,6 +552,9 @@ We estimate bootstrap confidence intervals (500 iterations) for the power law ex
 | 2022 | 92,200 | 1.826 | [1.800, 2.163] |
 | 2023 | 99,585 | 1.817 | [1.795, 2.183] |
 | 2024 | 102,204 | 1.779 | [1.765, 2.168] |
+| **2025†** | **71,171** | **1.798** | **[1.768, 2.156]** |
+
+*†2025 data: January–October only (10 months).*
 
 *Source: `output/bootstrap_personal_developers.csv`*
 
@@ -595,8 +614,11 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 1.85 | 36 | -6.47 | Log-normal |
 | 2023 | 1.82 | 40 | -14.32 | Log-normal |
 | 2024 | 1.63 | 30 | -31.58 | Log-normal |
+| **2025†** | **1.81** | **35** | **-2.49** | **Log-normal** |
 
-*Interpretation: α declined from 1.96 to 1.63 — indicating substantial increase in concentration. Lower α = heavier tail = more activity captured by superstars. Source: `output/multi_repo_analysis.csv`*
+*†2025 data: January–October only (10 months).*
+
+*Interpretation: α declined from 1.96 to 1.63 (2019-2024), then rose to 1.81 in 2025. The 2025 increase may reflect: (a) 10-month truncation reducing extreme outliers, or (b) sampling differences. Source: `output/multi_repo_analysis.csv`, `output/filtered_developers_2025.csv`*
 
 **xmin interpretation:** The xmin parameter (25-40 commits/year) identifies where power law behavior begins — roughly 2-4 commits/month. Developers above this threshold are in the heavy tail.
 
@@ -612,6 +634,9 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 56.4% | 53.7% | -2.7pp |
 | 2023 | 60.2% | 54.6% | -5.6pp |
 | 2024 | 68.9% | 63.9% | -5.0pp |
+| **2025†** | **—** | **57.7%** | **—** |
+
+*†2025 data: January–October only. Full sample comparison not available for 2025 extraction.*
 
 *Finding:* Both samples show the same upward trend. Multi-repo filter reduces concentration by 3-5pp but trend is robust.
 
@@ -625,6 +650,9 @@ Combining all multi-repo developers (org + personal):
 | 2022 | 1.85 | 1.81 | 1.80 |
 | 2023 | 1.82 | 1.81 | 1.80 |
 | 2024 | 1.63 | 1.64 | 1.64 |
+| **2025†** | **1.81** | **—** | **—** |
+
+*†2025 data: January–October only. Stricter filter variants not computed for 2025.*
 
 *Source: `output/developer_powerlaw_analysis.csv`*
 
