@@ -8,7 +8,7 @@
 
 *Is GitHub commit activity becoming more concentrated among fewer developers? Has this concentration accelerated with the rise of AI coding tools (Copilot, Claude Code, Cursor)?*
 
-**Short answer: Yes, but with adoption lag.** Concentration among personal developers increased sharply during COVID (2020-2022), with early AI tools accelerating the trend. Org developers saw slow concentration growth through 2024, then sharply accelerated in 2025 once enterprise AI tools cleared adoption hurdles. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
+**Short answer: Yes, with different timing across groups.** Concentration among personal developers increased sharply during 2020-2022. Org developers saw slow concentration growth through 2024, then sharp acceleration in 2025. The timing patterns are *consistent with* differential adoption of productivity tools, though we cannot establish causation. We assess this using power law analysis of commit distributions across 2019-2025 (through October 31).
 
 ### Motivation
 
@@ -34,7 +34,7 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 *Notes: "Personal-only" = zero commits to org repos. "Org developers" = at least one commit to a public org repo (Google, Microsoft, Apache, etc.). α estimated via Clauset-Shalizi-Newman (2009). Source: `output/powerlaw_2025.csv`, `output/powerlaw_lognormal_comparison.csv`.*
 
-**Two distinct phases with different drivers:**
+**Two distinct phases:**
 
 *Phase 1 (2020-2024): Concentration rises among personal developers — COVID, then AI.*
 - Personal α dropped from 1.99 → 1.78 (crossed into "infinite variance" regime)
@@ -53,9 +53,9 @@ We analyze GitHub commit concentration from 2019-2025 (through October 31) among
 
 Remember: **lower α = more concentration.** A declining α means extreme values (superstars) are becoming more common relative to typical developers.
 
-- *Personal developers:* Concentration increased sharply during COVID (2020-2021), with early AI tools accelerating the trend. Hobbyists and individuals self-selected into productivity tools quickly — **minimal adoption lag**. By 2024, concentration had plateaued because early adopters already dominated.
+- *Personal developers:* Concentration increased sharply 2020-2021, then continued through 2024. By 2024-2025, concentration had stabilized at high levels.
 
-- *Org developers:* Saw slow concentration growth through 2024, likely dampened by team structures, code review processes, and organizational procurement cycles that created **adoption lag** for new AI tools. **In 2025, this lag ended.** Enterprise AI coding tools became production-ready (Claude Code, Codex), passed security reviews, and concentration sharply accelerated.
+- *Org developers:* Concentration was flat through 2024, then sharply accelerated in 2025. This timing coincides with enterprise AI coding tools reaching production readiness.
 
 **The adoption lag hypothesis:** The timing pattern — personal developers concentrating first (2020-2022), org developers later (2025) — is *consistent with* differential adoption speeds. Individuals face fewer barriers to new tool adoption than organizations, which must navigate procurement, security reviews, and workflow integration. The ~2-3 year gap aligns with typical enterprise technology adoption cycles, though we cannot rule out alternative explanations.
 
@@ -426,7 +426,7 @@ Our analysis applies a 10,000 commits/year ceiling to exclude automated accounts
 
 The 6.6× increase in 2024 (175 → 1,155 accounts exceeding 10,000 commits) suggests a notable shift in automated commit activity — possibly enterprise-scale CI/CD, AI-assisted bulk operations, or monorepo automation at large companies. In 2024, 180 accounts hit our 10,000-commit ceiling; their true counts could be 50k, 100k, or higher. One account had 2.84 million commits before filtering.
 
-This creates a **conservative bias** in our 2024 concentration estimates. If we included these accounts at their true commit counts, concentration would be even higher. Our findings are therefore lower bounds on actual concentration
+This creates a **conservative bias** in our 2024 concentration estimates. If we included these accounts at their true commit counts, concentration would be even higher. Our findings are therefore lower bounds on actual concentration.
 
 ---
 
@@ -496,89 +496,6 @@ python scripts/01a_download_gharchive_direct.py \
 # Run analysis
 python scripts/02a_power_law_from_sample.py
 ```
-
-### A.3 Concentration Measures (Multi-Repo Sample)
-
-| Year | Accounts | Top 1% Share | Top 10% Share | Gini | P99/P50 |
-|:----:|:--------:|:------------:|:-------------:|:----:|:-------:|
-| 2019 | 64,406 | 45.3% | 71.9% | 0.750 | 45 |
-| 2020 | 88,765 | 47.8% | 72.2% | 0.753 | 44 |
-| 2021 | 102,867 | 52.2% | 75.2% | 0.779 | 51 |
-| 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
-| 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
-| 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
-| 2025 | 89,456 | 57.7% | 78.3% | 0.797 | 59 |
-
-*2025 data: January–October only (10 months).*
-
-*Source: GH Archive PushEvents. Multi-repo sample (n_repos ≥ 2). Output file: `output/multi_repo_analysis.csv`, `output/descriptive_stats_2025.csv`*
-
-### A.4 AI Detection in Commit Messages
-
-| Year | Total Commits | AI-Attributed | Rate |
-|:----:|:-------------:|:-------------:|:----:|
-| 2019 | 1,936,241 | 0 | 0.000% |
-| 2020 | 2,803,770 | 0 | 0.000% |
-| 2021 | 3,716,022 | 0 | 0.000% |
-| 2022 | 4,615,220 | 0 | 0.000% |
-| 2023 | 6,259,638 | 50 | 0.001% |
-| 2024 | 7,882,625 | 115 | 0.001% |
-| 2025 | 2,180,740 | — | — |
-
-*2025: AI detection not computed. GH Archive schema change (Oct 7, 2025) removed commit message details required for pattern matching.*
-
-*Detection patterns: `aider:` prefix (72 commits in 2024), `Co-authored-by: Copilot` (23), `generated by GPT/Claude/Copilot` (18), `AI-generated code` (2).*
-
-Only 0.001% of commits have explicit AI markers, despite industry surveys suggesting 30-50% of developers use AI tools. Most AI usage leaves no trace in commit messages.
-
-### A.6 The Human-AI Measurement Problem
-
-When a developer uses Copilot to write 50% of their code, whose productivity are we measuring? The distinction between "human productivity" and "AI-assisted productivity" is increasingly blurred. This creates fundamental challenges for labor productivity statistics, individual performance evaluation, and attribution of open-source contributions.
-
-Independent analysis by [Star History (2026)](https://www.star-history.com/blog/state-of-coding-ai-on-github) using the same GH Archive data finds AI coding tools now account for 60% of bot PR reviews (up from 20% at start of 2025) and 9-10% of bot-created PRs. However, they note these statistics "only capture PRs authored by bot accounts, not AI-written code submitted under human developer names" — confirming that explicit AI attribution is a floor, not a ceiling.
-
-### A.7 Bootstrap Confidence Intervals
-
-We estimate bootstrap confidence intervals (500 iterations) for the power law exponent α:
-
-**Org Developers:**
-
-| Year | n | α | 95% CI |
-|:----:|:---:|:-----:|:----------------:|
-| 2019 | 9,824 | 2.037 | [1.955, 2.082] |
-| 2020 | 14,502 | 2.063 | [2.024, 2.097] |
-| 2021 | 18,253 | 2.075 | [1.960, 2.106] |
-| 2022 | 20,764 | 1.911 | [1.882, 2.092] |
-| 2023 | 23,411 | 2.055 | [1.827, 2.074] |
-| 2024 | 25,490 | 2.037 | [1.967, 2.073] |
-| 2025 | 18,285 | 1.866 | [1.816, 2.130] |
-
-*2025 data: January–October only (10 months).*
-
-*Significance test (2019 vs 2024): Δα = 0.003, 95% CI [−0.090, 0.072]. Not significant — CI includes 0.*
-*Significance test (2024 vs 2025): Δα = 0.171 — org concentration increased sharply in 2025.*
-
-*Source: `output/bootstrap_org_developers.csv`*
-
-**Personal-Only Developers:**
-
-| Year | n | α | 95% CI |
-|:----:|:-------:|:-----:|:------------------:|
-| 2019 | 53,945 | 1.991 | [1.958, 2.031] |
-| 2020 | 73,483 | 1.946 | [1.918, 1.978] |
-| 2021 | 83,614 | 1.860 | [1.839, 2.168] |
-| 2022 | 92,200 | 1.826 | [1.800, 2.163] |
-| 2023 | 99,585 | 1.817 | [1.795, 2.183] |
-| 2024 | 102,204 | 1.779 | [1.765, 2.168] |
-| 2025 | 71,171 | 1.798 | [1.768, 2.156] |
-
-*2025 data: January–October only (10 months).*
-
-*Source: `output/bootstrap_personal_developers.csv`*
-
-The point estimates show a clear declining trend in α for personal developers (1.991 → 1.779), consistent with increasing concentration. However, the wide confidence intervals in later years (due to high variance in the heavy tail) mean we cannot reject the null hypothesis of no change when comparing 2019 to 2024 directly. The pattern across all six years is more informative than any single pairwise comparison.
-
-*Note on widening CIs:* The confidence intervals widen substantially after 2020 (e.g., 2024: [1.765, 2.168] vs 2019: [1.958, 2.031]). This widening is itself evidence of increasing concentration — as α declines and the tail gets heavier, the distribution's variance increases, making α harder to estimate precisely. The instability in estimation reflects the instability in the underlying distribution.
 
 ---
 
@@ -717,9 +634,69 @@ We create separate Zipf plots for org and personal developers to avoid conflatin
 
 ![Zipf Rank-Size Plot: Personal Developers](output/zipf_personal_developers.png)
 
-*Figure: Zipf rank-size plot for personal developers. Similar concentration pattern, with earlier divergence (2020-2021) reflecting faster AI tool adoption among individuals.*
+*Figure: Zipf rank-size plot for personal developers. Similar concentration pattern, with earlier divergence (2020-2021).*
 
----
+### A.6 Concentration Measures (Multi-Repo Sample)
+
+| Year | Accounts | Top 1% Share | Top 10% Share | Gini | P99/P50 |
+|:----:|:--------:|:------------:|:-------------:|:----:|:-------:|
+| 2019 | 64,406 | 45.3% | 71.9% | 0.750 | 45 |
+| 2020 | 88,765 | 47.8% | 72.2% | 0.753 | 44 |
+| 2021 | 102,867 | 52.2% | 75.2% | 0.779 | 51 |
+| 2022 | 113,981 | 53.7% | 76.1% | 0.787 | 54 |
+| 2023 | 124,041 | 54.6% | 76.9% | 0.792 | 56 |
+| 2024 | 131,530 | 63.9% | 89.2% | 0.895 | 215 |
+| 2025 | 89,456 | 57.7% | 78.3% | 0.797 | 59 |
+
+*2025 data: January–October only. Source: `output/multi_repo_analysis.csv`, `output/descriptive_stats_2025.csv`*
+
+### A.7 AI Detection in Commit Messages
+
+| Year | Total Commits | AI-Attributed | Rate |
+|:----:|:-------------:|:-------------:|:----:|
+| 2019 | 1,936,241 | 0 | 0.000% |
+| 2020 | 2,803,770 | 0 | 0.000% |
+| 2021 | 3,716,022 | 0 | 0.000% |
+| 2022 | 4,615,220 | 0 | 0.000% |
+| 2023 | 6,259,638 | 50 | 0.001% |
+| 2024 | 7,882,625 | 115 | 0.001% |
+| 2025 | 2,180,740 | — | — |
+
+*Detection patterns: `aider:` prefix (72 commits in 2024), `Co-authored-by: Copilot` (23), `generated by GPT/Claude/Copilot` (18). Only 0.001% of commits have explicit AI markers, despite surveys suggesting 30-50% of developers use AI tools.*
+
+### A.8 Bootstrap Confidence Intervals
+
+We estimate bootstrap confidence intervals (500 iterations) for the power law exponent α.
+
+**Org Developers:**
+
+| Year | n | α | 95% CI |
+|:----:|:---:|:-----:|:----------------:|
+| 2019 | 9,824 | 2.037 | [1.955, 2.082] |
+| 2020 | 14,502 | 2.063 | [2.024, 2.097] |
+| 2021 | 18,253 | 2.075 | [1.960, 2.106] |
+| 2022 | 20,764 | 1.911 | [1.882, 2.092] |
+| 2023 | 23,411 | 2.055 | [1.827, 2.074] |
+| 2024 | 25,490 | 2.037 | [1.967, 2.073] |
+| 2025 | 18,285 | 1.866 | [1.816, 2.130] |
+
+*Source: `output/bootstrap_org_developers.csv`*
+
+**Personal-Only Developers:**
+
+| Year | n | α | 95% CI |
+|:----:|:-------:|:-----:|:------------------:|
+| 2019 | 53,945 | 1.991 | [1.958, 2.031] |
+| 2020 | 73,483 | 1.946 | [1.918, 1.978] |
+| 2021 | 83,614 | 1.860 | [1.839, 2.168] |
+| 2022 | 92,200 | 1.826 | [1.800, 2.163] |
+| 2023 | 99,585 | 1.817 | [1.795, 2.183] |
+| 2024 | 102,204 | 1.779 | [1.765, 2.168] |
+| 2025 | 71,171 | 1.798 | [1.768, 2.156] |
+
+*Source: `output/bootstrap_personal_developers.csv`. 2025 data: January–October only.*
+
+The point estimates show a declining trend in α for personal developers (1.991 → 1.779). The wide confidence intervals in later years reflect increased variance as the tail gets heavier.
 
 ---
 
