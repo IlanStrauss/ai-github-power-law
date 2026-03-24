@@ -331,6 +331,10 @@ We estimate power law exponents α separately for **org developers** (contribute
 
 *†2025 data: January 1 – October 31 only. GitHub removed commit details from PushEvent payloads on October 7, 2025. Lower sample sizes in 2025 reflect 10 months vs. 12 months for other years.*
 
+![Power Law α: Org vs Personal Developers (2019-2025)](output/powerlaw_alpha_comparison.png)
+
+*Figure: Power law exponent α over time. Lower α = more concentration. Personal developers (red) show steady decline 2019-2024, then stabilize. Org developers (blue) remain stable until 2025, then drop. The α = 2 line marks the "infinite variance" threshold.*
+
 #### Key Observations
 
 *Phase 1 (2019-2024): Concentration rises among personal developers; orgs remain stable.* Personal developers' α declined steadily from 1.99 to 1.78, crossing into the "infinite variance" regime. The sharpest drop was 2020-2021 (during COVID, before mass AI tool adoption). Org developers remained remarkably stable at α ≈ 2.04 throughout this period.
