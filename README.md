@@ -540,27 +540,51 @@ python scripts/02a_power_law_from_sample.py
 
 ## Appendix A: Pooled Sample Analysis and Robustness
 
-### A.1 Pooled Power Law Estimates
+### A.1 Power Law Estimates by Developer Type
 
-Combining all multi-repo developers (org + personal):
+The pooled estimates obscure the different trajectories for org vs. personal developers. Table A.1 shows the full breakdown:
 
-| Year | α (exponent) | xmin | R (vs. log-normal) | Best Fit |
-|------|--------------|------|--------------------|----------|
-| 2019 | 1.96 | 25 | -3.16 | Log-normal |
-| 2020 | 1.93 | 34 | -5.64 | Log-normal |
-| 2021 | 2.09 | 5 | +6.33 | Power law |
-| 2022 | 1.85 | 36 | -6.47 | Log-normal |
-| 2023 | 1.82 | 40 | -14.32 | Log-normal |
-| 2024 | 1.63 | 30 | -31.58 | Log-normal |
-| 2025 | 1.81 | 35 | -2.49 | Log-normal |
+**Organization Developers:**
 
-*2025 data: January–October only (10 months).*
+| Year | n | α | xmin | R | Trend |
+|:----:|:-----:|:----:|:----:|:-----:|:------|
+| 2019 | 9,824 | 2.04 | 6 | +3.05 | Baseline |
+| 2020 | 14,502 | 2.06 | 7 | +1.98 | Stable |
+| 2021 | 18,253 | 2.08 | 7 | +3.31 | Stable |
+| 2022 | 20,764 | 1.91 | 37 | −0.97 | Stable |
+| 2023 | 23,411 | 2.06 | 6 | −0.95 | Stable |
+| 2024 | 25,490 | 2.04 | 5 | +6.83 | Stable |
+| 2025 | 18,285 | 1.87 | 25 | −0.31 | **Sharp drop** |
 
-*Interpretation: α declined from 1.96 to 1.63 (2019-2024), then rose to 1.81 in 2025. The 2025 increase may reflect: (a) 10-month truncation reducing extreme outliers, or (b) sampling differences. Source: `output/multi_repo_analysis.csv`, `output/filtered_developers_2025.csv`*
+**Change:** α stable at ~2.04 (2019-2024), then dropped to 1.87 in 2025 (−0.17 in one year).
 
-**xmin interpretation:** The xmin parameter (25-40 commits/year) identifies where power law behavior begins — roughly 2-4 commits/month. Developers above this threshold are in the heavy tail.
+**Personal-Only Developers:**
 
-**Log-normal vs power law:** Negative R values indicate log-normal body with power-law tail — consistent with Gabaix (2016) on productivity distributions.
+| Year | n | α | xmin | R | Trend |
+|:----:|:-------:|:----:|:----:|:-----:|:------|
+| 2019 | 53,945 | 1.99 | 25 | −1.16 | Baseline |
+| 2020 | 73,483 | 1.95 | 33 | −1.36 | Declining |
+| 2021 | 83,614 | 1.86 | 39 | −2.15 | **Sharp drop** |
+| 2022 | 92,200 | 1.83 | 40 | −2.74 | Declining |
+| 2023 | 99,585 | 1.82 | 38 | −2.68 | Declining |
+| 2024 | 102,204 | 1.78 | 45 | −3.11 | Declining |
+| 2025 | 71,171 | 1.80 | 33 | −2.00 | Stabilized |
+
+**Change:** α declined steadily from 1.99 → 1.78 (2019-2024), then stabilized at 1.80 in 2025.
+
+*2025 data: January–October only (10 months). Source: `output/powerlaw_lognormal_comparison.csv`, `output/powerlaw_2025.csv`*
+
+**Key patterns:**
+
+1. **Personal developers concentrated early (2020-2022).** The sharpest decline was 2020-2021 (α: 1.95 → 1.86), during COVID but before mass AI adoption. By 2024, concentration had stabilized.
+
+2. **Org developers concentrated late (2025).** α remained essentially flat from 2019-2024 (~2.04), then dropped sharply to 1.87 in 2025 — a ~3-year lag relative to personal developers.
+
+3. **Both converging toward α ≈ 1.8.** Despite different timing, both groups are approaching similar concentration levels in the infinite-variance regime (α < 2).
+
+**xmin interpretation:** The xmin parameter identifies where power law behavior begins. For personal developers, xmin ≈ 25-45 commits/year (2-4 commits/month). For org developers pre-2025, xmin ≈ 5-7 commits/year, but jumped to 25 in 2025, consistent with concentration shifting to the heavy tail.
+
+**Log-normal vs power law:** Negative R values for personal developers indicate log-normal body with power-law tail — consistent with Gabaix (2016) on productivity distributions. Positive R for org developers in early years suggests cleaner power law behavior, which shifted in 2025.
 
 ### A.2 Robustness: Full Sample vs. Multi-Repo
 
