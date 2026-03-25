@@ -19,6 +19,38 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 - **Institutional economics:** We can understand the role of institutions and work processes in mediating how AI is used and impacts worker productivity
 - **Platform governance:** Concentration affects power dynamics in open-source communities
 
+### What We're Measuring: Concentration and Power Laws
+
+**Concentration** refers to the degree to which activity is dominated by a small number of top performers. In labor markets, concentration manifests as "superstar" dynamics: a small fraction of workers capturing a disproportionate share of output, earnings, or market share. The key question is not whether top performers exist — they always do — but rather *how dominant* they are relative to typical workers, and whether this dominance is increasing over time.
+
+**Why power laws?** Power laws describe a world where advantage compounds without a natural ceiling — and the mathematical result is concentration so extreme it defies normal intuition. When activity follows a power law, the distribution isn't merely skewed; it's *skewed at every level in exactly the same way*. This is called scale-invariance: the top 1% dominate the bottom 99% by the same ratio as the top 0.01% dominate the bottom 0.99%, all the way down. There is no natural middle, no typical value around which things cluster the way heights cluster around average.
+
+This is fundamentally different from normal (Gaussian) distributions. In a normal distribution, extreme values are exponentially rare — 6-sigma events are essentially impossible. In a power law, extreme values are merely *polynomially* rare — they're uncommon but not impossible. This is why GitHub can have developers with 10,000+ commits per year while the median is just 6.
+
+**The power law exponent α controls how severe concentration is:**
+
+- **At α = 1.5:** Concentration is so extreme that mean commits across the whole distribution can be *mathematically infinite*. You could sample a million developers and the average would keep climbing, because each new superstar coder encountered pulls it higher. The largest entities are overwhelmingly dominant.
+
+- **At α = 2.0:** This is the threshold. Below this value, the distribution has infinite variance — the sample mean becomes unstable and dominated by outliers. Above it, a stable mean exists but the tail is still heavy.
+
+- **At α = 2.5:** Concentration is still substantial — the top 10% might capture 70% of commits — but the tail eventually thins and all statistical moments are finite.
+
+In our data, personal developers declined from α = 1.99 (2019) to α = 1.78 (2024), crossing into the infinite-variance regime. Org developers dropped from α = 2.04 to α = 1.87 (2025), also crossing this threshold. These values are comparable to wealth distributions in the top tail (α between 1.5 and 2.0; Pareto, 1896; Gabaix, 2009), where similar compounding dynamics operate.
+
+**What power laws reveal that traditional measures hide.** The Gini coefficient and top-k shares tell us the *degree* of inequality — how much activity the top captures — but they don't reveal its *architecture*. Two populations can share an identical Gini score while having completely different power law exponents: one has a large prosperous middle class with some superstars at the top, the other has a small elite sitting atop a flat mass below. Same aggregate inequality, different worlds.
+
+Power law analysis reveals the underlying structure:
+
+1. **The exponent α captures the *mechanism* driving concentration.** Power laws emerge from preferential attachment processes — "rich-get-richer" dynamics where success breeds more success. When productive developers gain visibility, attract collaborators, or adopt productivity-enhancing tools, their advantages compound. The exponent α measures *how strong* this compounding effect is.
+
+2. **Changes in α reveal *how the system is evolving*.** A declining α means extreme values are becoming more probable — the distribution's tail is getting heavier. This signals that whatever process generates concentration (skill premiums, productivity tools, network effects) is intensifying over time.
+
+**Why this matters for understanding AI's impact.** If AI coding tools amplify productivity uniformly — a rising tide lifting all boats — we'd expect the *mean* to shift rightward but the distribution's *shape* to remain stable. The Gini coefficient might barely move. But if AI tools create compounding advantages — helping top developers pull further ahead through faster iteration, better code quality, or ability to manage larger projects — we'd expect α to *decline*. The distribution becomes more winner-take-all. This is exactly what we observe: personal developers' α fell from 1.99 to 1.78 (2019-2024), and org developers' α dropped from 2.04 to 1.87 (2025).
+
+By tracking α over time and across developer groups, we can identify *when* concentration increased (2020-2022 for personal developers, 2025 for org developers), *how much* it increased (personal α declined by 0.21 points, org α by 0.17 points), and *whether different populations follow different trajectories* (they do — with a ~3-year lag). This granularity helps distinguish between competing explanations (COVID effects vs. AI adoption, institutional barriers vs. skill differences) in ways that simple top-1% shares cannot.
+
+**In short:** We're measuring concentration by estimating the shape of the commit distribution and tracking how that shape changes over time. Power laws provide the framework because they describe systems where advantage accumulates without a natural ceiling — the signature of any winner-take-all market. The Pareto principle keeps appearing across wealth, corporate revenue, and platform activity not as a loose rule of thumb but as the mathematical signature of compounding advantage. The exponent α quantifies how extreme this compounding has become.
+
 ### Key Findings
 
 **The rise of superstar coders happened in two waves — and these superstars are becoming *more* persistent over time, not less.**
