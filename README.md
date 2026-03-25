@@ -598,15 +598,15 @@ This pattern is consistent with a "superstar coder" hypothesis: concentration ma
 
 ### A.5 Zipf Rank-Size Plots
 
-The Zipf plot ranks developers from highest commits (rank 1) to lowest on log-log axes. A line sitting *higher* means developers at each rank contribute more commits. If lines diverge over time, concentration is increasing.
+The Zipf rank-size plot provides a visual complement to the power law estimates. Developers are ranked from highest commits (rank 1) to lowest and plotted on log-log axes. When a year's line sits higher than previous years, developers at each rank are contributing more commits — and if the gap widens at low ranks (top performers), this indicates increasing concentration at the top of the distribution.
 
 <img src="output/zipf_org_developers.png" width="500">
 
-*Org developers: Lines cluster tightly 2019-2024, then 2025 shifts upward at low ranks — top performers pulled ahead sharply in 2025.*
+For organization developers, the annual distributions cluster tightly together from 2019 through 2024, consistent with the stable α values reported in Table 1. The lines are nearly indistinguishable, suggesting little change in the shape of the commit distribution over this period. However, the 2025 line shifts noticeably upward, particularly at low ranks (the top 100-1000 developers). This visual pattern confirms the sharp α decline observed in 2025: top-performing org developers pulled significantly ahead of where they would have been in previous years.
 
 <img src="output/zipf_personal_developers.png" width="500">
 
-*Personal developers: Lines diverge earlier (2020-2021 onward), with 2024 sitting notably higher at low ranks. Concentration increased steadily, then stabilized.*
+For personal developers, the pattern differs. The lines begin diverging earlier, starting around 2020-2021, with each subsequent year sitting slightly higher than the last. By 2024, the gap between the 2019 baseline and current distribution is substantial, especially at low ranks. This gradual upward drift corresponds to the steady α decline from 1.99 to 1.78 documented in the main analysis. The 2025 line sits close to 2024, consistent with α stabilizing near 1.80. In short, personal developers experienced concentration earlier and more gradually, while org developers remained stable until a sharp 2025 shift.
 
 ### A.6 Concentration Measures (Multi-Repo Sample)
 
