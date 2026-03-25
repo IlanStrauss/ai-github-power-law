@@ -118,10 +118,7 @@ GitHub [announced](https://github.blog/changelog/2025-08-08-upcoming-changes-to-
 - `commits`, `size`, and `distinct_size` are **no longer part of the payload**
 - GH Archive records GitHub's Events API verbatim, so GH Archive inherited this change
 
-**Impact on this analysis:**
-- **Our 2025 data covers January 1 – October 31 only** (10 months)
-- All 2025 figures, sample sizes, and comparisons reflect this truncated year
-- November 2025 onward cannot be analyzed using commit-based metrics from GH Archive
+**Impact on this analysis:** Our 2025 data covers January 1 – October 31 only (10 months). All 2025 figures, sample sizes, and comparisons reflect this truncated year. We attempted to extend the analysis into 2026, but GH Archive files from November 2025 onward no longer contain commit counts — the `distinct_size` field we rely on is simply absent from the data. This schema change is permanent, meaning commit-based concentration analysis using GH Archive is no longer possible for periods after October 2025.
 
 *Note: GitHub webhooks still include the full `commits` array — this is specifically an Events API / GH Archive limitation, not a universal GitHub change.*
 
