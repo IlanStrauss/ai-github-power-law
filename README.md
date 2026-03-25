@@ -23,9 +23,9 @@ GitHub hosts over 100 million developers and serves as the primary platform for 
 
 **Concentration** refers to the degree to which activity is dominated by a small number of top performers. In labor markets, concentration manifests as "superstar" dynamics: a small fraction of workers capturing a disproportionate share of output, earnings, or market share. The key question is not whether top performers exist — they always do — but rather *how dominant* they are relative to typical workers, and whether this dominance is increasing over time.
 
-**Why power laws?** Power laws describe a world where advantage compounds without a natural ceiling — and the mathematical result is concentration so extreme it defies normal intuition. When activity follows a power law, the distribution isn't merely skewed; it's *skewed at every level in exactly the same way*. This is called scale-invariance: the top 1% dominate the bottom 99% by the same ratio as the top 0.01% dominate the bottom 0.99%, all the way down. There is no natural middle, no typical value around which things cluster the way heights cluster around average.
+**Why power laws?** Power laws describe a world where advantage compounds without a natural ceiling — and the mathematical result is concentration so extreme it defies normal intuition. Power laws are scale-invariant: the top 1% dominate the bottom 99% by the same ratio as the top 0.01% dominate the bottom 0.99%, all the way down. There is no natural middle, no typical value around which things cluster the way heights cluster around average.
 
-This is fundamentally different from normal (Gaussian) distributions. In a normal distribution, extreme values are exponentially rare — 6-sigma events are essentially impossible. In a power law, extreme values are merely *polynomially* rare — they're uncommon but not impossible. This is why GitHub can have developers with 10,000+ commits per year while the median is just 6.
+Normal (Gaussian) distributions behave differently. Extreme values are exponentially rare — 6-sigma events almost never occur. In power laws, extreme values are polynomially rare, which means they're uncommon but far from impossible. This is why GitHub can have developers with 10,000+ commits per year while the median is just 6.
 
 **The power law exponent α controls how severe concentration is:**
 
