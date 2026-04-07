@@ -1,4 +1,4 @@
-# Power Laws in GitHub Commits: A growing, competitive, and concentrated ecosystem 
+# Power Laws in GitHub Commits: New Arrivals, Not Superstars 
 
 ## 1. Introduction
 
