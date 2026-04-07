@@ -12,25 +12,46 @@ GitHub provides a natural laboratory to test this hypothesis. The platform hosts
 
 We find that commit distributions follow a power law, where a small number of developers account for a disproportionate share of total output. The *power law exponent* α measures concentration: lower α means heavier tails, with top contributors capturing more. Between 2019 and 2024, α declined from 2.0 to 1.8 — concentration increased.
 
-But does this pattern reflect AI amplifying superstars? Or something else entirely? Two competing hypotheses offer different interpretations.
+But does this pattern reflect AI amplifying superstars? Or something else entirely?
+
+### Software Engineering as a Proxy for the AI-Transformed Economy
+
+Software development is among the first occupations to experience widespread AI augmentation. Coding assistants launched at scale in 2022, and by 2024 a majority of professional developers report using them regularly. If AI transforms how work is distributed — who does it, how much they produce, whether advantages compound — software engineering should show these effects first.
+
+GitHub commit data offers a window into this transformation. Unlike most labor markets where output is unobservable, commits provide a direct, continuous measure of individual contribution. Understanding whether AI is creating persistent "superstars" versus merely changing who participates has implications far beyond software: it speaks to how AI will reshape digital work more broadly.
+
+Two theoretical perspectives offer competing predictions.
 
 ### Two Competing Hypotheses
 
-**Hypothesis A: "AI Is Creating Superstar Developers"**
+**Hypothesis A: "AI Amplifies Human Capital" (Skill-Biased Technological Change)**
 
-AI coding tools (Copilot, ChatGPT, Cursor) amplify the productivity of developers who are already highly skilled. The best developers adopt these tools first, learn to use them most effectively, and pull further ahead. Their output compounds: more commits lead to more visibility, which attracts collaborators and opportunities, generating still more commits. The same individuals dominate year after year, and the gap between top performers and everyone else widens. In this view, declining α signals dynamic concentration — a "rich-get-richer" process where productivity advantages compound over time.
+This hypothesis draws on the skill-biased technological change (SBTC) literature and Rosen's (1981) superstar economics. The core prediction: AI tools are *complementary* to existing human capital. Developers who already possess deep expertise — system design, debugging intuition, architectural judgment — can leverage AI assistants more effectively than novices. They adopt tools earlier, prompt them better, and integrate outputs more skillfully.
 
-**Hypothesis B: "The Developer Population Is Diversifying"**
+The result is *dynamic concentration*: the same top performers pull further ahead each year. Small initial skill differences yield large and growing productivity gaps. This is the "rich-get-richer" mechanism (preferential attachment in network science terms). If true, we should observe:
+- The same individuals dominating year after year (high rank persistence)
+- Existing top performers increasing their output (intensive margin dominance)
+- Growth proportional to current size (β ≈ 1 in attachment kernel)
 
-GitHub's user base has become increasingly heterogeneous. In 2019, GitHub users were predominantly professional developers. By 2024, the platform hosts: full-time professional developers, open-source maintainers, students learning to code, hobbyists who contribute occasionally, researchers pushing code for papers, and automation pipelines that escaped bot detection. Each group has a different "natural rate" of committing. The power law emerges from *mixing* these different populations, not from individuals becoming more concentrated. In this view, declining α reflects compositional change — who joins the platform — not behavioral change among existing developers.
+**Hypothesis B: "Platform Growth Creates Statistical Concentration" (Compositional Change)**
+
+This hypothesis draws on Mitzenmacher's (2004) work showing that power laws can emerge from *mixing* populations with different underlying rates — no dynamics required. The prediction: what looks like "superstar" concentration is actually a *compositional artifact* of who joins and leaves the platform.
+
+GitHub grew from 40 million to over 100 million users between 2019 and 2024. This expansion brought in more heterogeneous participants: students, hobbyists, researchers, automation pipelines — alongside continued growth in professional developers. Each group has a different baseline commit rate. Mixing them produces heavy-tailed distributions that *look like* concentration but reflect *who's in the sample*, not *how individuals behave*.
+
+If true, we should observe:
+- Different individuals at the top each year (low rank persistence, "rotating superstars")
+- New accounts dominating top performers (extensive margin)
+- Mean reversion in individual output (β < 1)
+- Increasing heterogeneity in underlying rates (declining Negative Binomial r)
 
 ### Why It Matters
 
-These hypotheses have different implications, connecting to foundational debates in labor economics about technology and inequality:
+These hypotheses connect to foundational debates about technology and inequality:
 
-- **If Hypothesis A is correct:** There are policy implications about skill premiums, labor market polarization, and AI amplifying inequality. The same developers are pulling ahead, potentially creating a winner-take-all dynamic in software labor markets. This would align with Rosen's (1981) "superstar" economics, where small talent differences yield large reward differences when technology enables scale.
+- **If Hypothesis A is correct:** AI is amplifying existing human capital advantages, potentially creating winner-take-all dynamics in knowledge work. Policy implications include rising skill premiums, labor market polarization, and the need to ensure broad access to AI tools. The pattern should *persist* as long as AI remains skill-complementary.
 
-- **If Hypothesis B is correct:** The pattern reflects platform growth and demographic shifts, not changes in individual behavior. Declining α is consistent with GitHub becoming more heterogeneous — more casual users AND more heavy contributors — without any dynamic concentration process. This compositional explanation has different policy implications: the pattern may reverse as platform growth slows.
+- **If Hypothesis B is correct:** Observed concentration is a statistical artifact of platform growth, not a behavioral change. The pattern may *reverse* as platform growth slows and the user base stabilizes. Policy concern shifts from "AI amplifying superstars" to ensuring equitable access to platforms themselves.
 
 ### This Paper
 
