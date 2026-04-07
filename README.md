@@ -6,7 +6,7 @@ Concentration and inequality have risen across many domains — income, wealth, 
 
 But rising inequality does not necessarily imply preferential attachment. As Strauss and Yang (2025) note, observationally identical concentration patterns can arise from simply mixing populations with different underlying rates — no dynamics required (Mitzenmacher, 2004). Distinguishing these mechanisms requires more than documenting a power law; it requires testing how individuals actually behave over time.
 
-**This paper asks:** does rising concentration in GitHub commit activity reflect "rich-get-richer" dynamics — consistent with AI amplifying existing human capital — or is it a statistical artifact of an increasingly heterogeneous user base?
+**This paper asks:** does rising concentration in GitHub commit activity reflect "rich-get-richer" dynamics — consistent with AI amplifying existing human capital — or is it a statistical artifact of an increasingly heterogeneous user base, reflecting rapid growth in coding among many different populations?
 
 ---
 
