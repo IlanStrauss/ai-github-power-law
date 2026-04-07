@@ -16,13 +16,15 @@ We frame the question around two competing hypotheses with distinct empirical im
 
 GitHub provides a natural laboratory to test these hypotheses. The platform records every code contribution, and a *commit* — a saved change to a repository — is a direct, continuous measure of individual output unavailable in most labor markets. We track over 48,000 developers across **January 2019 – October 2025** (six full years plus ten months). This period captures the **initial Copilot take-off** — GitHub Copilot launched for individuals in June 2022, with Copilot for Business following in February 2023 — but **ends before the Claude Code and full enterprise AI boom**. GitHub's API removed commit details from event payloads in October 2025, just eight months after Claude Code's launch (February 2025), preventing analysis of the period when agentic AI coding tools reached widespread adoption. The organization developer exception we document in 2023–2024 may be an early signal of dynamics that intensified after our data ends.
 
-We run four diagnostic tests: attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement.
+We run four diagnostic tests — attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement — and find **strong support for Hypothesis B**.
 
-Commit distributions follow a power law throughout, with the exponent $\alpha$ declining from 2.0 to 1.8 — concentration increased. But the diagnostics **point clearly to Hypothesis B**.
+**The finding:** Concentration increased (the power law exponent $\alpha$ declined from 2.0 to 1.8), but this reflects a more heterogeneous user base, not "rich-get-richer" dynamics. The superstars of 2019 are largely *not* the superstars of 2024. The right tail extended because GitHub attracted **new accounts with high baseline commit rates** — the *extensive margin* — **not** because existing productive developers pulled further ahead (the *intensive margin*). Among personal developers, **77–81% of top 1% entrants** each year are genuinely new accounts: superstars who arrive fully formed rather than climb through cumulative advantage.
 
-The attachment kernel coefficient **$\beta \approx 0.4$** indicates *mean reversion*, not compounding advantage. The dispersion of underlying commit rates widened substantially, consistent with a more heterogeneous user base rather than individual productivity pulling away. And the five-year rank correlation between 2019 and 2024 is just **$\rho \approx 0.18$**: the superstars of 2019 are largely *not* the superstars of 2024.
-
-Crucially, the right tail extended because GitHub attracted **new accounts with high baseline commit rates**, not because existing productive developers pulled further ahead. The spread widened through the *extensive margin* (new arrivals), **not** the *intensive margin* (existing developers accelerating). Among personal developers, **77–81% of top 1% entrants** each year are genuinely new accounts — superstars who arrive fully formed rather than climb through cumulative advantage.
+**The evidence:**
+- *Attachment kernel:* **$\beta \approx 0.4$** — sublinear, indicating mean reversion rather than compounding advantage
+- *Rate heterogeneity:* The dispersion parameter $r$ fell from 0.51 to 0.24 ($p = 0.009$), indicating a 46% widening in the spread of underlying commit rates
+- *Top 1% composition:* **77–81%** of new top 1% entrants (personal developers) are genuinely new accounts
+- *Rank persistence:* **$\rho \approx 0.18$** — the five-year rank correlation is remarkably low
 
 **Table: Who enters the top 1%? (2023-2024)**
 
