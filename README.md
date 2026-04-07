@@ -14,7 +14,7 @@ We frame the question around two competing hypotheses with distinct empirical im
 
 **Hypothesis B — Platform Growth Creates Statistical Concentration.** What looks like "superstar" concentration is a compositional artifact of who joins and leaves the platform. GitHub grew from 40 million to over 100 million users between 2019 and 2024, bringing in students, hobbyists, researchers, and automation pipelines alongside professional developers. Mixing these groups — each with different baseline commit rates — mechanically produces heavy-tailed distributions. Under this hypothesis, we expect low rank persistence, new accounts dominating the top, and individual productivity reverting toward the mean ($\beta < 1$).
 
-GitHub provides a natural laboratory to test these hypotheses. The platform records every code contribution, and a *commit* — a saved change to a repository — is a direct, continuous measure of individual output unavailable in most labor markets. We track over 48,000 developers across **January 2019 – December 2024** (six full years), with partial data through **October 2025**. This period spans from before the AI coding assistant era (2019–2021) through its early adoption phase (2022–2024), but **ends before the full enterprise AI boom**. GitHub's API removed commit details from event payloads in October 2025, preventing analysis of subsequent periods when enterprise tools like Copilot Enterprise and Claude Code reached widespread adoption. The organization developer exception we document in 2023–2024 may be an early signal of dynamics that intensified after our data ends.
+GitHub provides a natural laboratory to test these hypotheses. The platform records every code contribution, and a *commit* — a saved change to a repository — is a direct, continuous measure of individual output unavailable in most labor markets. We track over 48,000 developers across **January 2019 – October 2025** (six full years plus ten months). This period captures the **initial Copilot take-off** — GitHub Copilot launched for individuals in June 2022, with Copilot for Business following in February 2023 — but **ends before the Claude Code and full enterprise AI boom**. GitHub's API removed commit details from event payloads in October 2025, just eight months after Claude Code's launch (February 2025), preventing analysis of the period when agentic AI coding tools reached widespread adoption. The organization developer exception we document in 2023–2024 may be an early signal of dynamics that intensified after our data ends.
 
 We run four diagnostic tests: attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement.
 
@@ -50,9 +50,9 @@ The remainder of the paper is organized as follows. Section 2 develops the theor
 
 We use [GH Archive](https://www.gharchive.org/), which records all public GitHub events in real-time since 2011. Each hourly file contains JSON records of every public event on GitHub, including PushEvents (commits), which are our focus.
 
-**Data cutoff: October 31, 2025.** On October 7, 2025, GitHub's Events API [removed commit details](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) from PushEvent payloads — the `commits` array that previously contained individual commit metadata was replaced with only a commit count. GH Archive, which mirrors the Events API, inherited this change. As a result, we cannot identify individual commits or distinguish distinct contributions after this date. Our 2025 data therefore covers January 1 – October 31 only.
+**Sample period: January 2019 – October 2025.** On October 7, 2025, GitHub's Events API [removed commit details](https://github.blog/changelog/2025-08-08-upcoming-changes-to-github-events-api-payloads/) from PushEvent payloads — the `commits` array that previously contained individual commit metadata was replaced with only a commit count. GH Archive, which mirrors the Events API, inherited this change. As a result, we cannot identify individual commits or distinguish distinct contributions after this date, and our sample ends in October 2025.
 
-**Implications for AI analysis.** This data limitation has substantive consequences. GitHub Copilot launched for individuals in June 2022, but enterprise adoption accelerated only after Copilot for Business (February 2023) and Copilot Enterprise (February 2024) cleared procurement and security requirements. Claude Code, Cursor, and other AI coding tools similarly reached enterprise scale in late 2024 and 2025. Our data captures the *early* AI adoption period but ends just as enterprise AI tools achieved widespread deployment. The organization developer exception we document in 2023–2024 — where existing developers rather than new arrivals drove top-1% entry — may represent the beginning of an AI amplification effect that intensified after our data ends. Future research with alternative data sources will be needed to assess whether the patterns we observe persisted or changed as enterprise AI adoption matured.
+**Implications for AI analysis.** This data limitation has substantive consequences. We capture the **initial Copilot take-off**: GitHub Copilot launched for individuals in June 2022, Copilot for Business in February 2023, and Copilot Enterprise in February 2024. However, we **miss the Claude Code and agentic AI boom**: Claude Code launched in February 2025, just eight months before our data ends. The organization developer exception we document in 2023–2024 — where existing developers rather than new arrivals drove top-1% entry — may represent an early signal of AI amplification that intensified after our data ends. Future research with alternative data sources will be needed to assess whether the patterns we observe persisted or changed as agentic AI coding tools matured.
 
 ### 2.2 Sampling Strategy
 
@@ -352,7 +352,7 @@ Organization developers — those contributing to repositories owned by major co
 
 The 2023-2024 org developer pattern is the only evidence in our data consistent with Hypothesis A — existing productive developers being amplified by technology rather than new arrivals dominating the top tier. The timing aligns with enterprise AI tool adoption. The magnitude of the growth ratios (1,135× vs. 73-97×) suggests something qualitatively different occurred in this period.
 
-However, we emphasize important caveats. This is one group (organization developers) in one period (2023-2024). We cannot observe AI tool usage directly, only timing correlations. The pattern could reflect other factors: enterprise workflow changes, pandemic-era project accumulation being released, or sampling artifacts. Establishing causation would require individual-level data on tool adoption, which we do not have. We present this finding as suggestive evidence that warrants further investigation, not as proof that AI tools amplified incumbent superstars.
+However, we emphasize important caveats. This is one group (organization developers) in one period (2023-2024). We cannot observe AI tool usage directly, only timing correlations. The pattern could reflect other factors: enterprise workflow changes, pandemic-era project accumulation being released, or sampling artifacts. Crucially, **our data ends in October 2025** — just eight months after Claude Code's launch. The 2023–2024 org pattern may be an early signal of dynamics that intensified substantially when agentic AI coding tools reached full deployment. Establishing causation would require individual-level data on tool adoption, which we do not have. We present this finding as suggestive evidence that warrants further investigation, not as proof that AI tools amplified incumbent superstars.
 
 ### 4.7 Summary: Mechanism Verdict
 
@@ -360,7 +360,7 @@ However, we emphasize important caveats. This is one group (organization develop
 |------------|----------------------|----------------------|-------------|---------|
 | Attachment kernel (β) | β ≈ 1 | β < 1 | β ≈ 0.4 | **B** |
 | Rate heterogeneity (r) | r stable | r declining | r: 0.51 → 0.24 (p = 0.009) | **B** |
-| Top 1% composition | Incumbents | New accounts | 72-80% new (personal) | **B** |
+| Top 1% composition | Incumbents | New accounts | 77-81% new (personal) | **B** |
 | Rank persistence (ρ) | High ρ | Low ρ | ρ ≈ 0.18 | **B** |
 | Org 2024 composition | Incumbents | New accounts | 49% increased activity | **A** (exception) |
 
@@ -374,7 +374,7 @@ However, we emphasize important caveats. This is one group (organization develop
 
 The power law in GitHub commits arises primarily from **heterogeneity in developer types**, not from dynamic concentration. GitHub's growth from approximately 40 million to over 100 million users brought in a more diverse population: more casual learners, more hobbyists, more students — and simultaneously more heavy professional contributors and automation. The spread between these groups widened (CV(λ) increased by 46%), mechanically producing heavier tails (lower α).
 
-This is a **compositional story** about who joins the platform, not a **behavioral story** about individuals becoming more productive. The declining α does not indicate that the same developers are "pulling ahead" — rank persistence is low (ρ ≈ 0.18), and 72-80% of top performers each year are new accounts.
+This is a **compositional story** about who joins the platform, not a **behavioral story** about individuals becoming more productive. The declining α does not indicate that the same developers are "pulling ahead" — rank persistence is low (ρ ≈ 0.18), and 77-81% of top performers each year are new accounts.
 
 ### 5.2 What This Means for the AI Narrative
 
@@ -400,21 +400,25 @@ This is **the only evidence in our data consistent with AI amplifying existing p
 - This is one group (org developers) in one period (2023-2024)
 - We cannot establish causation; correlation with AI tool timing is suggestive but not conclusive
 - The pattern may reflect other factors (enterprise workflow changes, pandemic-era accumulation, sampling artifacts)
+- **Our data ends October 2025**, before the full agentic AI boom — this pattern may have intensified substantially in subsequent periods
 
 ### 5.4 Implications
 
-**For AI productivity research:** Studies claiming AI tools create "superstar" effects should demonstrate persistent individual-level advantages, not just cross-sectional concentration. Our finding that 72-80% of top performers are new each year challenges the "AI amplifies existing superstars" narrative for most of the population.
+**For AI productivity research:** Studies claiming AI tools create "superstar" effects should demonstrate persistent individual-level advantages, not just cross-sectional concentration. Our finding that 77-81% of top performers are new each year challenges the "AI amplifies existing superstars" narrative for most of the population.
 
 **For platform economics:** Concentration metrics (Gini, top-k shares) may reflect user base composition rather than behavioral changes. GitHub's growing heterogeneity — more casual users joining while professional contributor density also increases — can produce concentration patterns without any individual-level dynamics.
 
-**For labor economics:** Classic superstar theory (Rosen, 1981) predicts that small differences in talent generate large differences in earnings when technology enables scale without replication. However, Rosen's framework assumes *persistent* individual advantages. Our finding of low rank persistence (ρ ≈ 0.18) and 72-80% annual turnover in top performers suggests a different dynamic: "superstars" may be a rotating cast rather than a stable elite. This has implications for skill-biased technical change debates (Autor et al., 2003; Acemoglu & Autor, 2011) — if AI tools create temporary productivity bursts rather than persistent advantages, the labor market implications differ substantially from models assuming cumulative skill advantages.
+**For labor economics:** Classic superstar theory (Rosen, 1981) predicts that small differences in talent generate large differences in earnings when technology enables scale without replication. However, Rosen's framework assumes *persistent* individual advantages. Our finding of low rank persistence (ρ ≈ 0.18) and 77-81% annual turnover in top performers suggests a different dynamic: "superstars" may be a rotating cast rather than a stable elite. This has implications for skill-biased technical change debates (Autor et al., 2003; Acemoglu & Autor, 2011) — if AI tools create temporary productivity bursts rather than persistent advantages, the labor market implications differ substantially from models assuming cumulative skill advantages.
 
 ### 5.5 Limitations
 
-- **Data ends October 2025** due to GitHub API schema change
-- **Public repositories only** — private org repos (most enterprise development) not captured
-- **Cannot observe AI tool usage directly** — timing correlations are suggestive but not causal
-- **The 2024 org anomaly is one period** — may be noise rather than signal
+**Data timing.** Our sample spans January 2019 – October 2025. We capture the initial Copilot adoption wave (June 2022 onwards) but miss the full enterprise AI boom: Claude Code launched in February 2025, just eight months before our data ends. The organization developer patterns we document in 2023–2024 may intensify substantially in subsequent periods when agentic AI tools reached full deployment.
+
+**Coverage.** We observe only public repositories. Most enterprise development occurs in private repositories, which are not captured in GH Archive. The org developers we observe are those contributing to *public* organizational projects — likely a selected sample of open-source contributors and maintainers, not representative of all professional developers.
+
+**Identification.** We cannot observe AI tool usage directly. The timing correlations we highlight — particularly the 2023–2024 org developer exception coinciding with enterprise AI availability — are suggestive but not causal. The growth patterns could reflect other factors: project cycles, pandemic-era backlogs, or sampling artifacts.
+
+**Single anomaly.** The 2024 org developer exception is one group in one period. It may represent genuine AI amplification, or it may be noise. Replication with additional data will be necessary to determine which.
 
 ---
 
