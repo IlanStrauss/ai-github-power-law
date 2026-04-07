@@ -2,89 +2,26 @@
 
 ## 1. Introduction
 
-### Motivation
+Concentration and inequality have risen across many domains — income, wealth, firm size, scientific citations, social media followers. A natural interpretation is that these patterns reflect *preferential attachment*: the "rich-get-richer" mechanism in which initial advantages compound over time (Barabási & Albert, 1999). Under preferential attachment, small early differences in talent, luck, or position yield large and growing gaps, as success breeds further success. The spread of AI coding assistants since 2022 — GitHub Copilot, ChatGPT, Cursor — has sharpened concern that this dynamic now characterizes software development. A plausible hypothesis is that these tools amplify existing skill differences: the best developers adopt AI first, use it most effectively, and pull further ahead. If true, we should observe the same top performers dominating year after year, with advantages compounding over time.
 
-We ask: Does rising inequality in SWE productivity on GitHub reflect "rich-get-richer" dynamics — or something else?
+But rising inequality does not necessarily imply preferential attachment. As Strauss and Yang (2025) emphasize, observationally identical concentration patterns can arise from fundamentally different mechanisms. A power law distribution with a declining exponent is *consistent with* preferential attachment, but also with pure heterogeneity — mixing populations with different underlying rates produces heavy tails without any dynamic "rich-get-richer" process (Mitzenmacher, 2004). Distinguishing these mechanisms requires diagnostic tests beyond descriptive statistics. This paper provides those tests for software development.
 
-Concentration and inequality have increased across many domains: income, wealth, firm size, scientific citations, social media followers. A natural interpretation is that these patterns reflect *preferential attachment* — the "rich-get-richer" mechanism where initial advantages compound over time (Barabási & Albert, 1999). Under preferential attachment, small early differences in talent, luck, or position yield large and growing gaps, as success breeds more success (Strauss and Yang, 2025).
+**This paper asks:** does rising concentration in GitHub commit activity reflect dynamic "rich-get-richer" processes — consistent with AI amplifying existing human capital — or is it a statistical artifact of an increasingly heterogeneous user base?
 
-But rising inequality does not necessarily imply preferential attachment. As Strauss and Yang (2025) emphasize, observationally identical concentration patterns can arise from fundamentally different mechanisms. A power law distribution with declining exponent is *consistent with* preferential attachment, but also with pure heterogeneity — mixing populations with different underlying rates produces heavy tails without any dynamic "rich-get-richer" process (Mitzenmacher, 2004). Distinguishing these mechanisms requires diagnostic tests beyond descriptive statistics.
+GitHub provides a natural laboratory to address this question. The platform hosts over 100 million developers and records every code contribution. A *commit* — a saved change to a repository — is the fundamental unit of developer output, providing a direct and continuous measure of individual productivity unavailable in most labor markets. We analyze how commits are distributed across developers, and whether changes in that distribution reflect behavioral dynamics at the individual level or compositional change at the platform level.
 
-We apply this insight to a setting of immediate policy relevance: software development in the age of AI coding assistants. Since 2022, tools like GitHub Copilot, ChatGPT, and Cursor have transformed how code is written. A natural hypothesis is that these tools amplify existing skill differences — the best developers adopt AI first, use it most effectively, and pull further ahead. If true, we should see the *same* top performers dominating year after year, with advantages compounding over time.
+We track over 48,000 developers across 2019–2024 and run four diagnostic tests designed to directly identify mechanism: attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement. Commit distributions follow a power law across all years, with exponent $\alpha$ declining from 2.0 to 1.8 between 2019 and 2024 — concentration increased. The question is whether this reflects individuals compounding their advantages or GitHub's user base becoming more diverse.
 
-GitHub provides a natural laboratory to test this hypothesis. The platform hosts over 100 million developers and records every code contribution. A *commit* — a saved change to a repository — is the fundamental unit of developer output. We analyze how commits are distributed across developers, and whether this distribution is changing in ways that reflect dynamic concentration versus compositional change.
+**The evidence strongly favors heterogeneity over dynamics.** The attachment kernel coefficient $\beta \approx 0.4$ indicates mean reversion rather than compounding advantage: developers who are highly productive in year $t$ regress toward average productivity in year $t+1$, directly contradicting the "rich-get-richer" mechanism. The Negative Binomial dispersion parameter $r$ declined from 0.51 to 0.24 ($p = 0.009$), indicating that the coefficient of variation in underlying commit rates rose from 1.40 to 2.05. GitHub's user base became more diverse — more casual users and more heavy contributors — and this wider spread mechanically produces the observed concentration without any individual-level dynamics. Consistent with this, 72–80% of top 1% entrants among personal developers each year are genuinely new accounts appearing for the first time. The "superstars" are not created through cumulative advantage; they arrive with high baseline rates. Rank persistence is correspondingly low: the five-year rank correlation between 2019 and 2024 is $\rho \approx 0.18$, meaning that knowing a developer's 2019 productivity tells you almost nothing about their 2024 standing. The superstars of 2019 are largely not the superstars of 2024.
 
-We find that commit distributions follow a power law, with exponent $\alpha$ declining from 2.0 to 1.8 between 2019 and 2024 — concentration increased. But does this pattern reflect AI amplifying superstars through preferential attachment? Or is it a statistical artifact of an increasingly heterogeneous user base? This is the puzzle we address.
+There is one important exception. Among organization developers in 2023–2024, "increased activity" (48.7%) overtook "new accounts" (40.1%) as the dominant source of top 1% entrants, with a median year-on-year growth ratio of 1,135× — compared with 70–100× in prior years. This pattern, concentrated precisely in the period when enterprise AI coding tools were clearing procurement and security hurdles at large companies, is the only evidence in our data consistent with AI amplifying existing productive developers. We cannot establish causation, but the timing is suggestive.
 
-**The value of this study** lies in moving beyond descriptive statistics to diagnostic tests that distinguish *mechanism*. Most studies of inequality document concentration — Gini coefficients, top-k shares, power law exponents — without identifying whether the pattern arises from dynamic "rich-get-richer" processes or static heterogeneity. We exploit GitHub's panel structure, tracking over 48,000 developers across multiple years, to run four diagnostic tests that directly identify mechanism: attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement. This approach — testing mechanism rather than merely describing distributions — is essential for any causal claims about AI's effects on labor market concentration, yet rarely applied in the emerging literature on AI and productivity.
+These findings contribute to three bodies of work. First, we add to the literature on power laws and preferential attachment (Barabási & Albert, 1999; Mitzenmacher, 2004; Gabaix, 2009) by providing, to our knowledge, the first systematic application of mechanism-diagnostic tests to software productivity. Most studies of inequality document concentration — Gini coefficients, top-$k$ shares, power law exponents — without identifying whether the pattern arises from dynamic or static processes. Our panel structure enables identification that cross-sectional data cannot provide. Second, we contribute to the growing literature on AI and labor market outcomes. Recent work has documented productivity gains from AI coding assistants on controlled tasks (Peng et al., 2023; Kalliamvakou, 2022) and heterogeneous effects by skill level (Noy and Zhang, 2023; Brynjolfsson et al., 2023). We extend this literature by examining distributional effects at platform scale across multiple years, using naturally occurring behavioral data rather than experimental variation. Third, we connect to the skill-biased technological change literature (Acemoglu and Restrepo, 2018) and Rosen's (1981) superstar economics. Our findings suggest that the mechanism producing concentration in software development is closer to Mitzenmacher's (2004) compositional account than to the compounding advantage predicted by SBTC models — at least for the majority of developers, and at least so far.
 
-**Our key findings are:**
+The policy implications turn on this distinction. If AI were amplifying existing human capital advantages through preferential attachment, the pattern should persist and strengthen, warranting concern about winner-take-all dynamics in knowledge work and the need to ensure broad access to AI tools. Our finding that the pattern instead reflects compositional change — who participates on GitHub — suggests the concentration may moderate as platform growth slows and the user base stabilizes. The exception for organization developers in 2023–2024 warrants monitoring: if enterprise AI adoption does produce compounding advantages within firms, the distributional implications may differ from those we observe for the broader developer population.
 
-1. **The power law reflects heterogeneity, not dynamics.** The attachment kernel coefficient $\beta \approx 0.4$ indicates mean reversion, not compounding advantage. Developers who are highly productive in year $t$ regress toward average productivity in year $t+1$. This directly contradicts the "rich-get-richer" mechanism.
+The remainder of the paper is organized as follows. Section 2 develops the theoretical framework and derives testable predictions under each hypothesis. Section 3 describes the GitHub data and sample construction. Section 4 presents the power law estimates and their evolution over time. Section 5 reports the four diagnostic tests for mechanism. Section 6 examines the organization developer exception. Section 7 concludes.
 
-2. **Heterogeneity is increasing, mechanically producing heavier tails.** The Negative Binomial dispersion parameter $r$ declined from 0.51 to 0.24 ($p = 0.009$), meaning the coefficient of variation in underlying commit rates increased from 1.40 to 2.05. GitHub's user base became more diverse — more casual users and more heavy contributors — and this wider spread mechanically produces the observed concentration without any individual-level dynamics.
-
-3. **Top performers are predominantly new arrivals, not incumbents climbing the ladder.** Among personal developers, 72-80% of top 1% entrants each year are genuinely new accounts appearing for the first time. The "superstars" are not being created through cumulative advantage; they arrive fully formed with high baseline rates.
-
-4. **Rank persistence is remarkably low.** The five-year rank correlation between 2019 and 2024 is $\rho \approx 0.18$ — knowing a developer's 2019 productivity tells you almost nothing about their 2024 productivity. The superstars of 2019 are largely not the superstars of 2024. This is a rotating cast, not a stable elite.
-
-5. **One exception: organization developers in 2023-2024.** For this group only, "increased activity" (48.7%) overtook "new accounts" (40.1%) as the source of top 1% entrants, with median growth ratios of 1,135× versus 70-100× in prior years. This timing coincides with enterprise AI tools clearing procurement hurdles, and is the only evidence in our data consistent with AI amplifying existing productive developers.
-
-In sum, the declining power law exponent does not indicate "AI amplifying superstars" for most developers. The pattern is explained by compositional change — who participates on GitHub — not behavioral change — how individuals evolve.
-
-Two theoretical perspectives offer competing predictions.
-
-### Two Competing Hypotheses
-
-**Hypothesis A: "AI Amplifies Human Capital" (Skill-Biased Technological Change)**
-
-This hypothesis draws on the skill-biased technological change (SBTC) literature and Rosen's (1981) superstar economics. The core prediction: AI tools are *complementary* to existing human capital. Developers who already possess deep expertise — system design, debugging intuition, architectural judgment — can leverage AI assistants more effectively than novices. They adopt tools earlier, prompt them better, and integrate outputs more skillfully.
-
-The result is *dynamic concentration*: the same top performers pull further ahead each year. Small initial skill differences yield large and growing productivity gaps. This is the "rich-get-richer" mechanism (preferential attachment in network science terms). If true, we should observe:
-- The same individuals dominating year after year (high rank persistence)
-- Existing top performers increasing their output (intensive margin dominance)
-- Growth proportional to current size (β ≈ 1 in attachment kernel)
-
-**Hypothesis B: "Platform Growth Creates Statistical Concentration" (Compositional Change)**
-
-This hypothesis draws on Mitzenmacher's (2004) work showing that power laws can emerge from *mixing* populations with different underlying rates — no dynamics required. The prediction: what looks like "superstar" concentration is actually a *compositional artifact* of who joins and leaves the platform.
-
-GitHub grew from 40 million to over 100 million users between 2019 and 2024. This expansion brought in more heterogeneous participants: students, hobbyists, researchers, automation pipelines — alongside continued growth in professional developers. Each group has a different baseline commit rate. Mixing them produces heavy-tailed distributions that *look like* concentration but reflect *who's in the sample*, not *how individuals behave*.
-
-If true, we should observe:
-- Different individuals at the top each year (low rank persistence, "rotating superstars")
-- New accounts dominating top performers (extensive margin)
-- Mean reversion in individual output (β < 1)
-- Increasing heterogeneity in underlying rates (declining Negative Binomial r)
-
-### Why It Matters
-
-These hypotheses connect to foundational debates about technology and inequality:
-
-- **If Hypothesis A is correct:** AI is amplifying existing human capital advantages, potentially creating winner-take-all dynamics in knowledge work. Policy implications include rising skill premiums, labor market polarization, and the need to ensure broad access to AI tools. The pattern should *persist* as long as AI remains skill-complementary.
-
-- **If Hypothesis B is correct:** Observed concentration is a statistical artifact of platform growth, not a behavioral change. The pattern may *reverse* as platform growth slows and the user base stabilizes. Policy concern shifts from "AI amplifying superstars" to ensuring equitable access to platforms themselves.
-
-### This Paper
-
-We run diagnostic tests to distinguish these hypotheses. Evidence strongly favors Hypothesis B (diversification), with one exception: organization developers in 2023-2024 show patterns consistent with Hypothesis A (AI amplification).
-
-### Key Findings
-
-| Diagnostic Test | Hypothesis A Predicts | Hypothesis B Predicts | Our Finding |
-|-----------------|----------------------|----------------------|-------------|
-| Attachment kernel (β) | β ≈ 1 (proportional growth) | β < 1 (mean reversion) | **β ≈ 0.4** → B |
-| Rate heterogeneity (r) | r stable | r declining | **r: 0.51 → 0.24, p = 0.009** → B |
-| Top 1% composition | Incumbents dominate | New accounts dominate | **72-80% new accounts** → B |
-| Rank persistence (ρ) | High ρ | Low ρ | **ρ ≈ 0.18** → B |
-
-**The exception:** Among organization developers in 2023-2024, "increased activity" overtook "new accounts" as the dominant source of top 1% entrants (49% vs 40%), with a median growth ratio of 1,135× — patterns consistent with genuine productivity amplification. This timing coincides with enterprise AI coding tools clearing procurement and security hurdles at large companies, though we cannot establish causation.
-
-### Software Engineering as a Proxy for the AI-Transformed Economy
-
-Software development is among the first occupations to experience widespread AI augmentation. Coding assistants launched at scale in 2022, and by 2024 a majority of professional developers report using them regularly. If AI transforms how work is distributed — who does it, how much they produce, whether advantages compound — software engineering should show these effects first.
-
-GitHub commit data offers a window into this transformation. Unlike most labor markets where output is unobservable, commits provide a direct, continuous measure of individual contribution. Understanding whether AI is creating persistent "superstars" versus merely changing who participates has implications far beyond software: it speaks to how AI will reshape digital work more broadly.
 
 ---
 
