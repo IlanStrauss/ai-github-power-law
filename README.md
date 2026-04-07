@@ -22,7 +22,18 @@ GitHub provides a natural laboratory to test these hypotheses. The platform reco
 
 Commit distributions follow a power law throughout, with the exponent $\alpha$ declining from 2.0 to 1.8 — concentration increased. But the diagnostics point clearly to Hypothesis B.
 
-The attachment kernel coefficient $\beta \approx 0.4$ indicates mean reversion, not compounding advantage. The dispersion of underlying commit rates widened substantially, consistent with a more heterogeneous user base rather than individual productivity pulling away. Among personal developers, 72–80% of top 1% entrants each year are genuinely new accounts — superstars who arrive with high baseline rates rather than climb through cumulative advantage. And the five-year rank correlation between 2019 and 2024 is just $\rho \approx 0.18$: the superstars of 2019 are largely not the superstars of 2024.
+The attachment kernel coefficient $\beta \approx 0.4$ indicates mean reversion, not compounding advantage. The dispersion of underlying commit rates widened substantially, consistent with a more heterogeneous user base rather than individual productivity pulling away. And the five-year rank correlation between 2019 and 2024 is just $\rho \approx 0.18$: the superstars of 2019 are largely not the superstars of 2024.
+
+Crucially, the right tail extended because GitHub attracted new accounts with high baseline commit rates, not because existing productive developers pulled further ahead. The spread widened through the *extensive margin* (new arrivals), not the *intensive margin* (existing developers accelerating). Among personal developers, 77–81% of top 1% entrants each year are genuinely new accounts — superstars who arrive fully formed rather than climb through cumulative advantage.
+
+**Table: Who enters the top 1%? (2023-2024)**
+
+| Group | New top 1% entrants | % genuinely new accounts | Median commits |
+|-------|---------------------|-------------------------|----------------|
+| Personal | 3,023 | 77.6% | 807 |
+| Org | 197 | 40.1% | 8,137 |
+
+The new high-activity arrivals are predominantly *personal* developers. Although organization developers are 10× more active at the top (8,137 vs 807 median commits), they account for only 6% of new top 1% entrants. The compositional shift driving concentration is occurring among personal developers — hobbyists, students, independent contributors — not among professional developers at organizations.
 
 There is one important exception. Among *organization* developers in 2023–2024, "increased activity" overtook "new accounts" as the dominant source of top 1% entrants, with a median year-on-year growth ratio of 1,135× — compared with 70–100× in prior years. This is the only pattern in our data consistent with Hypothesis A, and its timing coincides with enterprise AI tools clearing procurement and security hurdles at large firms. We cannot establish causation, but the signal is distinct.
 
