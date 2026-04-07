@@ -1,0 +1,6 @@
+title: "Power Laws in GitHub Commits"
+description: "Heterogeneity, Not Dynamics — An empirical analysis of GitHub commit distributions"
+theme: jekyll-theme-cayman
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
