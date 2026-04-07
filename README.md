@@ -4,13 +4,15 @@
 
 ### Motivation
 
-A *commit* is a saved change to a code repository — the fundamental unit of developer contribution on GitHub. When a developer fixes a bug, adds a feature, or updates documentation, they create a commit. Developers with more commits contribute more code.
+**Are AI coding tools creating a new class of "superstar" developers?**
 
-GitHub hosts over 100 million developers and is the primary platform for open-source software development. Understanding how commit activity is distributed — and whether this distribution is changing — has implications for labor economics, AI productivity research, and platform governance.
+Since 2022, AI-powered coding assistants — GitHub Copilot, ChatGPT, Cursor — have transformed software development. A natural hypothesis is that these tools amplify existing skill differences: the best developers adopt AI tools first, use them most effectively, and pull further ahead. If true, we should see increasing concentration in developer output, with the same top performers dominating year after year.
 
-We find that GitHub commit distributions follow a power law, where a small number of developers account for a disproportionate share of total commits. The *power law exponent* α measures how extreme this concentration is: lower α means heavier tails, meaning top contributors capture an even larger share. Between 2019 and 2024, α declined from approximately 2.0 to 1.8 — concentration increased.
+GitHub provides a natural laboratory to test this hypothesis. The platform hosts over 100 million developers and records every code contribution. A *commit* — a saved change to a repository — is the fundamental unit of developer output. We analyze how commits are distributed across developers, and whether this distribution is changing.
 
-But what does this pattern mean? Two competing hypotheses offer different interpretations with different implications for understanding how software engineering work is changing.
+We find that commit distributions follow a power law, where a small number of developers account for a disproportionate share of total output. The *power law exponent* α measures concentration: lower α means heavier tails, with top contributors capturing more. Between 2019 and 2024, α declined from 2.0 to 1.8 — concentration increased.
+
+But does this pattern reflect AI amplifying superstars? Or something else entirely? Two competing hypotheses offer different interpretations.
 
 ### Two Competing Hypotheses
 
