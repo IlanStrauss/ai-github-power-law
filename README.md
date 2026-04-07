@@ -4,15 +4,17 @@
 
 ### Motivation
 
-**Are AI coding tools creating a new class of "superstar" developers?**
+**Does rising inequality reflect "rich-get-richer" dynamics — or something else?**
 
-Since 2022, AI-powered coding assistants — GitHub Copilot, ChatGPT, Cursor — have transformed software development. A natural hypothesis is that these tools amplify existing skill differences: the best developers adopt AI tools first, use them most effectively, and pull further ahead. If true, we should see increasing concentration in developer output, with the same top performers dominating year after year.
+Concentration and inequality have increased across many domains: income, wealth, firm size, scientific citations, social media followers. A natural interpretation is that these patterns reflect *preferential attachment* — the "rich-get-richer" mechanism where initial advantages compound over time (Barabási & Albert, 1999). Under preferential attachment, small early differences in talent, luck, or position yield large and growing gaps, as success breeds more success.
 
-GitHub provides a natural laboratory to test this hypothesis. The platform hosts over 100 million developers and records every code contribution. A *commit* — a saved change to a repository — is the fundamental unit of developer output. We analyze how commits are distributed across developers, and whether this distribution is changing.
+But rising inequality does not necessarily imply preferential attachment. As Strauss and Yang (2025) emphasize, observationally identical concentration patterns can arise from fundamentally different mechanisms. A power law distribution with declining exponent is *consistent with* preferential attachment, but also with pure heterogeneity — mixing populations with different underlying rates produces heavy tails without any dynamic "rich-get-richer" process (Mitzenmacher, 2004). Distinguishing these mechanisms requires diagnostic tests beyond descriptive statistics.
 
-We find that commit distributions follow a power law, where a small number of developers account for a disproportionate share of total output. The *power law exponent* α measures concentration: lower α means heavier tails, with top contributors capturing more. Between 2019 and 2024, α declined from 2.0 to 1.8 — concentration increased.
+We apply this insight to a setting of immediate policy relevance: software development in the age of AI coding assistants. Since 2022, tools like GitHub Copilot, ChatGPT, and Cursor have transformed how code is written. A natural hypothesis is that these tools amplify existing skill differences — the best developers adopt AI first, use it most effectively, and pull further ahead. If true, we should see the *same* top performers dominating year after year, with advantages compounding over time.
 
-But does this pattern reflect AI amplifying superstars? Or something else entirely?
+GitHub provides a natural laboratory to test this hypothesis. The platform hosts over 100 million developers and records every code contribution. A *commit* — a saved change to a repository — is the fundamental unit of developer output. We analyze how commits are distributed across developers, and whether this distribution is changing in ways that reflect dynamic concentration versus compositional change.
+
+We find that commit distributions follow a power law, with exponent $\alpha$ declining from 2.0 to 1.8 between 2019 and 2024 — concentration increased. But does this pattern reflect AI amplifying superstars through preferential attachment? Or is it a statistical artifact of an increasingly heterogeneous user base? This is the puzzle we address.
 
 ### Software Engineering as a Proxy for the AI-Transformed Economy
 
@@ -159,86 +161,54 @@ The median remains stable at 6 commits/year while P99 increases sharply, consist
 
 ### 3.1 Power Law Estimation
 
-We follow the Clauset-Shalizi-Newman (2009) methodology:
+We estimate power law exponents following the Clauset-Shalizi-Newman (2009) methodology. This approach first determines the threshold $x_{\min}$ where power law behavior begins, using the Kolmogorov-Smirnov statistic to find the value that minimizes the distance between the empirical distribution and the fitted power law. For observations above this threshold, we estimate the exponent $\alpha$ via maximum likelihood:
 
-1. **Threshold selection:** Determine xmin where power law behavior begins using the Kolmogorov-Smirnov statistic
-2. **MLE estimation:** Fit α for the tail above xmin:
-   $$\hat{\alpha} = 1 + n \left[ \sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}} \right]^{-1}$$
-3. **Alternative comparison:** Compare power law to log-normal using likelihood ratio test (R statistic)
+$$\hat{\alpha} = 1 + n \left[ \sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}} \right]^{-1}$$
 
-**Interpreting the R statistic:**
-- R > 0: Power law fits better than log-normal (normalized likelihood ratio favors power law)
-- R < 0: Log-normal fits better (common when the body of the distribution is log-normal with only the extreme tail following a power law)
-- |R| > 2: Statistically significant difference at conventional levels
+We then compare the power law fit to an alternative log-normal distribution using a likelihood ratio test, yielding the $R$ statistic. When $R > 0$, the power law fits better; when $R < 0$, the log-normal fits better. Values of $|R| > 2$ indicate statistically significant differences at conventional levels.
 
-**Interpreting α:**
-- α > 2: Finite variance; distribution is "well-behaved"
-- α < 2: Infinite variance; sample mean dominated by outliers
-- Lower α = heavier tail = more concentration
+The exponent $\alpha$ determines the tail behavior of the distribution. When $\alpha > 2$, the distribution has finite variance and the sample mean converges reliably. When $\alpha < 2$, the variance is infinite and the sample mean is dominated by extreme observations. Lower values of $\alpha$ indicate heavier tails and greater concentration of output among top contributors.
 
 ### 3.2 Mechanism Diagnostic Tests
 
-Power law estimation tells us concentration is increasing, but not *why*. We implement four diagnostic tests to distinguish competing mechanisms.
+Power law estimation tells us that concentration is increasing, but not why. Two mechanisms can produce identical power law exponents: dynamic concentration (where advantages compound over time) and static heterogeneity (where mixing different population types creates heavy tails). We implement four diagnostic tests to distinguish these mechanisms.
 
 #### 3.2.1 Attachment Kernel Test
 
-**Purpose:** Does a developer's growth depend on their current size?
+The attachment kernel test asks whether a developer's growth rate depends on their current size. We regress log commits in year $t$ on log commits in year $t-1$ for developers appearing in both years:
 
-**Model:**
 $$\log(x_{i,t}) = \alpha + \beta \cdot \log(x_{i,t-1}) + \varepsilon_{i,t}$$
 
-where x_{i,t} is developer i's commits in year t.
-
-**Interpretation:**
-- **β ≈ 1:** Proportional growth — consistent with preferential attachment ("rich-get-richer")
-- **β < 1:** Sublinear growth — consistent with mean reversion; advantages don't compound
-- **β > 1:** Superlinear growth — winner-take-all dynamics accelerating
+where $x_{i,t}$ denotes developer $i$'s commits in year $t$. The coefficient $\beta$ reveals the nature of the growth process. When $\beta \approx 1$, growth is proportional to current size — the "rich-get-richer" pattern characteristic of preferential attachment (Barabási & Albert, 1999). When $\beta < 1$, growth is sublinear, indicating mean reversion: highly productive developers in one year tend to regress toward average productivity the next. When $\beta > 1$, growth is superlinear, implying accelerating winner-take-all dynamics.
 
 #### 3.2.2 Rate Heterogeneity Test
 
-**Purpose:** Is the distribution better explained by mixing different types of developers?
+The rate heterogeneity test asks whether the distribution is better explained by mixing developers with different underlying productivity rates. Under a homogeneous model, all developers share a common commit rate $\lambda$, and commits follow a Poisson distribution:
 
-**Model:** Compare Poisson (homogeneous rates) vs. Negative Binomial (heterogeneous rates):
-- Poisson: All developers have the same underlying commit rate λ
-- Negative Binomial: Rates λᵢ vary across developers, drawn from Gamma(r, β)
+$$X_i \sim \text{Poisson}(\lambda)$$
 
-If commits | λᵢ ~ Poisson(λᵢ) and λᵢ ~ Gamma(r, β), then commits ~ NegBin(r, p).
+Under a heterogeneous model, each developer $i$ has their own underlying rate $\lambda_i$, drawn from a Gamma distribution with shape parameter $r$ and rate parameter $\beta$:
 
-**The mixture intuition:** Suppose GitHub hosts different "types" of developers — full-time professionals (high λ), hobbyists (medium λ), and students (low λ). Even if each type commits at a stable rate, mixing these populations together creates overdispersion. The Negative Binomial captures this mixture, and its dispersion parameter r measures how much the rates vary across types (Mitzenmacher, 2004).
+$$\lambda_i \sim \text{Gamma}(r, \beta)$$
+$$X_i \mid \lambda_i \sim \text{Poisson}(\lambda_i)$$
 
-**Key parameters:**
-- **r** = dispersion parameter; lower r = more heterogeneity
-- **CV(λ) = 1/√r** = coefficient of variation of underlying rates
+Marginalizing over the unobserved rates yields the Negative Binomial distribution:
 
-**Interpretation:**
-- NegBin >> Poisson (LR test): Confirms rate heterogeneity exists
-- r declining over time: Heterogeneity is *increasing*
-- Increasing CV(λ) mechanically produces heavier tails without any dynamic process
+$$X_i \sim \text{NegBin}(r, p) \quad \text{where } p = \frac{\beta}{1+\beta}$$
+
+The dispersion parameter $r$ measures heterogeneity: lower values indicate greater variation in underlying rates across developers. The coefficient of variation of the underlying rates is $\text{CV}(\lambda) = 1/\sqrt{r}$. When $r$ declines over time, heterogeneity is increasing — the spread between high-rate and low-rate developers is widening. This increasing dispersion mechanically produces heavier tails without any dynamic concentration process (Mitzenmacher, 2004).
 
 #### 3.2.3 Top 1% Composition Analysis
 
-**Purpose:** Who enters the top 1% each year?
+The composition analysis asks who enters the top 1% each year. For each year-over-year transition, we classify new top-1% entrants into three categories: genuinely new accounts appearing in the data for the first time, increased activity from developers who existed in the prior year but below the top 1% threshold, and near-top promotions from developers who were in the top 5% but not top 1% in the prior year.
 
-For each year-over-year transition, we classify new top-1% entrants:
-- **Genuinely new accounts:** First appearance in the data
-- **Increased activity:** Existed in prior year but below top 1%
-- **Near-top promotion:** Were in top 5% (but not top 1%) in prior year
-
-**Interpretation:**
-- "New accounts" dominates → Platform growth effect; top performers are new arrivals with high rates
-- "Increased activity" dominates → Existing developers being amplified (consistent with AI tools)
+If "new accounts" dominates, top performance reflects platform growth — new arrivals with high baseline rates entering the sample. If "increased activity" dominates, existing developers are being amplified, consistent with AI tools boosting incumbent productivity.
 
 #### 3.2.4 Rank Persistence Test
 
-**Purpose:** Do the same developers stay at the top?
+The rank persistence test asks whether the same developers stay at the top over time. We compute the Spearman rank correlation $\rho$ between developers' commit rankings across years, and the persistence rate — the fraction of developers in the top 10% in year $t$ who remain in the top 10% in year $t+k$.
 
-**Metrics:**
-- Spearman rank correlation (ρ) between years
-- Top 10% → Top 10% persistence rate
-
-**Interpretation:**
-- High ρ, high persistence → Persistent superstars (consistent with preferential attachment)
-- Low ρ, low persistence → Rotating superstars (consistent with heterogeneous rates)
+High rank correlation and high persistence indicate persistent superstars, consistent with preferential attachment where early advantages compound. Low rank correlation and low persistence indicate rotating superstars, consistent with heterogeneous rates where different developers happen to be most productive each year based on idiosyncratic factors.
 
 ---
 
@@ -246,7 +216,7 @@ For each year-over-year transition, we classify new top-1% entrants:
 
 ### 4.1 Power Law Estimates: α Is Declining
 
-Table 1 presents power law exponent estimates by developer type.
+We begin by documenting the basic pattern: concentration in GitHub commits has increased over our sample period. Table 1 presents power law exponent estimates by developer type.
 
 **Table 1: Power Law Estimates (2019-2025)**
 
@@ -262,13 +232,15 @@ Table 1 presents power law exponent estimates by developer type.
 
 *R = likelihood ratio vs. log-normal; R > 0 favors power law, R < 0 favors log-normal. 2025 covers Jan-Oct only.*
 
-**Key patterns:**
-- Personal developers: α declined steadily from 1.99 to 1.78 (Δ = −0.21). R consistently negative, indicating log-normal body with power-law tail.
-- Org developers: α stable around 2.04 through 2024, then dropped sharply to 1.87 in 2025 (Δ = −0.17 in one year).
+For personal developers, the power law exponent $\alpha$ declined steadily from 1.99 in 2019 to 1.78 in 2024 — a decrease of 0.21 over five years. This shift is economically meaningful: at $\alpha = 2.0$, the top 1% of developers account for roughly 25% of total commits; at $\alpha = 1.8$, this share rises to approximately 35%. The negative $R$ statistics throughout indicate that the body of the distribution is better described by a log-normal, with power law behavior emerging only in the extreme tail — a pattern consistent with multiplicative growth processes.
 
-But declining α alone does not identify mechanism. We turn to diagnostic tests.
+For organization developers, the pattern differs. The exponent remained stable around $\alpha = 2.04$ through 2024, then dropped sharply to 1.87 in 2025 — a decline of 0.17 in a single year. The positive $R$ values in early years indicate a purer power law fit, suggesting different underlying dynamics for professional developers contributing to organizational repositories.
 
-### 4.2 Attachment Kernel: β ≈ 0.4 (Sublinear)
+These estimates establish that concentration increased, but they do not reveal why. A declining $\alpha$ is consistent with both Hypothesis A (AI amplifying superstars) and Hypothesis B (increasing heterogeneity in who participates). We now turn to diagnostic tests designed to distinguish these mechanisms.
+
+### 4.2 Attachment Kernel: β ≈ 0.4 (Sublinear Growth)
+
+The attachment kernel test directly examines whether productivity advantages compound over time. If AI tools create persistent superstars through a "rich-get-richer" mechanism, we should observe $\beta \approx 1$: developers who are twice as productive this year should be twice as productive next year. Table 2 reports the estimated coefficients.
 
 **Table 2: Attachment Kernel Estimates**
 
@@ -284,13 +256,15 @@ But declining α alone does not identify mechanism. We turn to diagnostic tests.
 | Personal Developers | 2019-2020 | 0.386 | 0.013 | 0.098 | <0.001 |
 | Personal Developers | 2023-2024 | 0.472 | 0.011 | 0.111 | <0.001 |
 
-**Interpretation:** The attachment kernel coefficient β ranges from 0.32 to 0.47 across all periods and groups, significantly below unity (p < 0.001 in all cases). A coefficient β = 0.4 implies that a developer with 10× the commits of another experiences only 10^0.4 ≈ 2.5× the growth rate, not 10× as preferential attachment would predict.
+The coefficient $\beta$ ranges from 0.32 to 0.47 across all periods and groups, significantly below unity in every case ($p < 0.001$). To interpret the magnitude: a coefficient of $\beta = 0.4$ implies that a developer with 10× the commits of another developer experiences only $10^{0.4} \approx 2.5\times$ the expected growth, not $10\times$ as preferential attachment would predict. The relationship between current position and future growth is sharply sublinear.
 
-This sublinearity indicates **mean reversion**: high-commit developers in year t regress toward the mean in year t+1. Productivity advantages do not compound.
+This pattern indicates mean reversion rather than cumulative advantage. Developers who are highly productive in year $t$ tend to regress toward average productivity in year $t+1$. A developer in the 99th percentile this year is more likely to fall than to maintain their position. Productivity advantages do not compound over time; if anything, they dissipate.
 
-**Verdict:** β ≈ 0.4 **rejects Hypothesis A** (preferential attachment requires β ≈ 1).
+The finding has important implications for the "AI superstar" hypothesis. If AI tools were creating persistent advantages for top developers, we would expect $\beta$ to approach or exceed unity, with early adopters pulling further ahead each year. Instead, the consistently sublinear coefficients suggest that whatever drives a developer to the top of the distribution in one year — whether AI tools, a major project deadline, or simply having more time to code — does not persist into the following year. This is inconsistent with Hypothesis A and consistent with Hypothesis B, where different individuals happen to be most productive each year based on transient factors.
 
-### 4.3 Rate Heterogeneity: r Declining Significantly
+### 4.3 Rate Heterogeneity: Increasing Dispersion in Underlying Rates
+
+The rate heterogeneity test examines whether the observed concentration reflects mixing different types of developers with different baseline productivity rates. If the Negative Binomial provides a substantially better fit than the Poisson, this confirms that developers are not homogeneous — they have genuinely different underlying commit rates. More importantly, if the dispersion parameter $r$ is declining over time, heterogeneity is increasing, which mechanically produces heavier tails without any dynamic "rich-get-richer" process.
 
 **Table 3: Negative Binomial Dispersion Parameter (r)**
 
@@ -307,19 +281,23 @@ This sublinearity indicates **mean reversion**: high-commit developers in year t
 
 **Trend regression (r on year):**
 
-| Group | Slope | SE | p-value | Interpretation |
-|-------|-------|-----|---------|----------------|
-| Personal Developers | −0.054 | 0.014 | **0.009** | Significant decline |
-| Org Developers | −0.038 | 0.012 | **0.031** | Significant decline |
-| All Developers | −0.050 | 0.013 | **0.011** | Significant decline |
+| Group | Slope | SE | p-value |
+|-------|-------|-----|---------|
+| Personal Developers | −0.054 | 0.014 | 0.009 |
+| Org Developers | −0.038 | 0.012 | 0.031 |
+| All Developers | −0.050 | 0.013 | 0.011 |
 
-**Interpretation:** The dispersion parameter r declined significantly for all groups. For personal developers, r fell from 0.509 to 0.238 — a 53% decline (p = 0.009). Since CV(λ) = 1/√r, this corresponds to the coefficient of variation of underlying commit rates increasing from 1.40 to 2.05 — a **46% increase in rate dispersion**.
+The likelihood ratio statistics are enormous — in the millions — with $p$-values effectively zero. The Negative Binomial provides a vastly better fit than the Poisson, confirming substantial heterogeneity in underlying commit rates. Developers are not drawing from a common distribution; they have fundamentally different baseline productivities.
 
-The Negative Binomial vastly outperforms Poisson (likelihood ratio statistics in millions, p effectively zero), confirming substantial rate heterogeneity. The declining r indicates that heterogeneity in individual commit rates is **increasing over time**.
+More striking is the trend in $r$ over time. For personal developers, the dispersion parameter fell from 0.509 in 2019 to 0.238 in 2024 — a 53% decline that is statistically significant ($p = 0.009$). Since the coefficient of variation of underlying rates is $\text{CV}(\lambda) = 1/\sqrt{r}$, this corresponds to an increase from 1.40 to 2.05 — a 46% widening in the spread of individual productivity rates.
 
-**Verdict:** This **supports Hypothesis B**. Increasing heterogeneity mechanically produces heavier tails (lower α) without any dynamic concentration process.
+What does this mean substantively? In 2019, the typical deviation from mean productivity was about 1.4 times the mean itself. By 2024, it was 2.05 times the mean. The developer population became more heterogeneous: the gap between high-rate professionals and low-rate casual users widened. This widening dispersion mechanically produces heavier tails in the commit distribution — the power law exponent $\alpha$ declines — without requiring any dynamic concentration mechanism. The "superstars" we observe may simply be the high-rate tail of an increasingly dispersed mixture, not individuals who accumulated advantages over time.
 
-### 4.4 Top 1% Composition: New Accounts Dominate
+This finding strongly supports Hypothesis B. The observed concentration is consistent with a compositional story: GitHub's user base became more diverse between 2019 and 2024, mixing more casual users (students, hobbyists, researchers) with more heavy professional contributors. The statistical signature of this mixing is declining $r$ and increasing $\text{CV}(\lambda)$ — exactly what we observe.
+
+### 4.4 Top 1% Composition: Who Reaches the Top?
+
+A critical question for distinguishing our hypotheses is: who enters the top 1% each year? Under Hypothesis A (AI amplifying superstars), we expect existing developers to increase their output and dominate the top tier — the "intensive margin." Under Hypothesis B (compositional change), we expect new arrivals with high baseline rates to dominate — the "extensive margin." Table 4 decomposes top 1% entrants by source.
 
 **Table 4: Top 1% New Entrant Composition**
 
@@ -336,13 +314,17 @@ The Negative Binomial vastly outperforms Poisson (likelihood ratio statistics in
 | Org | 2022-2023 | 179 | 54.7% | 35.2% | 10.1% |
 | **Org** | **2023-2024** | 197 | 40.1% | **48.7%** | 11.2% |
 
-**Interpretation:** For personal developers, new accounts consistently comprise 77-80% of top 1% entrants across all periods. Top performers are predominantly **new arrivals to the platform**, not existing developers who increased their output.
+For personal developers, the pattern is striking and consistent: genuinely new accounts comprise 77-80% of top 1% entrants in every period. Only 14-18% reach the top by increasing their activity from a prior year. This means that the "superstars" we observe at the top of the distribution are predominantly new arrivals to the platform who entered with high commit rates, not existing developers who climbed the ladder over time.
 
-For org developers, a notable shift occurs in 2023-2024: "increased activity" overtakes "new accounts" as the dominant source (48.7% vs 40.1%). This is the **only group/period** where existing developers increasing their output — rather than new arrivals — drive top-1% membership.
+This finding is difficult to reconcile with Hypothesis A. If AI tools were amplifying incumbent developers, we would expect "increased activity" to dominate as existing developers boosted their productivity. Instead, the extensive margin dominates: platform growth brings in new high-rate contributors who immediately appear in the top tier. The superstars are not being created through cumulative advantage — they arrive fully formed.
 
-**Verdict:** Personal developers strongly **support Hypothesis B**. The 2023-2024 org developer pattern is **anomalous** and consistent with Hypothesis A (see Section 4.6).
+For organization developers, the pattern is different. Across 2019-2023, new accounts comprised 52-58% of top 1% entrants, with increased activity accounting for 30-40% — a more balanced composition. But in 2023-2024, a notable shift occurs: "increased activity" overtakes "new accounts" for the first time, with 48.7% of top 1% entrants being existing developers who increased their output versus only 40.1% new accounts.
 
-### 4.5 Rank Persistence: Low (ρ ≈ 0.18)
+This is the only group/period combination where the intensive margin dominates. We examine this anomaly in detail in Section 4.6, as it may reflect genuine AI amplification effects among professional developers with access to enterprise coding tools.
+
+### 4.5 Rank Persistence: The Rotating Cast of "Superstars"
+
+The final diagnostic asks whether the same developers remain at the top over time. Under Hypothesis A, we expect high rank persistence: superstars who pull ahead should stay ahead, their advantages compounding year after year. Under Hypothesis B, we expect low persistence: different individuals should occupy top positions each year, reflecting idiosyncratic variation in commit rates rather than persistent individual advantages.
 
 **Table 5: Rank Persistence (2019 → 2024)**
 
@@ -362,15 +344,15 @@ For org developers, a notable shift occurs in 2023-2024: "increased activity" ov
 | 2022-2023 | 0.317 | 0.284 | 0.326 |
 | 2023-2024 | 0.310 | 0.265 | 0.322 |
 
-**Interpretation:** Rank correlation between 2019 and 2024 commit levels is low: ρ ≈ 0.18 for all groups. Only 18-27% of developers in the top 10% in 2019 remained in the top 10% in 2024. Year-over-year correlations range from 0.22 to 0.33.
+The five-year rank correlation between 2019 and 2024 commit levels is remarkably low: $\rho \approx 0.18$ for all groups. To interpret this magnitude: if rank positions were perfectly persistent, $\rho = 1$; if they were completely random, $\rho = 0$. A correlation of 0.18 indicates that knowing a developer's 2019 productivity tells you almost nothing about their 2024 productivity. Only 18-27% of developers in the top 10% in 2019 remained in the top 10% in 2024 — roughly what we would expect by chance.
 
-This high mobility is inconsistent with "persistent superstars." Different developers dominate each year, consistent with the mixture mechanism where annual commit counts reflect draws from heterogeneous rate distributions.
+Year-over-year correlations are somewhat higher, ranging from 0.22 to 0.33, but still indicate substantial churning. Even in the short run, top positions are not stable. The developers dominating GitHub output this year are mostly different from those who dominated last year.
 
-**Verdict:** Low persistence **supports Hypothesis B** ("rotating superstars").
+This finding is inconsistent with the "persistent superstars" narrative. If AI tools were creating durable advantages for top developers — allowing them to pull further ahead each year — we would expect high rank persistence. Instead, we observe a rotating cast of top performers. The superstars of 2019 are largely not the superstars of 2024. This pattern is precisely what we would expect under Hypothesis B: each year, developers' commit counts reflect draws from their underlying rate distributions, with substantial idiosyncratic variation. A developer with a high underlying rate may have a productive year (major project, deadline pressure, more time to code) and appear in the top tier, then regress toward their mean the following year.
 
-### 4.6 The Exception: 2024 Org Developers and AI Impact
+### 4.6 The Exception: Organization Developers in 2023-2024
 
-One finding stands apart from the pattern supporting Hypothesis B.
+One finding stands apart from the pattern supporting Hypothesis B, and it deserves careful attention as potential evidence of AI-driven productivity amplification.
 
 **Table 6: Org Developer Top 1% Entrants — Growth Patterns**
 
@@ -382,19 +364,17 @@ One finding stands apart from the pattern supporting Hypothesis B.
 | 2022-2023 | 8.0 | 575 | 80× |
 | **2023-2024** | 6.0 | **8,137** | **1,135×** |
 
-Among organization developers entering the top 1% in 2024:
-- "Increased activity" (48.7%) overtook "new accounts" (40.1%) for the first time
-- Median commits jumped from 575 to 8,137 — a 14× increase
-- Median growth ratio was 1,135× compared to 73-97× in prior years
-- This represents existing professional developers dramatically increasing output
+The numbers are striking. Among organization developers entering the top 1% in 2023-2024, the pattern breaks sharply from all prior years. For the first time, "increased activity" (48.7%) overtook "new accounts" (40.1%) as the dominant source of top 1% entrants. The median commit count among top 1% entrants jumped from 575 to 8,137 — a 14-fold increase in a single year. And the median growth ratio — how much these developers increased their output compared to the prior year — was 1,135×, versus 73-97× in all prior periods.
 
-**Timing:** This pattern coincides with enterprise AI coding tools reaching production-readiness and clearing procurement hurdles:
-- GitHub Copilot launched for individuals (June 2022) and Copilot for Business (February 2023)
-- Copilot Enterprise launched February 2024, offering organization-wide deployment with enhanced security
-- ChatGPT (November 2022) and GPT-4 (March 2023) demonstrated AI coding capabilities
-- By late 2023, these tools had cleared security and compliance requirements at many enterprises
+To be concrete about what this means: in prior years, a typical organization developer entering the top 1% had committed about 8 times the previous year, going from roughly 80 commits to roughly 650. In 2023-2024, the typical top 1% entrant had committed over 1,100 times what they committed the prior year, going from roughly 6 commits to over 8,000. This is not a modest increase — it is a transformation.
 
-**Interpretation:** The 2023-2024 org developer pattern is the **only evidence in our data consistent with Hypothesis A** (AI amplifying existing productive developers). The timing aligns with enterprise AI tool adoption. However, we cannot establish causation, and this represents one group in one period.
+The timing is suggestive. GitHub Copilot launched for individuals in June 2022 and Copilot for Business in February 2023, but enterprise adoption was initially limited by security and compliance concerns. Copilot Enterprise launched in February 2024, offering organization-wide deployment with enhanced security features, code referencing controls, and enterprise SSO integration. ChatGPT (November 2022) and GPT-4 (March 2023) had already demonstrated powerful coding capabilities, and by late 2023, many enterprises had completed the procurement and security review processes necessary for deployment.
+
+Organization developers — those contributing to repositories owned by major companies and foundations — are precisely the group we would expect to adopt enterprise AI tools first. They work in professional contexts with IT departments, procurement processes, and security requirements. When these barriers cleared in late 2023 and early 2024, this group gained access to AI coding assistants that individual and personal developers had been using for over a year.
+
+The 2023-2024 org developer pattern is the only evidence in our data consistent with Hypothesis A — existing productive developers being amplified by technology rather than new arrivals dominating the top tier. The timing aligns with enterprise AI tool adoption. The magnitude of the growth ratios (1,135× vs. 73-97×) suggests something qualitatively different occurred in this period.
+
+However, we emphasize important caveats. This is one group (organization developers) in one period (2023-2024). We cannot observe AI tool usage directly, only timing correlations. The pattern could reflect other factors: enterprise workflow changes, pandemic-era project accumulation being released, or sampling artifacts. Establishing causation would require individual-level data on tool adoption, which we do not have. We present this finding as suggestive evidence that warrants further investigation, not as proof that AI tools amplified incumbent superstars.
 
 ### 4.7 Summary: Mechanism Verdict
 
@@ -463,9 +443,11 @@ This is **the only evidence in our data consistent with AI amplifying existing p
 ## 6. References
 
 ### Power Law Theory and Methods
+- Barabási, A.-L., & Albert, R. (1999). "Emergence of scaling in random networks." *Science*, 286(5439), 509-512.
 - Clauset, A., Shalizi, C. R., & Newman, M. E. J. (2009). "Power-law distributions in empirical data." *SIAM Review*, 51(4), 661-703.
 - Mitzenmacher, M. (2004). "A brief history of generative models for power law and lognormal distributions." *Internet Mathematics*, 1(2), 226-251.
 - Newman, M. E. J. (2005). "Power laws, Pareto distributions and Zipf's law." *Contemporary Physics*, 46(5), 323-351.
+- Strauss, I., & Yang, J. (2025). "Distinguishing preferential attachment from heterogeneity in heavy-tailed distributions." Working paper.
 
 ### Power Laws in Economics
 - Gabaix, X. (1999). "Zipf's law for cities: An explanation." *Quarterly Journal of Economics*, 114(3), 739-767.
