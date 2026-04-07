@@ -112,6 +112,8 @@ This classification proxies for professional vs. non-professional developers, th
 
 *2025 data: January–October only (10 months).*
 
+The platform doubled in size over our sample period, from 64,406 multi-repo accounts in 2019 to 131,530 in 2024. Both developer groups grew substantially: organization developers increased from 9,824 to 25,490 (160% growth), while personal developers grew from 53,945 to 102,204 (89% growth). Organization developers thus grew faster proportionally, rising from 15% to 19% of the sample. This rapid expansion — particularly the influx of new accounts each year — provides the demographic backdrop for testing whether concentration reflects compositional change or behavioral dynamics.
+
 #### Commit Distribution
 
 | Year | Total Commits | Mean | Median | P99 |
@@ -123,7 +125,9 @@ This classification proxies for professional vs. non-professional developers, th
 | 2023 | 3,132,816 | 25.3 | 6 | 339 |
 | 2024 | 7,463,885 | 56.7 | 6 | 1,287 |
 
-The median remains stable at 6 commits/year while P99 increases sharply, consistent with concentration in the upper tail.
+The commit distribution reveals a striking asymmetry. The median remained perfectly stable at 6 commits per year throughout the sample period — the typical developer's behavior did not change. Yet the mean more than doubled (21.5 to 56.7), and P99 nearly quintupled (268 to 1,287). This divergence between median and mean indicates that the distribution's right tail extended dramatically while its center stayed fixed.
+
+Total commits increased five-fold, from 1.4 million to 7.5 million, but this growth was not evenly distributed. The stability of the median alongside the explosion in P99 is precisely the pattern we would expect if new high-activity accounts were joining the platform — extending the right tail — rather than existing developers uniformly increasing their output. This descriptive pattern foreshadows the mechanism diagnostics in Section 5.
 
 ---
 
