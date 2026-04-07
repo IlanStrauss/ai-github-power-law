@@ -8,15 +8,11 @@ But rising inequality does not necessarily imply preferential attachment. As Str
 
 **This paper asks:** does rising concentration in GitHub commit activity reflect "rich-get-richer" dynamics — consistent with AI amplifying existing human capital — or is it a statistical artifact of an increasingly heterogeneous user base, reflecting rapid growth in coding among many different populations?
 
----
-
 We frame the question around two competing hypotheses with distinct empirical implications.
 
 **Hypothesis A — AI Amplifies Human Capital.** AI tools are complementary to existing expertise. Developers who already possess deep skill adopt tools earlier, prompt them better, and integrate outputs more effectively. The result is *dynamic concentration*: the same top performers pull further ahead each year. Under this hypothesis, we expect high rank persistence, incumbent developers driving output growth, and individual productivity compounding over time ($\beta \approx 1$ in the attachment kernel).
 
 **Hypothesis B — Platform Growth Creates Statistical Concentration.** What looks like "superstar" concentration is a compositional artifact of who joins and leaves the platform. GitHub grew from 40 million to over 100 million users between 2019 and 2024, bringing in students, hobbyists, researchers, and automation pipelines alongside professional developers. Mixing these groups — each with different baseline commit rates — mechanically produces heavy-tailed distributions. Under this hypothesis, we expect low rank persistence, new accounts dominating the top, and individual productivity reverting toward the mean ($\beta < 1$).
-
----
 
 GitHub provides a natural laboratory to test these hypotheses. The platform records every code contribution, and a *commit* — a saved change to a repository — is a direct, continuous measure of individual output unavailable in most labor markets. We track over 48,000 developers from 2019 to 2024 and run four diagnostic tests: attachment kernel estimation, rate heterogeneity trends, top-performer composition analysis, and rank persistence measurement.
 
@@ -36,8 +32,6 @@ Crucially, the right tail extended because GitHub attracted **new accounts with 
 The new high-activity arrivals are **predominantly *personal* developers**. Although organization developers are 10× more active at the top (8,137 vs 807 median commits), they account for only 6% of new top 1% entrants. The compositional shift driving concentration is occurring among personal developers — hobbyists, students, independent contributors — *not* among professional developers at organizations.
 
 **The Exception.** Among *organization* developers in 2023–2024, "increased activity" overtook "new accounts" as the dominant source of top 1% entrants, with a median year-on-year growth ratio of **1,135×** — compared with 70–100× in prior years. This is the **only pattern in our data consistent with Hypothesis A**, and its timing coincides with enterprise AI tools clearing procurement and security hurdles at large firms. We cannot establish causation, but the signal is distinct.
-
----
 
 **Contributions.** These findings contribute to three bodies of work. We add to the power law and preferential attachment literature (Barabási & Albert, 1999; Gabaix, 2009) by providing the first systematic *mechanism-diagnostic* analysis of software productivity — moving beyond documenting concentration to identifying its source. We extend the emerging literature on AI and labor outcomes (Noy and Zhang, 2023; Peng et al., 2023) by examining distributional effects at platform scale using naturally occurring behavioral data across six years. And we speak to the skill-biased technological change literature (Acemoglu and Restrepo, 2018; Rosen, 1981): for most developers, the mechanism producing concentration is closer to Mitzenmacher's compositional account than to compounding advantage predicted by SBTC models.
 
