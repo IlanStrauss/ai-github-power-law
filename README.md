@@ -4,7 +4,7 @@
 
 ### Motivation
 
-We ask: *Does rising inequality in SWE productivity on GitHub reflect "rich-get-richer" dynamics — or something else?*
+We ask: Does rising inequality in SWE productivity on GitHub reflect "rich-get-richer" dynamics — or something else?
 
 Concentration and inequality have increased across many domains: income, wealth, firm size, scientific citations, social media followers. A natural interpretation is that these patterns reflect *preferential attachment* — the "rich-get-richer" mechanism where initial advantages compound over time (Barabási & Albert, 1999). Under preferential attachment, small early differences in talent, luck, or position yield large and growing gaps, as success breeds more success.
 
