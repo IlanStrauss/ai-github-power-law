@@ -1,4 +1,4 @@
-# Power Laws in GitHub Commits: Heterogeneity, Not Dynamics
+# Power Laws in GitHub Commits: A growing, competitive, and concentrated ecosystem 
 
 ## 1. Introduction
 
